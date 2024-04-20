@@ -11,7 +11,8 @@ public class Doctor {
 		    this.id= _id;
 			this.name = _name;
 			}
-		
+	
+	 //Uses hashCode and boolean equals
 		
 		public Integer getId() {
 			return id;
