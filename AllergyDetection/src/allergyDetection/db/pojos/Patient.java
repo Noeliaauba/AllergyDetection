@@ -1,6 +1,7 @@
 package allergyDetection.db.pojos;
 
 import java.sql.Date;
+import java.util.Objects;
 public class Patient {
 
 		private Integer id;
@@ -8,6 +9,10 @@ public class Patient {
 		private Date dob;
 		private String gender;
 		
+		public Patient () {
+			
+		}
+	
 		
 		public Patient (Integer _id, String _name, Date _dob, String _gender) {
 			this.id= _id;
@@ -17,6 +22,23 @@ public class Patient {
 			}
 		
 		
+		@Override
+		public int hashCode() {
+			return Objects.hash(id);
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			Patient other = (Patient) obj;
+			return Objects.equals(id, other.id);
+		}
+
 		public Integer getId() {
 			return id;
 		}

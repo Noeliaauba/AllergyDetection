@@ -1,19 +1,39 @@
 package allergyDetection.db.pojos;
 
-
+import java.util.Objects;
 
 public class Doctor {
  
 	 private Integer id;
 	 private String name;
 	 
+	 
+	 public Doctor () {
+	
+	 }
+	 
 	 public Doctor (Integer _id, String _name) {
 		    this.id= _id;
 			this.name = _name;
 			}
 	
-	 //Uses hashCode and boolean equals
-		
+	 public int hashCode() {
+			return Objects.hash(id);
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			Doctor other = (Doctor) obj;
+			return Objects.equals(id, other.id);
+		}
+
+
 		public Integer getId() {
 			return id;
 		}
