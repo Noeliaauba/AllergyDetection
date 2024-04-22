@@ -1,5 +1,5 @@
 package allergyDetection.db.interfaces;
 
-public interface PatientManager {
+public interface DoctorManager {
 
 }
