@@ -1,7 +1,5 @@
 package allergyDetection.db.pojos;
 
-import java.sql.Date;
-
 public class Prescription {
 	private Integer id;
 	private Treatment treatment_required;
