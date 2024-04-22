@@ -1,11 +1,17 @@
 package allergyDetection.db.pojos;
 
+import java.util.Objects;
+
 public class Prescription {
 	private Integer id;
 	private Treatment treatment_required;
 	private Boolean isUsed;
 	private Patient given_to;
 	private Doctor given_by;
+	
+	public Prescription() {
+		
+	}
 	
 	public Prescription (Integer _id, Treatment _treatment_required, Boolean _isUsed, Patient _given_to, Doctor _given_by) {
 		this.id= _id;
@@ -63,6 +69,24 @@ public class Prescription {
 	    public String toString() {
 	    	return "Prescription [id=" + id + ", treatment required=" + treatment_required + ", ¿is used?=" + isUsed +", given to=" + given_to +", given by="+given_by+ "]";
 	    }
+
+		@Override
+		public int hashCode() {
+			return Objects.hash(id);
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			Prescription other = (Prescription) obj;
+			return Objects.equals(id, other.id);
+		}
+	    
 	    
 
 }
