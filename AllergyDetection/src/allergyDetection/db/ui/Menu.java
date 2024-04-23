@@ -26,4 +26,11 @@ public class Menu {
 	
 	}
 	
+	public void menuWelcome() {
+		System.out.println("Welcome! Select the an option: ");
+		System.out.println("1) Log in. ");
+		System.out.println("2) Sign up.");
+		System.out.println("0) End the program.");
+	}
+	
 }
