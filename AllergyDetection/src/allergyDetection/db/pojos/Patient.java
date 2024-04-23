@@ -9,6 +9,7 @@ public class Patient {
 		private Date dob;
 		private String gender;
 		
+		//private List <Prescription> prescriptions ; (Pues la relación entre pacient y prescription es 1-n ("un paciente tiene varias prescriptions")).		
 		public Patient () {
 			
 		}

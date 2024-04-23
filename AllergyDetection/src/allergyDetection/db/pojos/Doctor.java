@@ -7,6 +7,9 @@ public class Doctor {
 	 private Integer id;
 	 private String name;
 	 
+	//private List <Prescription> prescriptions ; (Pues la relación entre doctor y prescription es 1-n ("un doctor tiene varias prescriptions")).		
+		
+	 
 	 
 	 public Doctor () {
 	

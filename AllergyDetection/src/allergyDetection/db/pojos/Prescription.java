@@ -9,6 +9,8 @@ public class Prescription {
 	private Patient given_to;
 	private Doctor given_by;
 	
+	//private List<Treatment> treatments.
+	
 	public Prescription() {
 		
 	}

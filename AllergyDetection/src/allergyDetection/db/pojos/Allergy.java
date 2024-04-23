@@ -13,6 +13,7 @@ public class Allergy {
 	// Additional method to add to a list
 	private Date startDateAllergy;
 	private Date endDateAllergy;
+	//Tenemos que añadir un: private List<Patient> patients;
 
 	public Allergy() {
 	}

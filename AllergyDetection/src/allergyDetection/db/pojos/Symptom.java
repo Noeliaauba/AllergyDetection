@@ -7,6 +7,8 @@ public class Symptom {
 	private Integer id;
 	private String symptom_type;
 	
+	//private List<Patient> patients;
+	
 	//CONSTRUCTOR WITHOUT PARAMETERS
 	public Symptom () {
 
