@@ -9,6 +9,7 @@ public class Menu {
 		System.out.println("Choose your desired option");
 		System.out.println("1. Login");
 		System.out.println("2. Sign Up");
+		}
 		
 
 	public void  menuPatient() {

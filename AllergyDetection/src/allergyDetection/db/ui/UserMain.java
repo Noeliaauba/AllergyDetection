@@ -15,11 +15,11 @@ public class UserMain {
 		int choice = Integer.parseInt(r.readLine());
 		switch (choice) {
 		case 1: {
-			menuLogin();
+			//menuLogin();
 			break;
 		}
 		case 2: {
-			menuSignUp();
+			//menuSignUp();
 			break;
 		}
 		case 0: {
