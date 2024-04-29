@@ -1,5 +1,6 @@
 package allergyDetection.db.pojos;
 
+import java.util.List;
 import java.util.Objects;
 
 public class Prescription {
@@ -9,7 +10,11 @@ public class Prescription {
 	private Patient given_to;
 	private Doctor given_by;
 	
-	//private List<Treatment> treatments.
+	private List<Treatment> treatments;
+	
+	private Doctor doctor;
+	
+	private Patient patient;
 	
 	public Prescription() {
 		
@@ -87,6 +92,30 @@ public class Prescription {
 				return false;
 			Prescription other = (Prescription) obj;
 			return Objects.equals(id, other.id);
+		}
+
+		public Patient getPatient() {
+			return patient;
+		}
+
+		public void setPatient(Patient patient) {
+			this.patient = patient;
+		}
+
+		public Doctor getDoctor() {
+			return doctor;
+		}
+
+		public void setDoctor(Doctor doctor) {
+			this.doctor = doctor;
+		}
+
+		public List<Treatment> getTreatments() {
+			return treatments;
+		}
+
+		public void setTreatments(List<Treatment> treatments) {
+			this.treatments = treatments;
 		}
 	    
 		

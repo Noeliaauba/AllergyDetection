@@ -1,5 +1,6 @@
 package allergyDetection.db.pojos;
 
+import java.util.List;
 import java.util.Objects;
 
 public class Symptom {
@@ -7,9 +8,11 @@ public class Symptom {
 	private Integer id;
 	private String symptom_type;
 	
-	//private List<Patient> patients;
+	private List<Patient> patients;
 	
-	//CONSTRUCTOR WITHOUT PARAMETERS
+	private List<Allergy> allergies;
+	
+	
 	public Symptom () {
 
 	}
@@ -55,5 +58,21 @@ public class Symptom {
 	 public String toString() {
 	    	return "Symptom [id=" + id + ", symptom type=" + symptom_type + "]";
 	    }
+
+	public List<Patient> getPatients() {
+		return patients;
+	}
+
+	public void setPatients(List<Patient> patients) {
+		this.patients = patients;
+	}
+
+	public List<Allergy> getAllergies() {
+		return allergies;
+	}
+
+	public void setAllergies(List<Allergy> allergies) {
+		this.allergies = allergies;
+	}
 	    
 }
