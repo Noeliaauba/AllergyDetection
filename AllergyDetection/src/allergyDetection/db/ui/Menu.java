@@ -12,7 +12,7 @@ public class Menu {
 		}
 		
 
-	public void  menuPatient() {
+	public static void  menuPatient() {
 		System.out.println("Welcome patient! Select the number of the follow option that you want to do: ");
 		System.out.println("1) Book a visit: ");
 		System.out.println("2) Look for the visit that are booked");
@@ -22,7 +22,7 @@ public class Menu {
 	
 	}
 	
-	public void menuDoctor() {
+	public static void menuDoctor() {
 		System.out.println("Welcome Doctor! We are delighted with your great job!");
 		System.out.println("Select the number of the follow option that you want to do: ");
 		System.out.println("1) Add a patient to the data base");
@@ -36,7 +36,7 @@ public class Menu {
 	
 	}
 	
-	public void menuWelcome() {
+	public static void menuWelcome() {
 		System.out.println("Welcome! Select the an option: ");
 		System.out.println("1) Log in. ");
 		System.out.println("2) Sign up.");
