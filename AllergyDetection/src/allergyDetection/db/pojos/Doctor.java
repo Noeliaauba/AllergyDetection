@@ -1,5 +1,6 @@
 package allergyDetection.db.pojos;
 
+import java.util.List;
 import java.util.Objects;
 
 public class Doctor {
@@ -7,8 +8,7 @@ public class Doctor {
 	 private Integer id;
 	 private String name;
 	 
-	//private List <Prescription> prescriptions ; (Pues la relación entre doctor y prescription es 1-n ("un doctor tiene varias prescriptions")).		
-		
+	private List <Prescription> prescriptions ;
 	 
 	 
 	 public Doctor () {
@@ -20,6 +20,7 @@ public class Doctor {
 			this.name = _name;
 			}
 	
+	 @Override
 	 public int hashCode() {
 			return Objects.hash(id);
 		}
@@ -55,6 +56,14 @@ public class Doctor {
 		
 		public String toString() {
 			return "Doctor [id=" + id + ", name=" + name + "]";
+		}
+
+		public List <Prescription> getPrescriptions() {
+			return prescriptions;
+		}
+
+		public void setPrescriptions(List <Prescription> prescriptions) {
+			this.prescriptions = prescriptions;
 		}
 
 }

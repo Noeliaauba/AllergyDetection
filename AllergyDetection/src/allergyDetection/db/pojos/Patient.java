@@ -1,6 +1,7 @@
 package allergyDetection.db.pojos;
 
 import java.sql.Date;
+import java.util.List;
 import java.util.Objects;
 public class Patient {
 
@@ -9,7 +10,12 @@ public class Patient {
 		private Date dob;
 		private String gender;
 		
-		//private List <Prescription> prescriptions ; (Pues la relación entre pacient y prescription es 1-n ("un paciente tiene varias prescriptions")).		
+
+		private List <Prescription> prescriptions; 
+		private List <Allergy> allergies;
+		private List<Symptom> symptoms;
+		
+		
 		public Patient () {
 			
 		}
@@ -73,6 +79,36 @@ public class Patient {
 		}
 		public String toString() {
 			return "Patient [id=" + id + ", name=" + name + ", dob=" + dob +", gender=" + gender + "]";
+		}
+
+
+		public List <Prescription> getPrescriptions() {
+			return prescriptions;
+		}
+
+
+		public void setPrescriptions(List <Prescription> prescriptions) {
+			this.prescriptions = prescriptions;
+		}
+
+
+		public List <Allergy> getAllergies() {
+			return allergies;
+		}
+
+
+		public void setAllergies(List <Allergy> allergies) {
+			this.allergies = allergies;
+		}
+
+
+		public List<Symptom> getSymptoms() {
+			return symptoms;
+		}
+
+
+		public void setSymptoms(List<Symptom> symptoms) {
+			this.symptoms = symptoms;
 		}
 }
 

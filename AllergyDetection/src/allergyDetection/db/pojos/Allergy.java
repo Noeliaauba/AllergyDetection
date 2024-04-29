@@ -1,6 +1,7 @@
 package allergyDetection.db.pojos;
 
 import java.sql.Date;
+import java.util.List;
 import java.util.Objects;
 
 public class Allergy {
@@ -13,7 +14,10 @@ public class Allergy {
 	// Additional method to add to a list
 	private Date startDateAllergy;
 	private Date endDateAllergy;
-	//Tenemos que añadir un: private List<Patient> patients;
+	
+	private List<Patient> patients;
+	private List <Treatment> treatments;
+	private List<Symptom> symptoms;
 
 	public Allergy() {
 	}
@@ -86,5 +90,35 @@ public class Allergy {
 				", startDateAllergy="+startDateAllergy+
 				", endDateAllergy="+endDateAllergy+ "]";
 				}
+
+
+	public List<Patient> getPatients() {
+		return patients;
+	}
+
+
+	public void setPatients(List<Patient> patients) {
+		this.patients = patients;
+	}
+
+
+	public List<Symptom> getSymptoms() {
+		return symptoms;
+	}
+
+
+	public void setSymptoms(List<Symptom> symptoms) {
+		this.symptoms = symptoms;
+	}
+
+
+	public List <Treatment> getTreatments() {
+		return treatments;
+	}
+
+
+	public void setTreatments(List <Treatment> treatments) {
+		this.treatments = treatments;
+	}
 	
 }
