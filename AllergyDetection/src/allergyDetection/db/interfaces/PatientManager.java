@@ -1,19 +1,12 @@
 package allergyDetection.db.interfaces;
-
+import allergyDetection.db.pojos.Prescription;
 import java.sql.Date;
 
 public interface PatientManager {
-	
-	public void selectVisitDate();
-	
-	public Date lookVisitDate();
-	
-	public String showMedicalScore();
-	
-	public String showPrescription();
-	
-	public void seePrescription();
-	
+	public Date selectVisitDate(String d);
+	public Date lookVisitDate(Integer id);	 //Del paciente
+	public Prescription showPrescription(Integer id);  //Del paciente
+
 
 
 }
