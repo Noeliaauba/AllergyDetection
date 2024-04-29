@@ -1,6 +1,16 @@
 package allergyDetection.db.ui;
 
+import java.io.IOException;
+
 public class Menu {
+	
+	public static void main(String[] args) throws NumberFormatException, IOException {
+		System.out.println("Welcome to the library!");
+		System.out.println("Choose your desired option");
+		System.out.println("1. Login");
+		System.out.println("2. Sign Up");
+		}
+		
 
 	public void  menuPatient() {
 		System.out.println("Welcome patient! Select the number of the follow option that you want to do: ");
