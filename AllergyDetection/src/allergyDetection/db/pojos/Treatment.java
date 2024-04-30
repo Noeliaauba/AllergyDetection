@@ -7,7 +7,7 @@ public class Treatment {
 	
 	private Integer id;
 	private String treatment_type;
-	
+	private String name;
 	private Prescription prescription;
 	private List<Allergy> allergies;
 	
@@ -16,9 +16,10 @@ public class Treatment {
 	
 	}
 	
-	public Treatment (Integer _id, String _treatment_type) {
+	public Treatment (Integer _id, String _name, String _treatmentType) {
 		this.id=_id;
-		this.treatment_type=_treatment_type;
+		this.name=_name;
+		this.treatment_type=_treatmentType;
 	}
 	
 	
@@ -46,6 +47,14 @@ public class Treatment {
 	public void setId(Integer _id) {
 	        this.id = _id;
 	    }
+	public String getName() {
+		 return name;
+	}
+	
+	public void setName(String _name) {
+		 this.name=_name;
+	}
+	
 	public String getTreatmentType() {
 		 return treatment_type;
 	 }

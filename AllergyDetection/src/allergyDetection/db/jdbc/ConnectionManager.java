@@ -65,7 +65,7 @@ public class ConnectionManager {
 			
 			Statement createTables1 = c.createStatement();
 			
-			String create1 = "CREATE TABLE patient ( "
+			String create1 = "CREATE TABLE patients ( "
 					+ " id INTEGER PRIMARY KEY,"
 					+ " name TEXT NOT NULL,"
 					+ " dateOfBirth DATE,"
@@ -76,7 +76,7 @@ public class ConnectionManager {
 			
 			Statement createTables2 = c.createStatement();
 			
-			String create2 = "CREATE TABLE doctor ( "
+			String create2 = "CREATE TABLE doctors ( "
 					+ " id INTEGER PRIMARY KEY,"
 					+ " name TEXT NOT NULL)";
 		
@@ -85,7 +85,7 @@ public class ConnectionManager {
 			
 			Statement createTables3 = c.createStatement();
 			
-			String create3 = "CREATE TABLE allergy ( "
+			String create3 = "CREATE TABLE allergys ( "
 					+ " id INTEGER PRIMARY KEY ,"
 					+ " startDate DATE,"
 					+ " endDate DATE,"
@@ -98,7 +98,7 @@ public class ConnectionManager {
 			Statement createTables4 = c.createStatement();
 			
 			
-			String create4 = "CREATE TABLE prescription ( "
+			String create4 = "CREATE TABLE prescriptions ( "
 					+ " id INTEGER ,"
 					+ " treatment_required INTEGER REFERENCES treatment(id),"
 					+ " isUsed BOOLEAN,"
@@ -110,7 +110,7 @@ public class ConnectionManager {
 			createTables4.close();
 			
 			Statement createTables5 = c.createStatement();
-			String create5 = "CREATE TABLE symptom ( "
+			String create5 = "CREATE TABLE symptoms ( "
 					+ " id INTEGER PRIMARY KEY,"
 					+ " name TEXT NOT NULL,"
 					+ " type TEXT)";
@@ -119,8 +119,9 @@ public class ConnectionManager {
 			createTables5.close();
 			
 			Statement createTables6 = c.createStatement();
-			String create6 = "CREATE TABLE treatment ( "
+			String create6 = "CREATE TABLE treatments ( "
 					+ " id INTEGER PRIMARY KEY,"
+					+ "name TEXT NOT NULL,"
 					+ " type TEXT)";
 					
 			createTables6.executeUpdate(create6);
@@ -165,8 +166,7 @@ public class ConnectionManager {
 			createTables10.executeUpdate(create10);
 			createTables10.close();
 			
-			
-			
+					
 		} catch (SQLException sqlE) {
 			if (sqlE.getMessage().contains("already exist")){
 				System.out.println("No need to create the tables; already there");
