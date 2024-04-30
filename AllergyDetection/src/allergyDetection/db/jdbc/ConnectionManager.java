@@ -58,7 +58,7 @@ public class ConnectionManager {
 			e.printStackTrace();
 		}
 	}
-	
+	//INSERTS PARA ALLERGIES
 	
 	private void createTables() {
 		try {

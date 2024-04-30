@@ -1,6 +1,7 @@
 package allergyDetection.db.jdbc;
 
 import allergyDetection.db.interfaces.SymptomManager;
+
 import allergyDetection.db.pojos.Symptom;
 
 public class JCDBCSymptomManager implements SymptomManager {
