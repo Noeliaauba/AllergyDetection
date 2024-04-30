@@ -167,7 +167,6 @@ public class ConnectionManager {
 			
 			
 			
-			
 		} catch (SQLException sqlE) {
 			if (sqlE.getMessage().contains("already exist")){
 				System.out.println("No need to create the tables; already there");
