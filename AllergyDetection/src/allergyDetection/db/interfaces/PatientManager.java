@@ -9,9 +9,10 @@ public interface PatientManager {
 	//public Date lookVisitDate(Integer id);	 //Del paciente
 	
 	public void addPatient(Patient p);
-	public void modifyPatient(Integer id);
+	public void modifyPatient(Patient p);
 	public void deletePatient(Integer id);
-	public Patient searchPatient(Integer id);
+	public Patient getPatientByID(Integer id);
+	
 
 
 
