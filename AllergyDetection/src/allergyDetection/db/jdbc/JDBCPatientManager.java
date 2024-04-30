@@ -18,7 +18,7 @@ public class JDBCPatientManager implements PatientManager {
 @Override
 	public void addPatient(Patient p) {
 		try {
-			String template = "INSERT INTO patients (name,dob,gender ) VALUES (?, ?, ?)";
+			String template = "INSERT INTO patient (name,dob,gender ) VALUES (?, ?, ?)";
 			PreparedStatement pstmt;
 			pstmt = c.prepareStatement(template);
 			pstmt.setString(1, p.getName());
@@ -38,7 +38,7 @@ public class JDBCPatientManager implements PatientManager {
 @Override
 public Patient getPatientByID(Integer id) {
 	try {
-		String sql = "SELECT * FROM patients WHERE id = " + id;
+		String sql = "SELECT * FROM patient WHERE id = " + id;
 		Statement st;
 		st = c.createStatement();
 		ResultSet rs = st.executeQuery(sql);
@@ -55,7 +55,7 @@ public Patient getPatientByID(Integer id) {
 @Override
 public void modifyPatient(Patient p) {
 	 try {
-	        String query = "UPDATE patients SET name = ?, dob = ?, gender = ? WHERE id = ?";
+	        String query = "UPDATE patient SET name = ?, dob = ?, gender = ? WHERE id = ?";
 	        PreparedStatement pstmt = c.prepareStatement(query);
 	        pstmt.setString(1, p.getName());
 	        pstmt.setDate(2, p.getDob()); 
@@ -74,7 +74,7 @@ public void modifyPatient(Patient p) {
 @Override
 public void deletePatient(Integer id) {
 	try {
-	String st = "DELETE FROM patients WHERE id = ?";
+	String st = "DELETE FROM patient WHERE id = ?";
 	PreparedStatement pstmt = c.prepareStatement(st);
     pstmt.setInt(1, id);
         int rowsAffected = pstmt.executeUpdate();
