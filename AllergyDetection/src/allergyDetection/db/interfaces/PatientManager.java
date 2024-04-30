@@ -14,6 +14,7 @@ public interface PatientManager {
 	public Patient getPatientByID(Integer id);
 	
 
+	//Hacer los metodos de select by id y modify
 
 
 }
