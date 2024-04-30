@@ -42,7 +42,7 @@ public class ConnectionManager {
 			c = DriverManager.getConnection("jdbc:sqlite:./db/library.db");
 			c.createStatement().execute("PRAGMA foreign_keys=ON");
 		} catch (ClassNotFoundException cnfE) {
-			System.out.println("Databases libraries not loaded");
+			System.out.println("Databases Allergy Detection not loaded");
 			cnfE.printStackTrace();
 		} catch (SQLException sqlE) {
 			System.out.println("Error with database");
@@ -202,12 +202,6 @@ public class ConnectionManager {
 	public TreatmentManager getTreatment() {
 		return treatment;
 	}
-
-
-	
-	
-	
-	
 	
 	
 	
