@@ -2,7 +2,6 @@ package allergyDetection.db.jdbc;
 import allergyDetection.db.pojos.Patient;
 
 import java.sql.*;
-import java.util.List;
 
 import allergyDetection.db.interfaces.*;
 

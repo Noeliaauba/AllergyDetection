@@ -1,5 +1,4 @@
 package allergyDetection.db.jdbc;
-
 import allergyDetection.db.interfaces.DoctorManager;
 import allergyDetection.db.pojos.Doctor;
 
