@@ -20,7 +20,7 @@ public class JDBCTreatmentManager implements TreatmentManager {
 @Override
 	public void addTreatment(Treatment t) {
 		try {
-			String template = "INSERT INTO treatmentd (name, type) VALUES (?, ?)";
+			String template = "INSERT INTO treatment (name, type) VALUES (?, ?)";
 			PreparedStatement pstmt;
 			pstmt = c.prepareStatement(template);
 			pstmt.setString(1, t.getName());
