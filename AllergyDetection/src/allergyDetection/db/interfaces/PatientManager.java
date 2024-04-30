@@ -13,6 +13,7 @@ public interface PatientManager {
 	public void deletePatient(Integer id);
 	public Patient searchPatient(Integer id);
 
+	//Hacer los metodos de select by id y modify
 
 
 }
