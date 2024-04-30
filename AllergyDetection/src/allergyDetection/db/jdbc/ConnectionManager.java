@@ -9,12 +9,6 @@ import java.sql.Statement;
 
 import java.sql.Connection;
 import allergyDetection.db.interfaces.*;
-import allergyDetection.db.interfaces.AllergyManager;
-import allergyDetection.db.interfaces.DoctorManager;
-import allergyDetection.db.interfaces.PatientManager;
-import allergyDetection.db.interfaces.PrescriptionManager;
-import allergyDetection.db.interfaces.SymptomManager;
-import allergyDetection.db.interfaces.TreatmentManager;
 
 
 public class ConnectionManager {
