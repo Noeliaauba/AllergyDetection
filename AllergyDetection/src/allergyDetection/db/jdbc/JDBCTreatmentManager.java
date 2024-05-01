@@ -75,6 +75,28 @@ public List<Treatment> searchTreatmentByType(String typeParameter) {
 	return lista;
 }
 
+public List<Treatment> showAllTreatments() {
+	List<Treatment> tratamientos = new ArrayList<Treatment>();
+	try {
+		String sql = "SELECT * FROM treatments";
+		PreparedStatement p;
+		p = c.prepareStatement(sql);
+		ResultSet rs = p.executeQuery();
+		while (rs.next()) {
+			Integer id = rs.getInt("id");
+			String name = rs.getString("name");
+			String type = rs.getString("type");
+			Treatment t = new Treatment(id, name, type);
+			tratamientos.add(t);
+		}
+		rs.close();
+		p.close();
+	} catch (SQLException e) {
+		System.out.println("Error in the database");
+		e.printStackTrace();
+	}
+	return tratamientos;
+}
 
 }
 

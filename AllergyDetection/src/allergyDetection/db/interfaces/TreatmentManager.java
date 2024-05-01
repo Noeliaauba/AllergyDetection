@@ -5,6 +5,7 @@ import allergyDetection.db.pojos.Treatment;
 public interface TreatmentManager {
 	
 	public void addTreatment(Treatment t); 
-	public void modifyTreatment(Treatment t); //Del paciente
+	public void modifyTreatment(Treatment t); 
 	public List<Treatment> searchTreatmentByType(String type);
+	public List<Treatment> showAllTreatments();
 }
