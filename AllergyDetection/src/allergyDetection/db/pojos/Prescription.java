@@ -17,7 +17,6 @@ public class Prescription {
 	private Patient patient;
 	
 	public Prescription() {
-		
 	}
 	
 	public Prescription (Integer _id, Treatment _treatment_required, Boolean _isUsed, Patient _given_to, Doctor _given_by) {
@@ -117,8 +116,5 @@ public class Prescription {
 		public void setTreatments(List<Treatment> treatments) {
 			this.treatments = treatments;
 		}
-	    
-		
-	    
 
 }
