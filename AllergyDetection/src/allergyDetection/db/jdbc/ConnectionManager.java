@@ -58,7 +58,7 @@ public class ConnectionManager {
 			e.printStackTrace();
 		}
 	}
-	//INSERTS PARA ALLERGIES
+	
 	
 	private void createTables() {
 		try {
@@ -160,23 +160,79 @@ public class ConnectionManager {
 			createTables10.close();
 			
 			
+			Statement insertTables3 = c.createStatement();
+			String insert3_1 = "INSERT INTO allergies (name, type) VALUES ('Dairy', 'Alimentary')";
+			insertTables3.executeUpdate(insert3_1);
+			String insert3_2 = "INSERT INTO allergies (name, type) VALUES ('Pollen', 'Stationary')";
+			insertTables3.executeUpdate(insert3_2);
+			String insert3_3 = "INSERT INTO allergies (name, type) VALUES ('Nuit', 'Alimentary')";
+			insertTables3.executeUpdate(insert3_3);
+			String insert3_4 = "INSERT INTO allergies (name, type) VALUES ('Dust Mite', 'Statioanry')";
+			insertTables3.executeUpdate(insert3_4);
+			String insert3_5 = "INSERT INTO allergies (name, type) VALUES ('Insect', 'Insect')";
+			insertTables3.executeUpdate(insert3_5);
+			String insert3_6 = "INSERT INTO allergies (name, type) VALUES ('Drug', 'Drugs')";
+			insertTables3.executeUpdate(insert3_6);
+			String insert3_7 = "INSERT INTO allergies (name, type) VALUES ('Sun ', 'Cutaneous')";
+			insertTables3.executeUpdate(insert3_7);
+			String insert3_8 = "INSERT INTO allergies (name, type) VALUES ('Gluten', 'Alimentary')";
+			insertTables3.executeUpdate(insert3_8);
+			insertTables3.close();
+			
+			
+			Statement insertTables5 = c.createStatement();
+			String insert5_1 = "INSERT INTO symptoms (name, type) VALUES ('Sneeze', 'Respiratory')";
+			insertTables5.executeUpdate(insert5_1);
+			String insert5_2 = "INSERT INTO symptoms (name, type) VALUES ('Nasal Congestion', 'Respiratory')";
+			insertTables5.executeUpdate(insert5_2);
+			String insert5_3 = "INSERT INTO symptoms (name, type) VALUES ('Cough', 'Respiratory')";
+			insertTables5.executeUpdate(insert5_3);
+			String insert5_4 = "INSERT INTO symptoms (name, type) VALUES ('Runny Nose', 'Respiratory')";
+			insertTables5.executeUpdate(insert5_4);
+			String insert5_5 = "INSERT INTO symptoms (name, type) VALUES ('Asthma Attack', 'Respiratory')";
+			insertTables5.executeUpdate(insert5_5);
+			String insert5_6 = "INSERT INTO symptoms (name, type) VALUES ('Hives', 'Cutaneous')";
+			insertTables5.executeUpdate(insert5_6);
+			String insert5_7 = "INSERT INTO symptoms (name, type) VALUES ('Itch ', 'Cutaneous')";
+			insertTables5.executeUpdate(insert5_7);
+			String insert5_8 = "INSERT INTO symptoms (name, type) VALUES ('Burning Rush', 'Cutaneous')";
+			insertTables5.executeUpdate(insert5_8);
+			String insert5_9 = "INSERT INTO symptoms (name, type) VALUES ('Abdominal Pain', 'Digestive')";
+			insertTables5.executeUpdate(insert5_9);
+			String insert5_10 = "INSERT INTO symptoms (name, type) VALUES ('Nausea', 'Digestive')";
+			insertTables5.executeUpdate(insert5_10);
+			String insert5_11 = "INSERT INTO symptoms (name, type) VALUES ('Swelling Mouth', 'Digestive')";
+			insertTables5.executeUpdate(insert5_11);
+			String insert5_12 = "INSERT INTO symptoms (name, type) VALUES ('Tingling Tongue', 'Digestive')";
+			insertTables5.executeUpdate(insert5_12);
+			String insert5_13 = "INSERT INTO symptoms (name, type) VALUES ('Chest Tightness', 'Others')";
+			insertTables5.executeUpdate(insert5_13);
+			String insert5_14 = "INSERT INTO symptoms (name, type) VALUES ('Watery Eyes', 'Others')";
+			insertTables5.executeUpdate(insert5_14);
+			String insert5_15 = "INSERT INTO symptoms (name, type) VALUES ('Fever', 'Others')";
+			insertTables5.executeUpdate(insert5_15);
+			String insert5_16 = "INSERT INTO symptoms (name, type) VALUES ('Headache', 'Others')";
+			insertTables5.executeUpdate(insert5_16);
+			insertTables5.close();
+			
+			
 			Statement insertTables6 = c.createStatement();
-			String insert1 = "INSERT INTO treatments (name, type) VALUES ('Desloratadina', 'Antihistamines')";
-			insertTables6.executeUpdate(insert1);
-			String insert2 = "INSERT INTO treatments (name, type) VALUES ('Dexametasona', 'Corticosteroids')";
-			insertTables6.executeUpdate(insert2);
-			String insert3 = "INSERT INTO treatments (name, type) VALUES ('Clorfenamina', 'Decongestants')";
-			insertTables6.executeUpdate(insert3);
-			String insert4 = "INSERT INTO treatments (name, type) VALUES ('Albuterol', 'Bronchodilators')";
-			insertTables6.executeUpdate(insert4);
-			String insert5 = "INSERT INTO treatments (name, type) VALUES ('Epinefrina', 'Vaccine')";
-			insertTables6.executeUpdate(insert5);
-			String insert6 = "INSERT INTO treatments (name, type) VALUES ('Prednisona', 'Corticosteroids')";
-			insertTables6.executeUpdate(insert6);
-			String insert7 = "INSERT INTO treatments (name, type) VALUES ('Oximetazolina ', 'Decongestants')";
-			insertTables6.executeUpdate(insert7);
-			String insert8 = "INSERT INTO treatments (name, type) VALUES ('Metaproterenol', 'Bronchodilators')";
-			insertTables6.executeUpdate(insert8);
+			String insert6_1 = "INSERT INTO treatments (name, type) VALUES ('Desloratadina', 'Antihistamines')";
+			insertTables6.executeUpdate(insert6_1);
+			String insert6_2 = "INSERT INTO treatments (name, type) VALUES ('Dexametasona', 'Corticosteroids')";
+			insertTables6.executeUpdate(insert6_2);
+			String insert6_3 = "INSERT INTO treatments (name, type) VALUES ('Clorfenamina', 'Decongestants')";
+			insertTables6.executeUpdate(insert6_3);
+			String insert6_4 = "INSERT INTO treatments (name, type) VALUES ('Albuterol', 'Bronchodilators')";
+			insertTables6.executeUpdate(insert6_4);
+			String insert6_5 = "INSERT INTO treatments (name, type) VALUES ('Epinefrina', 'Vaccine')";
+			insertTables6.executeUpdate(insert6_5);
+			String insert6_6 = "INSERT INTO treatments (name, type) VALUES ('Prednisona', 'Corticosteroids')";
+			insertTables6.executeUpdate(insert6_6);
+			String insert6_7 = "INSERT INTO treatments (name, type) VALUES ('Oximetazolina ', 'Decongestants')";
+			insertTables6.executeUpdate(insert6_7);
+			String insert6_8 = "INSERT INTO treatments (name, type) VALUES ('Metaproterenol', 'Bronchodilators')";
+			insertTables6.executeUpdate(insert6_8);
 			insertTables6.close();
 			
 					

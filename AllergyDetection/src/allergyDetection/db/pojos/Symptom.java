@@ -6,6 +6,7 @@ import java.util.Objects;
 public class Symptom {
 	
 	private Integer id;
+	private String symptom_name;
 	private String symptom_type;
 	
 	private List<Patient> patients;
@@ -17,14 +18,15 @@ public class Symptom {
 
 	}
 	
-	public Symptom (Integer _id, String _symptom_type) {
+	public Symptom (Integer _id, String _symptom_name, String _symptom_type) {
 		this.id=_id;
+		this.symptom_name= _symptom_name;
 		this.symptom_type=_symptom_type;
 	}
 	
 	
-	
-	 @Override
+
+	@Override
 	public int hashCode() {
 		return Objects.hash(id);
 	}
@@ -48,6 +50,13 @@ public class Symptom {
 	 public void setId(Integer _id) {
 	        this.id = _id;
 	    }
+	 public String getSymptom_name() {
+			return symptom_name;
+		}
+
+		public void setSymptom_name(String symptom_name) {
+			this.symptom_name = symptom_name;
+		}
 	 public String getSymptomType() {
 		 return symptom_type;
 	 }
@@ -56,7 +65,7 @@ public class Symptom {
 	 }
 	 
 	 public String toString() {
-	    	return "Symptom [id=" + id + ", symptom type=" + symptom_type + "]";
+	    	return "Symptom [id=" + id + ", symptom name= " + symptom_name +" symptom type=" + symptom_type + "]";
 	    }
 
 	public List<Patient> getPatients() {
