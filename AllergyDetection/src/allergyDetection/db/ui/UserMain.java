@@ -336,15 +336,12 @@ public static void getPrescriptionsByPatientId() {
 		if(!newGender.equals("")) {
 			p.setGender(newGender);
 			}
+		patientManag.modifyPatient(p);
+		
 		//TODO about the prescriptions and allergies and symptoms??? How do we do --> Ask Rodrigo
 	}
 		
-		
-
-					
-					
 	
-		
 		
 		
 		
