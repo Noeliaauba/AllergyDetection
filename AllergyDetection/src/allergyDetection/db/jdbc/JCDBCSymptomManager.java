@@ -15,7 +15,7 @@ public class JCDBCSymptomManager implements SymptomManager {
 	private ConnectionManager conMan;
 	
 
-	public JCDBCSymptomManager(ConnectionManager connectionManager) {
+	public JCDBCSymptomManager(ConnectionManager conMan) {
 		this.conMan = conMan;
 		this.c = conMan.getConnection();
 	}

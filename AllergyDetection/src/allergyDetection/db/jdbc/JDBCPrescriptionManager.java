@@ -16,8 +16,7 @@ public class JDBCPrescriptionManager implements PrescriptionManager {
 	private Connection c;
 	private ConnectionManager conMan;
 	
-	public JDBCPrescriptionManager(ConnectionManager connectionManager) {
-		// TODO Auto-generated constructor stub
+	public JDBCPrescriptionManager(ConnectionManager conMan) {
 		this.conMan = conMan;
 		this.c = conMan.getConnection();
 	}

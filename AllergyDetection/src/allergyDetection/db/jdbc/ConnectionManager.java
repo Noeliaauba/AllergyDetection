@@ -13,12 +13,12 @@ import allergyDetection.db.interfaces.*;
 
 public class ConnectionManager {
 	private Connection c;
-	private AllergyManager allergy;
-	private DoctorManager doctor;
-	private PatientManager patient;
-	private PrescriptionManager prescription;
-	private SymptomManager symptom;
-	private TreatmentManager treatment;
+	private AllergyManager allergyManag;
+	private DoctorManager doctorManag;
+	private PatientManager patientManag;
+	private PrescriptionManager prescriptionManag;
+	private SymptomManager symptomManag;
+	private TreatmentManager treatmentManag;
 	
 
 	public Connection getConnection() {
@@ -27,12 +27,12 @@ public class ConnectionManager {
 	
 	public ConnectionManager() {
 		this.connect();
-		this.allergy = new JDBCAllergyManager(this);
-		this.doctor = new JDBCDoctorManager(this);
-		this.patient = new JDBCPatientManager(this);
-		this.prescription = new JDBCPrescriptionManager(this);
-		this.symptom=new JCDBCSymptomManager(this);
-		this.treatment=new JDBCTreatmentManager(this);
+		this.allergyManag = new JDBCAllergyManager(this);
+		this.doctorManag = new JDBCDoctorManager(this);
+		this.patientManag = new JDBCPatientManager(this);
+		this.prescriptionManag = new JDBCPrescriptionManager(this);
+		this.symptomManag =new JCDBCSymptomManager(this);
+		this.treatmentManag =new JDBCTreatmentManager(this);
 		this.createTables();
 	}
 	
@@ -248,27 +248,27 @@ public class ConnectionManager {
 	}
 
 	public AllergyManager getAllergy() {
-		return allergy;
+		return allergyManag;
 	}
 
 	public DoctorManager getDoctor() {
-		return doctor;
+		return doctorManag;
 	}
 
 	public PatientManager getPatient() {
-		return patient;
+		return patientManag;
 	}
 
 	public PrescriptionManager getPrescription() {
-		return prescription;
+		return prescriptionManag;
 	}
 
 	public SymptomManager getSymptom() {
-		return symptom;
+		return symptomManag;
 	}
 
 	public TreatmentManager getTreatment() {
-		return treatment;
+		return treatmentManag;
 	}
 	
 	

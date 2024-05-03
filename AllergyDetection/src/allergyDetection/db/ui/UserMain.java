@@ -11,15 +11,26 @@ import java.util.List;
 
 import allergyDetection.db.*;
 import allergyDetection.db.interfaces.*;
+import allergyDetection.db.jdbc.ConnectionManager;
 import allergyDetection.db.jdbc.JDBCPatientManager;
 import allergyDetection.db.pojos.*;
-import library.db.pojos.Author;
-import library.db.pojos.Book;
+
 
 public class UserMain {
 
 	private static BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+	
+	private static ConnectionManager conMan;
+	
+	private static AllergyManager allergyManag;
+	private static DoctorManager doctorManag;
+	private static PatientManager patientManag;
+	private static PrescriptionManager prescriptionManag;
+	private static SymptomManager symptomManag;
+	private static TreatmentManager treatmentManag;
+	 
+	
 	
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		System.out.println("Welcome to the library!");
@@ -252,24 +263,9 @@ public static void getPrescriptionsByPatientId() {
 		String gender = r.readLine();
 
 		Patient patient = new Patient(id,name,date,gender);			//we follow the constructor that is in class Patient
-		patient.addPatient(patient);
+		patientManag.addPatient(patient);
 	}
-	private static void addBook() throws NumberFormatException, IOException {
-		System.out.println("Please, write the book info:");
-		System.out.println("ISBN (without dashes):");
-		Integer isbn = Integer.parseInt(r.readLine());
-		System.out.println("Title:");
-		String title = r.readLine();
-		System.out.println("Publication date (DD-MM-YYYY format):");
-		LocalDate localDate = LocalDate.parse(r.readLine(), formatter);
-		Date date = Date.valueOf(localDate);
-		// Show and add authors
-		listAuthors();
-		Integer authorId = Integer.parseInt(r.readLine());
-		Author author = authorMan.getAuthor(authorId);
-		Book book = new Book(isbn, title, date, author);
-		bookMan.addBook(book);
-	}
+	
 	
 	private static void listPrescriptions() throws IOException{
 		System.out.println("Enter the prescription id");
@@ -300,31 +296,7 @@ public static void getPrescriptionsByPatientId() {
 	}
 	
 	
-	private static void addBook() throws NumberFormatException, IOException {
-		System.out.println("Please, write the book info:");
-		System.out.println("ISBN (without dashes):");
-		Integer isbn = Integer.parseInt(r.readLine());
-		System.out.println("Title:");
-		String title = r.readLine();
-		System.out.println("Publication date (DD-MM-YYYY format):");
-		LocalDate localDate = LocalDate.parse(r.readLine(), formatter);
-		Date date = Date.valueOf(localDate);
-		// Show and add authors
-		listAuthors();
-		Integer authorId = Integer.parseInt(r.readLine());
-		Author author = authorMan.getAuthor(authorId);
-		Book book = new Book(isbn, title, date, author);
-		bookMan.addBook(book);
-	}
-	private static void listAuthors() throws IOException {
-		System.out.println("Author name (press enter to search all): ");
-		String name = r.readLine();
-		System.out.println("Author surname (press enter to search all): ");
-		String surname = r.readLine();
-		System.out.println("These are the available authors, choose one by typing their id:");
-		List<Author> authors = authorMan.getAuthorByNameSurname(name, surname);
-		System.out.println(authors);
-	}
+	
 		
 		
 		

@@ -18,7 +18,7 @@ public class JDBCAllergyManager implements AllergyManager {
 	
 	
 
-	public JDBCAllergyManager(ConnectionManager connectionManager) {
+	public JDBCAllergyManager(ConnectionManager conMan) {
 		this.conMan = conMan;
 		this.c = conMan.getConnection();
 	}
