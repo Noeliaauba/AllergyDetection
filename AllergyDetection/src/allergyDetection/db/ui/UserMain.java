@@ -14,6 +14,8 @@ import allergyDetection.db.interfaces.*;
 import allergyDetection.db.jdbc.ConnectionManager;
 import allergyDetection.db.jdbc.JDBCPatientManager;
 import allergyDetection.db.pojos.*;
+import library.db.pojos.Author;
+import library.db.pojos.Book;
 
 
 public class UserMain {
@@ -199,7 +201,7 @@ public static void getPrescriptionsByPatientId() {
 			break;
 		
 		case 3: 
-			//modifyInformationOfPatient();
+			//modifyPatient();
 			//TODO the method. This method can be done here 
 
 			break;
@@ -216,13 +218,13 @@ public static void getPrescriptionsByPatientId() {
 
 			break;	
 		case 6: 
-			//showMedicalScore();
+			//addPrescription();
 			//TODO the method. This method can be done here 
 
 			break;
 			
 		case 7: 
-			//showMedicalScore();
+			//modifyPrescription();
 			//TODO the method. This method can be done here 
 
 			break;
@@ -264,9 +266,9 @@ public static void getPrescriptionsByPatientId() {
 
 		Patient patient = new Patient(id,name,date,gender);			//we follow the constructor that is in class Patient
 		patientManag.addPatient(patient);
-	}
+	}	
 	
-	
+	//method of lists in case we need.
 	private static void listPrescriptions() throws IOException{
 		System.out.println("Enter the prescription id");
 		Integer id = Integer.parseInt(r.readLine());
@@ -297,38 +299,51 @@ public static void getPrescriptionsByPatientId() {
 	
 	
 	
+	private static void deletePatient()  throws NumberFormatException, IOException {
+		System.out.println("Your will delete a patient from the data base information. ");
+		System.out.println("Please, write the id of the patient taht your want to delete: ");
+		System.out.println("Patient id: ");
+		Integer id = Integer.parseInt(r.readLine());
+		patientManag.deletePatient(id);
+	}	
 		
+	private static void modifyPatient() throws NumberFormatException, IOException {
+		//TODO delete the comments???
+		// Search for an author to be modified
+		// User selects the author to be modified
+		Patient p=null;
+		System.out.println("Here are the actual patient's values");
+		System.out.println("Type a new value to modyfy them or just press enter to keep their value.");
+		System.out.println("id (" + p.getId() + "): ");
+		Integer newId = Integer.parseInt(r.readLine());
+		System.out.println("Name (" + p.getName() + "): ");
+		String newName = r.readLine();
+		System.out.println("The Date of Birth of the patient(DD-MM-YYYY format): "+p.getDob());
+		LocalDate localDate = LocalDate.parse(r.readLine(), formatter);
+		Date newDob = Date.valueOf(localDate);
+		System.out.println("Gender (" + p.getGender() + "): ");
+		String newGender = r.readLine();
 		
-		
-		
-		
-		
-	/*		listPrescriptions();
-	Integer prescriptionId = Integer.parseInt(r.readLine());
-	Prescription prescrip= PrescriptionManager.getPrescription(prescriptionId);
-	listAllergies();
-	Integer allergyId = Integer.parseInt(r.readLine());
-	Allergy allergy= AllergyManager.getAllergy(allergyId);
-	System.out.println("To stop adding allergies, please add a (-1): ");
-	while(allergyId!=-1) {
-		allergyId = Integer.parseInt(r.readLine());
-		Allergy allergy1= AllergyManager.getAllergy(allergyId);
-		System.out.println("A new allergy was added. ");
-		System.out.println("To stop adding allergies, please add a (-1): ");
+		if(!newId.equals("")) {
+			p.setId(newId);
+			}
+		if(!newName.equals("")) {
+			p.setName(newName);
+			}
+		if(!newDob.equals("")) {
+			p.setDob(newDob);
+			}
+		if(!newGender.equals("")) {
+			p.setGender(newGender);
+			}
+		//TODO about the prescriptions and allergies and symptoms??? How do we do --> Ask Rodrigo
 	}
-	listSymptoms();
-	Integer symptomId = Integer.parseInt(r.readLine());
-	Symptom symptom= SymptomManager.getSymptom(symptomId);
-	System.out.println("To stop adding Symptoms, please add a (-1): ");
-	while(symptomId!=-1) {
-		symptomId = Integer.parseInt(r.readLine());
-		Symptom symptom1= SymptomManager.getSymptom(symptomId);
-		System.out.println("A new symptom was added. ");
-		System.out.println("To stop adding symptoms, please add a (-1): ");
-	}		*/
 		
 		
-		
+
+					
+					
+	
 		
 		
 		
@@ -348,3 +363,28 @@ public static void getPrescriptionsByPatientId() {
 	
 }
 
+
+//the code that we should add to addPatient if we add the methods lists
+/*		listPrescriptions();
+Integer prescriptionId = Integer.parseInt(r.readLine());
+Prescription prescrip= PrescriptionManager.getPrescription(prescriptionId);
+listAllergies();
+Integer allergyId = Integer.parseInt(r.readLine());
+Allergy allergy= AllergyManager.getAllergy(allergyId);
+System.out.println("To stop adding allergies, please add a (-1): ");
+while(allergyId!=-1) {
+	allergyId = Integer.parseInt(r.readLine());
+	Allergy allergy1= AllergyManager.getAllergy(allergyId);
+	System.out.println("A new allergy was added. ");
+	System.out.println("To stop adding allergies, please add a (-1): ");
+}
+listSymptoms();
+Integer symptomId = Integer.parseInt(r.readLine());
+Symptom symptom= SymptomManager.getSymptom(symptomId);
+System.out.println("To stop adding Symptoms, please add a (-1): ");
+while(symptomId!=-1) {
+	symptomId = Integer.parseInt(r.readLine());
+	Symptom symptom1= SymptomManager.getSymptom(symptomId);
+	System.out.println("A new symptom was added. ");
+	System.out.println("To stop adding symptoms, please add a (-1): ");
+}		*/
