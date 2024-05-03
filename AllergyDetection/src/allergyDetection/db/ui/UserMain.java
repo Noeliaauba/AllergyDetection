@@ -3,13 +3,18 @@ package allergyDetection.db.ui;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 import allergyDetection.db.*;
 import allergyDetection.db.interfaces.*;
+import allergyDetection.db.jdbc.JDBCPatientManager;
 import allergyDetection.db.pojos.*;
+import library.db.pojos.Author;
+import library.db.pojos.Book;
 
 public class UserMain {
 
@@ -135,15 +140,7 @@ public class UserMain {
     }
 		
 	
-	private static void searchBooksByTitle() throws IOException {
-		System.out.println("Please, type the book title");
-		String title = r.readLine();
-		List<Book> books = bookMan.searchBookByTitle(title);
-		for (Book book : books) {
-			System.out.println(book);
-		}
-	}
-
+	
 		
 	
 public static void getPrescriptionsByPatientId() {
@@ -232,14 +229,131 @@ public static void getPrescriptionsByPatientId() {
 		}
 	}
 	
+	private Integer id;
+	private String name;
+	private Date dob;
+	private String gender;
+	
+
+	private List <Prescription> prescriptions; 
+	private List <Allergy> allergies;
+	private List<Symptom> symptoms;
+	
+	private static void addPatient()  throws NumberFormatException, IOException {
+		System.out.println("Please, write the information of the patient:");
+		System.out.println("Patient id: ");
+		Integer id = Integer.parseInt(r.readLine());
+		System.out.println("Patient name: ");
+		String name = r.readLine();
+		System.out.println("The Date of Birth of the patient(DD-MM-YYYY format): ");
+		LocalDate localDate = LocalDate.parse(r.readLine(), formatter);
+		Date date = Date.valueOf(localDate);
+		System.out.println("Patient gender: ");
+		String gender = r.readLine();
+
+		Patient patient = new Patient(id,name,date,gender);			//we follow the constructor that is in class Patient
+		patient.addPatient(patient);
+	}
+	private static void addBook() throws NumberFormatException, IOException {
+		System.out.println("Please, write the book info:");
+		System.out.println("ISBN (without dashes):");
+		Integer isbn = Integer.parseInt(r.readLine());
+		System.out.println("Title:");
+		String title = r.readLine();
+		System.out.println("Publication date (DD-MM-YYYY format):");
+		LocalDate localDate = LocalDate.parse(r.readLine(), formatter);
+		Date date = Date.valueOf(localDate);
+		// Show and add authors
+		listAuthors();
+		Integer authorId = Integer.parseInt(r.readLine());
+		Author author = authorMan.getAuthor(authorId);
+		Book book = new Book(isbn, title, date, author);
+		bookMan.addBook(book);
+	}
+	
+	private static void listPrescriptions() throws IOException{
+		System.out.println("Enter the prescription id");
+		Integer id = Integer.parseInt(r.readLine());
+		System.out.println("These are the available prescriptions, choose one by typing their id:");
+		List<Prescription> prescription = PrescriptionManager.getPrescriptionById(id);
+		//TODO  the method getPrescriptionById
+		
+		System.out.println(prescription);
+	}
+	private static void listAllergies() throws IOException{
+		System.out.println("Enter the Allergy id");
+		Integer id = Integer.parseInt(r.readLine());
+		System.out.println("These are the available allergies, choose one by typing their id:");
+		List<Allergy> allergies = AllergyManager.getAllergyById(id);
+		//TODO  the method getAllergyById
+		
+		System.out.println(allergies);
+	}
+	private static void listSymptoms() throws IOException{
+		System.out.println("Enter the Symptom id");
+		Integer id = Integer.parseInt(r.readLine());
+		System.out.println("These are the available symptoms, choose one by typing their id:");
+		List<Symptom> symptoms = SymptomManager.getSymptomById(id);
+		//TODO  the method getSymptomById
+		
+		System.out.println(symptoms);
+	}
+	
+	
+	private static void addBook() throws NumberFormatException, IOException {
+		System.out.println("Please, write the book info:");
+		System.out.println("ISBN (without dashes):");
+		Integer isbn = Integer.parseInt(r.readLine());
+		System.out.println("Title:");
+		String title = r.readLine();
+		System.out.println("Publication date (DD-MM-YYYY format):");
+		LocalDate localDate = LocalDate.parse(r.readLine(), formatter);
+		Date date = Date.valueOf(localDate);
+		// Show and add authors
+		listAuthors();
+		Integer authorId = Integer.parseInt(r.readLine());
+		Author author = authorMan.getAuthor(authorId);
+		Book book = new Book(isbn, title, date, author);
+		bookMan.addBook(book);
+	}
+	private static void listAuthors() throws IOException {
+		System.out.println("Author name (press enter to search all): ");
+		String name = r.readLine();
+		System.out.println("Author surname (press enter to search all): ");
+		String surname = r.readLine();
+		System.out.println("These are the available authors, choose one by typing their id:");
+		List<Author> authors = authorMan.getAuthorByNameSurname(name, surname);
+		System.out.println(authors);
+	}
 		
 		
 		
 		
 		
 		
-		
-		
+	/*		listPrescriptions();
+	Integer prescriptionId = Integer.parseInt(r.readLine());
+	Prescription prescrip= PrescriptionManager.getPrescription(prescriptionId);
+	listAllergies();
+	Integer allergyId = Integer.parseInt(r.readLine());
+	Allergy allergy= AllergyManager.getAllergy(allergyId);
+	System.out.println("To stop adding allergies, please add a (-1): ");
+	while(allergyId!=-1) {
+		allergyId = Integer.parseInt(r.readLine());
+		Allergy allergy1= AllergyManager.getAllergy(allergyId);
+		System.out.println("A new allergy was added. ");
+		System.out.println("To stop adding allergies, please add a (-1): ");
+	}
+	listSymptoms();
+	Integer symptomId = Integer.parseInt(r.readLine());
+	Symptom symptom= SymptomManager.getSymptom(symptomId);
+	System.out.println("To stop adding Symptoms, please add a (-1): ");
+	while(symptomId!=-1) {
+		symptomId = Integer.parseInt(r.readLine());
+		Symptom symptom1= SymptomManager.getSymptom(symptomId);
+		System.out.println("A new symptom was added. ");
+		System.out.println("To stop adding symptoms, please add a (-1): ");
+	}		*/
 		
 		
 		
