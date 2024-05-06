@@ -40,6 +40,7 @@ public class JDBCPrescriptionManager implements PrescriptionManager {
 		}		
 	}
 
+
 	@Override   
 	public void modifyPrescription(Prescription k) {
 		try {
@@ -69,13 +70,13 @@ public class JDBCPrescriptionManager implements PrescriptionManager {
 		    pstmt.setInt(1, k.getId());
 		    int rowsAffected = pstmt.executeUpdate();
 		    if (rowsAffected > 0) {
-		        System.out.println("Deleted successfully the patient with ID"+ k.getId());
+		        System.out.println("Deleted successfully the prescription with ID"+ k.getId());
 		    } else {
-		        System.out.println("Patient not found with ID " + k.getId());
+		        System.out.println("Prescription not found with ID " + k.getId());
 		    }
 		    pstmt.close();
 		} catch (SQLException e) {
-		    System.out.println("Error in data bases with the patient ID " + k.getId());
+		    System.out.println("Error in data bases with the prescription ID " + k.getId());
 		    e.printStackTrace();
 		}	
 		
@@ -112,6 +113,23 @@ public class JDBCPrescriptionManager implements PrescriptionManager {
 			e.printStackTrace();
 		}
 	    return prescription;
+	}
+	
+	@Override
+	public Prescription getPrescriptionById(Integer id) {
+		try {
+			String sql = "SELECT * FROM patient WHERE id = " + id;
+			Statement st;
+			st = c.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+			rs.next();
+			Prescription pr = new Prescription (rs.getInt("id"), null, null, null, null);
+			return pr;
+		} catch (SQLException e) {
+			System.out.println("Error in the database");
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }
