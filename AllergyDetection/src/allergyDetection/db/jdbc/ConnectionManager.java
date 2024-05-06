@@ -31,7 +31,7 @@ public class ConnectionManager {
 		this.doctorManag = new JDBCDoctorManager(this);
 		this.patientManag = new JDBCPatientManager(this);
 		this.prescriptionManag = new JDBCPrescriptionManager(this);
-		this.symptomManag =new JCDBCSymptomManager(this);
+		this.symptomManag =new JDBCSymptomManager(this);
 		this.treatmentManag =new JDBCTreatmentManager(this);
 		this.createTables();
 	}
@@ -167,7 +167,7 @@ public class ConnectionManager {
 			insertTables3.executeUpdate(insert3_2);
 			String insert3_3 = "INSERT INTO allergies (name, type) VALUES ('Nuit', 'Alimentary')";
 			insertTables3.executeUpdate(insert3_3);
-			String insert3_4 = "INSERT INTO allergies (name, type) VALUES ('Dust Mite', 'Statioanry')";
+			String insert3_4 = "INSERT INTO allergies (name, type) VALUES ('Dust Mite', 'Stationary')";
 			insertTables3.executeUpdate(insert3_4);
 			String insert3_5 = "INSERT INTO allergies (name, type) VALUES ('Insect', 'Insect')";
 			insertTables3.executeUpdate(insert3_5);

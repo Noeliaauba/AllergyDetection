@@ -9,6 +9,7 @@ import java.util.List;
 
 import allergyDetection.db.interfaces.AllergyManager;
 import allergyDetection.db.pojos.Allergy;
+import allergyDetection.db.pojos.Symptom;
 import allergyDetection.db.pojos.Treatment;
 
 public class JDBCAllergyManager implements AllergyManager {
@@ -61,8 +62,8 @@ public class JDBCAllergyManager implements AllergyManager {
 	}
 
 	@Override
-	 public List<Allergy> searchAllergybyTreatment(Treatment t) {
-		return null;
+	 //public List<Allergy> searchAllergybyTreatment(Treatment t) {
+		//return null;
 		/*List<Allergy> allergylist = new ArrayList<Allergy>();
 		try {
 			String sql = "SELECT * FROM allergies WHERE  LIKE ?";
@@ -88,12 +89,11 @@ public class JDBCAllergyManager implements AllergyManager {
 
 	
 	
-	public List<Allergy> showAllAllergy() {
+	public List<Allergy> searchAllergy(String type_Allergy) {
 		List<Allergy> allergies = new ArrayList<Allergy>();
 		try {
-			String sql = "SELECT * FROM allergies";
-			PreparedStatement p;
-			p = c.prepareStatement(sql);
+			String sql = "SELECT * FROM allergy WHERE type LIKE ?";
+			PreparedStatement p = c.prepareStatement(sql);
 			ResultSet rs = p.executeQuery();
 			while (rs.next()) {
 				Integer id = rs.getInt("id");
@@ -111,6 +111,46 @@ public class JDBCAllergyManager implements AllergyManager {
 			e.printStackTrace();
 		}
 		return allergies;
+	}
+	
+	public List<Symptom> searchSymptom(String type_Symptom){
+		List<Symptom> symptoms = new ArrayList<Symptom>();
+		try {
+			String sql = "SELECT * FROM symptom WHERE type LIKE ?";
+			PreparedStatement p= c.prepareStatement(sql);
+			p.setString(1,type_Symptom);
+			ResultSet rs = p.executeQuery();
+			while (rs.next()) {
+				Integer id = rs.getInt("id");
+				String name = rs.getString("name");
+				String type = rs.getString("type");
+				Symptom s = new Symptom(id, name, type);
+				symptoms.add(s);
+			}
+			rs.close();
+			p.close();
+		} catch (SQLException e) {
+			System.out.println("Error in the database");
+			e.printStackTrace();
+		}
+		return symptoms;
+		
+	}
+
+	@Override
+	public void assignedSymptomtoAllergy(Integer symptomId,Integer allergyId) {
+		try {
+			String template = "INSERT INTO PRODUCES (symptom_id, allergy_id) VALUES (?,?)";
+			PreparedStatement pstmt = c.prepareStatement(template);
+			pstmt.setInt(1, symptomId);
+			pstmt.setInt(2,allergyId);
+			pstmt.executeUpdate();
+			pstmt.close();
+		} catch (SQLException e) {
+			System.out.println("Error in the database");
+			e.printStackTrace();
+		}
+		
 	}
 }
 
