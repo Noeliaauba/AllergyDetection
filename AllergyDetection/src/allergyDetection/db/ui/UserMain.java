@@ -190,20 +190,18 @@ public static void getPrescriptionsByPatientId() {
 		int choiceDoctor = Integer.parseInt(r.readLine());
 		switch (choiceDoctor) {
 		case 1: 
-			//addPatient();
-			//TODO the method. This method can be done here in this class
+			addPatient();
 			
 			break;
 		
 		case 2: 
-			//deletePatient();
-			//TODO the method. This method can be done here 
+			deletePatient();
+			
 			break;
 		
 		case 3: 
-			//modifyPatient();
-			//TODO the method. This method can be done here 
-
+			modifyPatient();
+			
 			break;
 		
 		case 4: 
@@ -230,9 +228,8 @@ public static void getPrescriptionsByPatientId() {
 			break;
 		
 		case 0:
-			// TODO CLOSE EVRYTHING
 			variableWhileDoctor=0;
-			
+			conMan.close();			
 		break;
 		
 		default:
@@ -385,3 +382,5 @@ while(symptomId!=-1) {
 	System.out.println("A new symptom was added. ");
 	System.out.println("To stop adding symptoms, please add a (-1): ");
 }		*/
+
+//......................................................
