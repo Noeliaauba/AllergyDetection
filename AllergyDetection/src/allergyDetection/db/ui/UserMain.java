@@ -237,7 +237,7 @@ public static void showPrescription() throws IOException, NumberFormatException{
 	private static void addPrescription()  throws NumberFormatException, IOException {
 		System.out.println("Please, write the information of the patient and the doctor:");
 		System.out.println("Treatment name: ");
-		String treatmentName = r.readLine();
+		String treatmentName = r.readLine(); // for patient and doctor we need to call method getDoctorid and same w/ patient
 		System.out.println("Patient id: ");
 		Integer idPatient = Integer.parseInt(r.readLine());
 		System.out.println("Doctor id: ");
@@ -252,7 +252,7 @@ public static void showPrescription() throws IOException, NumberFormatException{
 		System.out.println("Patient id: ");
 		Integer id = Integer.parseInt(r.readLine());
 		System.out.println("Symptom name: ");
-		String name = r.readLine();
+		String name = r.readLine(); 
 		System.out.println("Symptom type: ");
 		String type = r.readLine();
 		
