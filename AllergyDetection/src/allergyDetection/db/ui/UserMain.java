@@ -243,8 +243,8 @@ public static void showPrescription() throws IOException, NumberFormatException{
 		System.out.println("Doctor id: ");
 		Integer idDoctor = Integer.parseInt(r.readLine());
 		
-		Prescription prescription = new Prescription(_treatment_required, _given_to,_given_by);			
-		Prescription.addPrescription(prescription);
+		Prescription prescription = new Prescription(treatmentName, idPatient,idDoctor);			
+		prescriptionManag.addPrescription(prescription);
 	}
 	
 	private static void addSymptom()  throws NumberFormatException, IOException {
