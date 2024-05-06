@@ -92,7 +92,7 @@ public class ConnectionManager {
 			
 			
 			String create4 = "CREATE TABLE prescription ( "
-					+ " id INTEGER ,"
+					+ " id INTEGER PRIMARY KEY AUTOINCREMENT,"
 					+ " treatment_required INTEGER REFERENCES treatment(id),"
 					+ " isUsed BOOLEAN,"
 					+ " given_to INTEGER REFERENCES patient(id),"
