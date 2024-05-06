@@ -2,6 +2,7 @@ package allergyDetection.db.ui;
 
 import java.io.BufferedReader;
 
+
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.Date;
@@ -14,6 +15,7 @@ import allergyDetection.db.*;
 import allergyDetection.db.interfaces.*;
 import allergyDetection.db.jdbc.ConnectionManager;
 import allergyDetection.db.jdbc.JDBCPatientManager;
+import allergyDetection.db.jdbc.*;
 import allergyDetection.db.pojos.*;
 
 
@@ -119,13 +121,12 @@ public class UserMain {
 	
 	//Patients methods.
 
-
 public static void showPrescription() throws IOException, NumberFormatException{
 		try {
 			System.out.println("Here is your prescription:\n");
-			getPrescriptionsById();
+			JDBCPrescriptionManager.getPrescriptionsById(id);
             // Fetch prescriptions by patient ID
-            List<Prescription> prescriptions = getPrescriptionsById(); 
+            List<Prescription> prescriptions = getPrescriptionsById(id); 
 
             if (prescriptions.isEmpty()) {
                 System.out.println("No prescriptions found for the given ID.");
@@ -142,16 +143,7 @@ public static void showPrescription() throws IOException, NumberFormatException{
         }
     }
 
-/*public static void getPrescriptionsByPatientId() {
-	System.out.println("Please, type your ID as a patient");
-	int id = Integer.parseInt(r.readLine());
-  List<Prescription> prescriptions = PrescriptionManager.SelectPrescriptionById(id);
-  for(Prescription prescrip : prescriptions) {
-	  System.out.println(prescrip);
-  }
-}
-	*/
-	
+
   	
 
 	public static void menuDoctor() throws NumberFormatException, IOException {
@@ -224,7 +216,7 @@ public static void showPrescription() throws IOException, NumberFormatException{
 		}
 	}
 	
-	private Integer id;
+	private  Integer id;
 	private String name;
 	private Date dob;
 	private String gender;
