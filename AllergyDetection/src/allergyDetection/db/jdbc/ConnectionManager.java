@@ -64,7 +64,7 @@ public class ConnectionManager {
 		try {
 			
 			Statement createTables1 = c.createStatement();
-			String create1 = "CREATE TABLE patients ( "
+			String create1 = "CREATE TABLE patient ( "
 					+ " id INTEGER PRIMARY KEY,"
 					+ " name TEXT NOT NULL,"
 					+ " dateOfBirth DATE,"
@@ -74,7 +74,7 @@ public class ConnectionManager {
 			
 			
 			Statement createTables2 = c.createStatement();
-			String create2 = "CREATE TABLE doctors ( "
+			String create2 = "CREATE TABLE doctor ( "
 					+ " id INTEGER PRIMARY KEY,"
 					+ " name TEXT NOT NULL)";
 			createTables2.executeUpdate(create2);
@@ -82,7 +82,7 @@ public class ConnectionManager {
 			
 			
 			Statement createTables3 = c.createStatement();
-			String create3 = "CREATE TABLE allergys ( "
+			String create3 = "CREATE TABLE allergy ( "
 					+ " id INTEGER PRIMARY KEY ,"
 					+ " startDate DATE,"
 					+ " endDate DATE,"
@@ -93,7 +93,7 @@ public class ConnectionManager {
 			Statement createTables4 = c.createStatement();
 			
 			
-			String create4 = "CREATE TABLE prescriptions ( "
+			String create4 = "CREATE TABLE prescription ( "
 					+ " id INTEGER ,"
 					+ " treatment_required INTEGER REFERENCES treatment(id),"
 					+ " isUsed BOOLEAN,"
@@ -105,7 +105,7 @@ public class ConnectionManager {
 			
 			
 			Statement createTables5 = c.createStatement();
-			String create5 = "CREATE TABLE symptoms ( "
+			String create5 = "CREATE TABLE symptom ( "
 					+ " id INTEGER PRIMARY KEY,"
 					+ " name TEXT NOT NULL,"
 					+ " type TEXT)";		
@@ -114,7 +114,7 @@ public class ConnectionManager {
 			
 			
 			Statement createTables6 = c.createStatement();
-			String create6 = "CREATE TABLE treatments ( "
+			String create6 = "CREATE TABLE treatment ( "
 					+ " id INTEGER PRIMARY KEY,"
 					+ "name TEXT NOT NULL,"
 					+ " type TEXT)";		
@@ -161,77 +161,77 @@ public class ConnectionManager {
 			
 			
 			Statement insertTables3 = c.createStatement();
-			String insert3_1 = "INSERT INTO allergies (name, type) VALUES ('Dairy', 'Alimentary')";
+			String insert3_1 = "INSERT INTO allergy (name, type) VALUES ('Dairy', 'Alimentary')";
 			insertTables3.executeUpdate(insert3_1);
-			String insert3_2 = "INSERT INTO allergies (name, type) VALUES ('Pollen', 'Stationary')";
+			String insert3_2 = "INSERT INTO allergy (name, type) VALUES ('Pollen', 'Stationary')";
 			insertTables3.executeUpdate(insert3_2);
-			String insert3_3 = "INSERT INTO allergies (name, type) VALUES ('Nuit', 'Alimentary')";
+			String insert3_3 = "INSERT INTO allergy (name, type) VALUES ('Nuit', 'Alimentary')";
 			insertTables3.executeUpdate(insert3_3);
-			String insert3_4 = "INSERT INTO allergies (name, type) VALUES ('Dust Mite', 'Statioanry')";
+			String insert3_4 = "INSERT INTO allergy (name, type) VALUES ('Dust Mite', 'Stationary')";
 			insertTables3.executeUpdate(insert3_4);
-			String insert3_5 = "INSERT INTO allergies (name, type) VALUES ('Insect', 'Insect')";
+			String insert3_5 = "INSERT INTO allergy (name, type) VALUES ('Insect', 'Insect')";
 			insertTables3.executeUpdate(insert3_5);
-			String insert3_6 = "INSERT INTO allergies (name, type) VALUES ('Drug', 'Drugs')";
+			String insert3_6 = "INSERT INTO allergy (name, type) VALUES ('Drug', 'Drugs')";
 			insertTables3.executeUpdate(insert3_6);
-			String insert3_7 = "INSERT INTO allergies (name, type) VALUES ('Sun ', 'Cutaneous')";
+			String insert3_7 = "INSERT INTO allergy (name, type) VALUES ('Sun ', 'Cutaneous')";
 			insertTables3.executeUpdate(insert3_7);
-			String insert3_8 = "INSERT INTO allergies (name, type) VALUES ('Gluten', 'Alimentary')";
+			String insert3_8 = "INSERT INTO allergy (name, type) VALUES ('Gluten', 'Alimentary')";
 			insertTables3.executeUpdate(insert3_8);
 			insertTables3.close();
 			
 			
 			Statement insertTables5 = c.createStatement();
-			String insert5_1 = "INSERT INTO symptoms (name, type) VALUES ('Sneeze', 'Respiratory')";
+			String insert5_1 = "INSERT INTO symptom (name, type) VALUES ('Sneeze', 'Respiratory')";
 			insertTables5.executeUpdate(insert5_1);
-			String insert5_2 = "INSERT INTO symptoms (name, type) VALUES ('Nasal Congestion', 'Respiratory')";
+			String insert5_2 = "INSERT INTO symptom (name, type) VALUES ('Nasal Congestion', 'Respiratory')";
 			insertTables5.executeUpdate(insert5_2);
-			String insert5_3 = "INSERT INTO symptoms (name, type) VALUES ('Cough', 'Respiratory')";
+			String insert5_3 = "INSERT INTO symptom (name, type) VALUES ('Cough', 'Respiratory')";
 			insertTables5.executeUpdate(insert5_3);
-			String insert5_4 = "INSERT INTO symptoms (name, type) VALUES ('Runny Nose', 'Respiratory')";
+			String insert5_4 = "INSERT INTO symptom (name, type) VALUES ('Runny Nose', 'Respiratory')";
 			insertTables5.executeUpdate(insert5_4);
-			String insert5_5 = "INSERT INTO symptoms (name, type) VALUES ('Asthma Attack', 'Respiratory')";
+			String insert5_5 = "INSERT INTO symptom (name, type) VALUES ('Asthma Attack', 'Respiratory')";
 			insertTables5.executeUpdate(insert5_5);
-			String insert5_6 = "INSERT INTO symptoms (name, type) VALUES ('Hives', 'Cutaneous')";
+			String insert5_6 = "INSERT INTO symptom (name, type) VALUES ('Hives', 'Cutaneous')";
 			insertTables5.executeUpdate(insert5_6);
-			String insert5_7 = "INSERT INTO symptoms (name, type) VALUES ('Itch ', 'Cutaneous')";
+			String insert5_7 = "INSERT INTO symptom (name, type) VALUES ('Itch ', 'Cutaneous')";
 			insertTables5.executeUpdate(insert5_7);
-			String insert5_8 = "INSERT INTO symptoms (name, type) VALUES ('Burning Rush', 'Cutaneous')";
+			String insert5_8 = "INSERT INTO symptom (name, type) VALUES ('Burning Rush', 'Cutaneous')";
 			insertTables5.executeUpdate(insert5_8);
-			String insert5_9 = "INSERT INTO symptoms (name, type) VALUES ('Abdominal Pain', 'Digestive')";
+			String insert5_9 = "INSERT INTO symptom (name, type) VALUES ('Abdominal Pain', 'Digestive')";
 			insertTables5.executeUpdate(insert5_9);
-			String insert5_10 = "INSERT INTO symptoms (name, type) VALUES ('Nausea', 'Digestive')";
+			String insert5_10 = "INSERT INTO symptom (name, type) VALUES ('Nausea', 'Digestive')";
 			insertTables5.executeUpdate(insert5_10);
-			String insert5_11 = "INSERT INTO symptoms (name, type) VALUES ('Swelling Mouth', 'Digestive')";
+			String insert5_11 = "INSERT INTO symptom (name, type) VALUES ('Swelling Mouth', 'Digestive')";
 			insertTables5.executeUpdate(insert5_11);
-			String insert5_12 = "INSERT INTO symptoms (name, type) VALUES ('Tingling Tongue', 'Digestive')";
+			String insert5_12 = "INSERT INTO symptom (name, type) VALUES ('Tingling Tongue', 'Digestive')";
 			insertTables5.executeUpdate(insert5_12);
-			String insert5_13 = "INSERT INTO symptoms (name, type) VALUES ('Chest Tightness', 'Others')";
+			String insert5_13 = "INSERT INTO symptom (name, type) VALUES ('Chest Tightness', 'Others')";
 			insertTables5.executeUpdate(insert5_13);
-			String insert5_14 = "INSERT INTO symptoms (name, type) VALUES ('Watery Eyes', 'Others')";
+			String insert5_14 = "INSERT INTO symptom (name, type) VALUES ('Watery Eyes', 'Others')";
 			insertTables5.executeUpdate(insert5_14);
-			String insert5_15 = "INSERT INTO symptoms (name, type) VALUES ('Fever', 'Others')";
+			String insert5_15 = "INSERT INTO symptom (name, type) VALUES ('Fever', 'Others')";
 			insertTables5.executeUpdate(insert5_15);
-			String insert5_16 = "INSERT INTO symptoms (name, type) VALUES ('Headache', 'Others')";
+			String insert5_16 = "INSERT INTO symptom (name, type) VALUES ('Headache', 'Others')";
 			insertTables5.executeUpdate(insert5_16);
 			insertTables5.close();
 			
 			
 			Statement insertTables6 = c.createStatement();
-			String insert6_1 = "INSERT INTO treatments (name, type) VALUES ('Desloratadina', 'Antihistamines')";
+			String insert6_1 = "INSERT INTO treatment (name, type) VALUES ('Desloratadina', 'Antihistamines')";
 			insertTables6.executeUpdate(insert6_1);
-			String insert6_2 = "INSERT INTO treatments (name, type) VALUES ('Dexametasona', 'Corticosteroids')";
+			String insert6_2 = "INSERT INTO treatment (name, type) VALUES ('Dexametasona', 'Corticosteroids')";
 			insertTables6.executeUpdate(insert6_2);
-			String insert6_3 = "INSERT INTO treatments (name, type) VALUES ('Clorfenamina', 'Decongestants')";
+			String insert6_3 = "INSERT INTO treatment (name, type) VALUES ('Clorfenamina', 'Decongestants')";
 			insertTables6.executeUpdate(insert6_3);
-			String insert6_4 = "INSERT INTO treatments (name, type) VALUES ('Albuterol', 'Bronchodilators')";
+			String insert6_4 = "INSERT INTO treatment (name, type) VALUES ('Albuterol', 'Bronchodilators')";
 			insertTables6.executeUpdate(insert6_4);
-			String insert6_5 = "INSERT INTO treatments (name, type) VALUES ('Epinefrina', 'Vaccine')";
+			String insert6_5 = "INSERT INTO treatment (name, type) VALUES ('Epinefrina', 'Vaccine')";
 			insertTables6.executeUpdate(insert6_5);
-			String insert6_6 = "INSERT INTO treatments (name, type) VALUES ('Prednisona', 'Corticosteroids')";
+			String insert6_6 = "INSERT INTO treatment (name, type) VALUES ('Prednisona', 'Corticosteroids')";
 			insertTables6.executeUpdate(insert6_6);
-			String insert6_7 = "INSERT INTO treatments (name, type) VALUES ('Oximetazolina ', 'Decongestants')";
+			String insert6_7 = "INSERT INTO treatment (name, type) VALUES ('Oximetazolina ', 'Decongestants')";
 			insertTables6.executeUpdate(insert6_7);
-			String insert6_8 = "INSERT INTO treatments (name, type) VALUES ('Metaproterenol', 'Bronchodilators')";
+			String insert6_8 = "INSERT INTO treatment (name, type) VALUES ('Metaproterenol', 'Bronchodilators')";
 			insertTables6.executeUpdate(insert6_8);
 			insertTables6.close();
 			

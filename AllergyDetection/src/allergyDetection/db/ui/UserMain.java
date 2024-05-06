@@ -14,8 +14,7 @@ import allergyDetection.db.interfaces.*;
 import allergyDetection.db.jdbc.ConnectionManager;
 import allergyDetection.db.jdbc.JDBCPatientManager;
 import allergyDetection.db.pojos.*;
-import library.db.pojos.Author;
-import library.db.pojos.Book;
+
 
 
 public class UserMain {
@@ -83,42 +82,29 @@ public class UserMain {
 		int variableWhilePatient=1;
 		
 		while(variableWhilePatient!=0) {
-		System.out.println("1) Book a visit: ");
-		System.out.println("2) Look for the visit that are booked");
-		System.out.println("3) Check your medical score");
-		System.out.println("4) Show prescriptions");
+		//System.out.println("1) Book a visit: ");
+		System.out.println("1) Check your medical score");
+		System.out.println("2) Show prescriptions");
 		System.out.println("0) This option is always to exit");
 	
 		int choicePatient = Integer.parseInt(r.readLine());
 		switch (choicePatient) {
+		
+		
 		case 1: 
-			//selectVisitDate();
-			//TODO the method. This method can be done here in this class
-			
+			//checkMedicalScore();
+			//TODO the method. This method can be done here 
 			break;
 		
 		case 2: 
-			//LookForTheListOfVisitBooked();
-			//TODO the method. This method can be done here 
-			break;
-		
-		case 3: 
-			//checkMedicalScore();
-			//TODO the method. This method can be done here 
-
-			break;
-		
-		case 4: 
 			//showPrescription();
-			System.out.println("You want to see the prescription");
 			//TODO the method. This method can be done here 
 
 			break;
-		
 		
 		case 0:
-			// TODO CLOSE EVRYTHING
 			variableWhilePatient=0;
+			conMan.close();	
 			
 		break;
 		
@@ -130,12 +116,15 @@ public class UserMain {
 
 	}
 	
-	
-/*public static void showPrescription() throws IOException, NumberFormatException{
+	//Patients methods.
+
+
+public static void showPrescription() throws IOException, NumberFormatException{
 		try {
+			System.out.println("Here is your prescription:\n");
 			getPrescriptionsByPatientId();
             // Fetch prescriptions by patient ID
-            List<Prescription> prescriptions = getPrescriptionsByPatientId(); //A method 
+            List<Prescription> prescriptions = getPrescriptionsByPatientId(); 
 
             if (prescriptions.isEmpty()) {
                 System.out.println("No prescriptions found for the given ID.");
@@ -151,11 +140,7 @@ public class UserMain {
             System.out.println("Invalid ID format. Please enter a valid integer ID.");
         }
     }
-		
-	
-	
-		
-	
+
 public static void getPrescriptionsByPatientId() {
 	System.out.println("Please, type your ID as a patient");
 	int id = Integer.parseInt(r.readLine());
@@ -164,9 +149,8 @@ public static void getPrescriptionsByPatientId() {
 	  System.out.println(prescrip);
   }
 }
-*/
-
-  
+	
+	
   	
 
 	public static void menuDoctor() throws NumberFormatException, IOException {
@@ -211,8 +195,8 @@ public static void getPrescriptionsByPatientId() {
 			break;
 			
 		case 5: 
-			//addSymptoms();
-			//TODO the method. This method can be done here 
+			addSymptom();
+			
 
 			break;	
 		case 6: 
@@ -248,6 +232,19 @@ public static void getPrescriptionsByPatientId() {
 	private List <Prescription> prescriptions; 
 	private List <Allergy> allergies;
 	private List<Symptom> symptoms;
+	
+	private static void addSymptom()  throws NumberFormatException, IOException {
+		System.out.println("Please, write the information of the symptom:");
+		System.out.println("Patient id: ");
+		Integer id = Integer.parseInt(r.readLine());
+		System.out.println("Symptom name: ");
+		String name = r.readLine();
+		System.out.println("Symptom type: ");
+		String type = r.readLine();
+		
+		Symptom symptom = new Symptom(id,name,type);			
+		symptomManag.addSymptom(symptom);
+		}
 	
 	private static void addPatient()  throws NumberFormatException, IOException {
 		System.out.println("Please, write the information of the patient:");
@@ -384,3 +381,8 @@ while(symptomId!=-1) {
 }		*/
 
 //............................................................
+
+
+
+
+
