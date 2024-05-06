@@ -89,7 +89,37 @@ public void deletePatient(Integer id) {
     e.printStackTrace();
 }	
 }
-
-
-
+public void assignedAllergytoPatient(Integer patientId, Integer allergyId) {
+	try {
+		String template = "INSERT INTO SUFFERS (patient_id, allergy_id) VALUES (?,?)";
+		PreparedStatement pstmt = c.prepareStatement(template);
+		pstmt.setInt(1, patientId);
+		pstmt.setInt(2,allergyId);
+		pstmt.executeUpdate();
+		pstmt.close();
+	} catch (SQLException e) {
+		System.out.println("Error in the database");
+		e.printStackTrace();
+	}
+	
 }
+public void assignedSymptomtoPatient(Integer patientId, Integer symptomId) {
+	try {
+		String template = "INSERT INTO HAS (patient_id, symptom_id) VALUES (?,?)";
+		PreparedStatement pstmt = c.prepareStatement(template);
+		pstmt.setInt(1, patientId);
+		pstmt.setInt(2,symptomId);
+		pstmt.executeUpdate();
+		pstmt.close();
+	} catch (SQLException e) {
+		System.out.println("Error in the database");
+		e.printStackTrace();
+	}
+	
+}
+	
+}
+
+
+
+
