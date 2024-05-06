@@ -69,13 +69,13 @@ public class JDBCPrescriptionManager implements PrescriptionManager {
 		    pstmt.setInt(1, k.getId());
 		    int rowsAffected = pstmt.executeUpdate();
 		    if (rowsAffected > 0) {
-		        System.out.println("Deleted successfully the patient with ID"+ k.getId());
+		        System.out.println("Deleted successfully the prescription with ID"+ k.getId());
 		    } else {
-		        System.out.println("Patient not found with ID " + k.getId());
+		        System.out.println("Prescription not found with ID " + k.getId());
 		    }
 		    pstmt.close();
 		} catch (SQLException e) {
-		    System.out.println("Error in data bases with the patient ID " + k.getId());
+		    System.out.println("Error in data bases with the prescription ID " + k.getId());
 		    e.printStackTrace();
 		}	
 		
