@@ -14,8 +14,7 @@ import allergyDetection.db.interfaces.*;
 import allergyDetection.db.jdbc.ConnectionManager;
 import allergyDetection.db.jdbc.JDBCPatientManager;
 import allergyDetection.db.pojos.*;
-import library.db.pojos.Author;
-import library.db.pojos.Book;
+
 
 
 public class UserMain {
@@ -110,7 +109,7 @@ public class UserMain {
 		
 		case 4: 
 			//showPrescription();
-			System.out.println("You want to see the prescription");
+			System.out.println("You want to see the prescription.");
 			//TODO the method. This method can be done here 
 
 			break;
@@ -129,6 +128,14 @@ public class UserMain {
 		}
 
 	}
+	
+	//Patients methods.
+	private static void showPrescription() {
+		
+	}
+	
+	
+	
 	
 	
 /*public static void showPrescription() throws IOException, NumberFormatException{
@@ -384,3 +391,8 @@ while(symptomId!=-1) {
 }		*/
 
 //............................................................
+
+
+
+
+
