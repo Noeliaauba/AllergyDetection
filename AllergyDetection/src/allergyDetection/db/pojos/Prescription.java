@@ -29,7 +29,7 @@ public class Prescription {
 	public Prescription (Treatment _treatment_required, Patient _given_to, Doctor _given_by) {
 		this.treatment_required=_treatment_required;
 		this.given_to=_given_to;
-		this.given_by=_given_by;	
+		this.given_by=_given_by;	//constructor for createprescription
 	}
 	
 	 public Integer getId() {
