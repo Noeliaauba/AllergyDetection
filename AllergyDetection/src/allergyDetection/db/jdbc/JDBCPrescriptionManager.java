@@ -40,6 +40,7 @@ public class JDBCPrescriptionManager implements PrescriptionManager {
 		}		
 	}
 
+
 	@Override   
 	public void modifyPrescription(Prescription k) {
 		try {
@@ -112,6 +113,23 @@ public class JDBCPrescriptionManager implements PrescriptionManager {
 			e.printStackTrace();
 		}
 	    return prescription;
+	}
+	
+	@Override
+	public Prescription getPrescriptionByID(Integer id) {
+		try {
+			String sql = "SELECT * FROM patient WHERE id = " + id;
+			Statement st;
+			st = c.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+			rs.next();
+			Prescription pr = new Prescription (rs.getInt("id"),treatment, isUsed, patient, doctor);
+			return pr;
+		} catch (SQLException e) {
+			System.out.println("Error in the database");
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

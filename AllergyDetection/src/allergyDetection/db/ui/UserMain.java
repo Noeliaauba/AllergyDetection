@@ -1,6 +1,7 @@
 package allergyDetection.db.ui;
 
 import java.io.BufferedReader;
+
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.Date;
@@ -122,14 +123,14 @@ public class UserMain {
 public static void showPrescription() throws IOException, NumberFormatException{
 		try {
 			System.out.println("Here is your prescription:\n");
-			getPrescriptionsByPatientId();
+			getPrescriptionsById();
             // Fetch prescriptions by patient ID
-            List<Prescription> prescriptions = getPrescriptionsByPatientId(); 
+            List<Prescription> prescriptions = getPrescriptionsById(); 
 
             if (prescriptions.isEmpty()) {
                 System.out.println("No prescriptions found for the given ID.");
             } else {
-                System.out.println("Prescriptions for patient with ID " + patientId + ":");
+                System.out.println("Prescriptions for patient with ID " + Patient.getId() + ":");
                 for (Prescription prescription : prescriptions) {
                     System.out.println(prescription);
                 }
@@ -141,7 +142,7 @@ public static void showPrescription() throws IOException, NumberFormatException{
         }
     }
 
-public static void getPrescriptionsByPatientId() {
+/*public static void getPrescriptionsByPatientId() {
 	System.out.println("Please, type your ID as a patient");
 	int id = Integer.parseInt(r.readLine());
   List<Prescription> prescriptions = PrescriptionManager.SelectPrescriptionById(id);
@@ -149,7 +150,7 @@ public static void getPrescriptionsByPatientId() {
 	  System.out.println(prescrip);
   }
 }
-	
+	*/
 	
   	
 
@@ -200,8 +201,8 @@ public static void getPrescriptionsByPatientId() {
 
 			break;	
 		case 6: 
-			//addPrescription();
-			//TODO the method. This method can be done here 
+			addPrescription();
+			
 
 			break;
 			
@@ -232,6 +233,19 @@ public static void getPrescriptionsByPatientId() {
 	private List <Prescription> prescriptions; 
 	private List <Allergy> allergies;
 	private List<Symptom> symptoms;
+	
+	private static void addPrescription()  throws NumberFormatException, IOException {
+		System.out.println("Please, write the information of the patient and the doctor:");
+		System.out.println("Treatment name: ");
+		String treatmentName = r.readLine();
+		System.out.println("Patient id: ");
+		Integer idPatient = Integer.parseInt(r.readLine());
+		System.out.println("Doctor id: ");
+		Integer idDoctor = Integer.parseInt(r.readLine());
+		
+		Prescription prescription = new Prescription(_treatment_required, _given_to,_given_by);			
+		Prescription.addPrescription(prescription);
+	}
 	
 	private static void addSymptom()  throws NumberFormatException, IOException {
 		System.out.println("Please, write the information of the symptom:");
