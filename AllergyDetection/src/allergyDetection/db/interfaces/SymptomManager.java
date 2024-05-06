@@ -1,14 +1,17 @@
 package allergyDetection.db.interfaces;
 import java.util.*;
 import allergyDetection.db.pojos.Allergy;
+import allergyDetection.db.pojos.Patient;
 import allergyDetection.db.pojos.Symptom;
 import allergyDetection.db.pojos.Treatment;
 public interface SymptomManager {
 	
 	public void addSymptom(Symptom s);
 	public void modifySymptom(Symptom s);
-	public List<Symptom> searchSymptomybyAllergy(Integer allergyID);	
+	public Symptom getSymptomByID(Integer id);
 	public List<Symptom> searchSymptom(String type_Symptom);
+	public List<Symptom> searchSymptomybyAllergy(Integer allergyID);	
+
 	
 	// symMan.searchSympton("")
 }

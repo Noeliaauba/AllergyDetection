@@ -65,7 +65,7 @@ public class ConnectionManager {
 			
 			Statement createTables1 = c.createStatement();
 			String create1 = "CREATE TABLE patient ( "
-					+ " id INTEGER PRIMARY KEY,"
+					+ " id INTEGER PRIMARY KEY AUTOINCREMENT,"
 					+ " name TEXT NOT NULL,"
 					+ " dateOfBirth DATE,"
 					+ " gender TEXT)";		
@@ -75,7 +75,7 @@ public class ConnectionManager {
 			
 			Statement createTables2 = c.createStatement();
 			String create2 = "CREATE TABLE doctor ( "
-					+ " id INTEGER PRIMARY KEY,"
+					+ " id INTEGER PRIMARY KEY AUTOINCREMENT,"
 					+ " name TEXT NOT NULL)";
 			createTables2.executeUpdate(create2);
 			createTables2.close();
@@ -83,9 +83,7 @@ public class ConnectionManager {
 			
 			Statement createTables3 = c.createStatement();
 			String create3 = "CREATE TABLE allergy ( "
-					+ " id INTEGER PRIMARY KEY ,"
-					+ " startDate DATE,"
-					+ " endDate DATE,"
+					+ " id INTEGER PRIMARY KEY AUTOINCREMENT ,"
 					+ " name TEXT NOT NULL,"
 					+ " type TEXT NOT NULL)";	
 			createTables3.executeUpdate(create3);
@@ -106,7 +104,7 @@ public class ConnectionManager {
 			
 			Statement createTables5 = c.createStatement();
 			String create5 = "CREATE TABLE symptom ( "
-					+ " id INTEGER PRIMARY KEY,"
+					+ " id INTEGER PRIMARY KEY AUTOINCREMENT,"
 					+ " name TEXT NOT NULL,"
 					+ " type TEXT)";		
 			createTables5.executeUpdate(create5);
@@ -115,7 +113,7 @@ public class ConnectionManager {
 			
 			Statement createTables6 = c.createStatement();
 			String create6 = "CREATE TABLE treatment ( "
-					+ " id INTEGER PRIMARY KEY,"
+					+ " id INTEGER PRIMARY KEY AUTOINCREMENT,"
 					+ "name TEXT NOT NULL,"
 					+ " type TEXT)";		
 			createTables6.executeUpdate(create6);
@@ -126,8 +124,6 @@ public class ConnectionManager {
 			String create7 = "CREATE TABLE HAS ( "
 					+ " patient_id INTEGER REFERENCES patient(id),"
 					+ " symptom_id INTEGER REFERENCES symptom(id),"
-					+ " startDate TEXT,"
-					+ " endate TEXT),"
 					+ " PRIMARY KEY (patient_id, symptom_id)";
 			createTables7.executeUpdate(create7);
 			createTables7.close();
@@ -155,7 +151,7 @@ public class ConnectionManager {
 			String create10 = "CREATE TABLE OWNS ( "
 					+ " allergy_id INTEGER REFERENCES allergy(id),"
 					+ " treatment_id INTEGER REFERENCES allergy(name),"
-					+ " PRIMARY KEY (allergy_id, treatment_id)";
+					+ " PRIMARY KEY (treatment_id,allergy_id)";
 			createTables10.executeUpdate(create10);
 			createTables10.close();
 			

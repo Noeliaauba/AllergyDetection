@@ -9,7 +9,6 @@ public class Prescription {
 	private Boolean isUsed;
 	private Patient given_to;
 	private Doctor given_by;
-	
 	private List<Treatment> treatments;
 	
 	private Doctor doctor;

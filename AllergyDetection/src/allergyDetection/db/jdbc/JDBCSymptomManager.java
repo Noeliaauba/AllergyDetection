@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.*;
 import allergyDetection.db.interfaces.SymptomManager;
 import allergyDetection.db.pojos.Allergy;
@@ -44,7 +45,7 @@ public class JDBCSymptomManager implements SymptomManager {
 	@Override
 	public void modifySymptom(Symptom s) {
 		try {
-	        String query = "UPDATE symptom SET name = ?, type = ?,  WHERE id = ?";
+	        String query = "UPDATE symptom SET name = ?, type = ?  WHERE id = ?";
 	        PreparedStatement pstmt = c.prepareStatement(query);
 	        pstmt.setString(1, s.getSymptom_name());
 	        pstmt.setString(2, s.getSymptomType()); 
@@ -58,34 +59,23 @@ public class JDBCSymptomManager implements SymptomManager {
 	    }
 
 	}
-
-
-	@Override
-	public List<Symptom> searchSymptomybyAllergy(Integer allergyID) {
-		List<Symptom> symptoms = new ArrayList<Symptom>();
+	
+	public Symptom getSymptomByID(Integer id) {
 		try {
-			String sql = "SELECT symptom.id, symptom.name, symptom.type FROM symptom INNER JOIN PRODUCES ON symptom.id=PRODUCES.symptom_id WHERE Produces.allergy_id= ?";
-			PreparedStatement p= c.prepareStatement(sql);
-			p.setInt(1,allergyID);
-			ResultSet rs = p.executeQuery();
-			while (rs.next()) {
-				Integer id = rs.getInt("id");
-				String name = rs.getString("name");
-				String type = rs.getString("type");
-				Symptom s = new Symptom(id, name, type);
-				symptoms.add(s);
-			}
-			rs.close();
-			p.close();
+			String sql = "SELECT * FROM symptom WHERE id = " + id;
+			Statement st;
+			st = c.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+			rs.next();
+			Symptom s = new Symptom (rs.getInt("id"), rs.getString("name"), rs.getString("type"));
+			return s;
 		} catch (SQLException e) {
 			System.out.println("Error in the database");
 			e.printStackTrace();
 		}
-		return symptoms;
-		
+		return null;
 	}
-		
-	
+
 
 	@Override
 	public List<Symptom> searchSymptom(String type_Symptom){
@@ -111,5 +101,31 @@ public class JDBCSymptomManager implements SymptomManager {
 		return symptoms;
 		
 	}
+
+	@Override
+	public List<Symptom> searchSymptomybyAllergy(Integer allergyID) {
+		List<Symptom> symptoms = new ArrayList<Symptom>();
+		try {
+			String sql = "SELECT symptom.id, symptom.name, symptom.type FROM symptom INNER JOIN PRODUCES ON symptom.id=PRODUCES.symptom_id WHERE PRODUCES.allergy_id= ?";
+			PreparedStatement p= c.prepareStatement(sql);
+			p.setInt(1,allergyID);
+			ResultSet rs = p.executeQuery();
+			while (rs.next()) {
+				Integer id = rs.getInt("id");
+				String name = rs.getString("name");
+				String type = rs.getString("type");
+				Symptom s = new Symptom(id, name, type);
+				symptoms.add(s);
+			}
+			rs.close();
+			p.close();
+		} catch (SQLException e) {
+			System.out.println("Error in the database");
+			e.printStackTrace();
+		}
+		return symptoms;
+		
+	}
+		
 
 }

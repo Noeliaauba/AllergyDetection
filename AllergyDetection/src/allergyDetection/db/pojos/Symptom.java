@@ -8,9 +8,7 @@ public class Symptom {
 	private Integer id;
 	private String symptom_name;
 	private String symptom_type;
-	
 	private List<Patient> patients;
-	
 	private List<Allergy> allergies;
 	
 	
