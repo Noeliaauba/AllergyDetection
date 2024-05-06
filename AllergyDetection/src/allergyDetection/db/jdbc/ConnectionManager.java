@@ -157,21 +157,21 @@ public class ConnectionManager {
 			
 			
 			Statement insertTables3 = c.createStatement();
-			String insert3_1 = "INSERT INTO allergy (name, type) VALUES ('Dairy', 'Alimentary')";
+			String insert3_1 = "INSERT INTO allergy (name, type) VALUES ('Dairy allergy', 'Alimentary')";
 			insertTables3.executeUpdate(insert3_1);
-			String insert3_2 = "INSERT INTO allergy (name, type) VALUES ('Pollen', 'Stationary')";
+			String insert3_2 = "INSERT INTO allergy (name, type) VALUES ('Pollen allergy', 'Stationary')";
 			insertTables3.executeUpdate(insert3_2);
-			String insert3_3 = "INSERT INTO allergy (name, type) VALUES ('Nuit', 'Alimentary')";
+			String insert3_3 = "INSERT INTO allergy (name, type) VALUES ('Nut allergy', 'Alimentary')";
 			insertTables3.executeUpdate(insert3_3);
-			String insert3_4 = "INSERT INTO allergies (name, type) VALUES ('Dust Mite', 'Stationary')";
+			String insert3_4 = "INSERT INTO allergies (name, type) VALUES ('Dust Mite allergy', 'Stationary')";
 			insertTables3.executeUpdate(insert3_4);
-			String insert3_5 = "INSERT INTO allergy (name, type) VALUES ('Insect', 'Insect')";
+			String insert3_5 = "INSERT INTO allergy (name, type) VALUES ('Insect allergy', 'Insect')";
 			insertTables3.executeUpdate(insert3_5);
-			String insert3_6 = "INSERT INTO allergy (name, type) VALUES ('Drug', 'Drugs')";
+			String insert3_6 = "INSERT INTO allergy (name, type) VALUES ('Drug allergy', 'Drugs')";
 			insertTables3.executeUpdate(insert3_6);
-			String insert3_7 = "INSERT INTO allergy (name, type) VALUES ('Sun ', 'Cutaneous')";
+			String insert3_7 = "INSERT INTO allergy (name, type) VALUES ('Sun allergy', 'Cutaneous')";
 			insertTables3.executeUpdate(insert3_7);
-			String insert3_8 = "INSERT INTO allergy (name, type) VALUES ('Gluten', 'Alimentary')";
+			String insert3_8 = "INSERT INTO allergy (name, type) VALUES ('Gluten allergy', 'Alimentary')";
 			insertTables3.executeUpdate(insert3_8);
 			insertTables3.close();
 			
