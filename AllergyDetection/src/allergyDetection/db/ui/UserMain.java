@@ -300,7 +300,7 @@ public static void getPrescriptionsByPatientId() {
 	
 	
 	private static void deletePatient()  throws NumberFormatException, IOException {
-		System.out.println("Your will delete a patient from the data base information. ");
+		System.out.println("You will delete a patient from the data base information. ");
 		System.out.println("Please, write the id of the patient taht your want to delete: ");
 		System.out.println("Patient id: ");
 		Integer id = Integer.parseInt(r.readLine());
