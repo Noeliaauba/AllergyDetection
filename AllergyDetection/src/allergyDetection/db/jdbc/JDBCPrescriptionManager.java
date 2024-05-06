@@ -116,14 +116,14 @@ public class JDBCPrescriptionManager implements PrescriptionManager {
 	}
 	
 	@Override
-	public Prescription getPrescriptionByID(Integer id) {
+	public Prescription getPrescriptionById(Integer id) {
 		try {
 			String sql = "SELECT * FROM patient WHERE id = " + id;
 			Statement st;
 			st = c.createStatement();
 			ResultSet rs = st.executeQuery(sql);
 			rs.next();
-			Prescription pr = new Prescription (rs.getInt("id"),treatment, isUsed, patient, doctor);
+			Prescription pr = new Prescription (rs.getInt("id"), null, null, null, null);
 			return pr;
 		} catch (SQLException e) {
 			System.out.println("Error in the database");

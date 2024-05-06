@@ -9,7 +9,7 @@ public interface PrescriptionManager {
 	public void deletePrescription(Prescription k);
 	public Prescription showPrescription(Integer id);
 	
-	public Prescription getPrescriptionByID(Integer id); 
+	public Prescription getPrescriptionById(Integer id); 
 	//Del paciente
 	
 	//Hacer los metodos de select by id y modify
