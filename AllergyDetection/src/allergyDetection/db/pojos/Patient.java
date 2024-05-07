@@ -10,7 +10,6 @@ public class Patient {
 		private Date dob;
 		private String gender;
 		
-
 		private List <Prescription> prescriptions; 
 		private List <Allergy> allergies;
 		private List<Symptom> symptoms;

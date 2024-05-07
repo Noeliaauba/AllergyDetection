@@ -1,4 +1,5 @@
 package allergyDetection.db.jdbc;
+import allergyDetection.db.pojos.Prescription;
 import allergyDetection.db.pojos.Treatment;
 
 import java.sql.*;
@@ -37,12 +38,11 @@ public class JDBCTreatmentManager implements TreatmentManager {
 @Override
 public void modifyTreatment(Treatment t) {
 	 try {
-	        String query = "UPDATE treatments SET name = ?, type = ? WHERE id = ?";
+	        String query = "UPDATE treatments SET name = ?, type = ? , prescription_id = ? WHERE id = ?";
 	        PreparedStatement pstmt = c.prepareStatement(query);
 	        pstmt.setString(1, t.getName());
-	        pstmt.setString(2, t.getTreatmentType()); 
-	        pstmt.setInt(3, t.getId());
-	        pstmt.executeUpdate();
+	        pstmt.setString(2, t.getTreatmentType());
+	        pstmt.setInt(3, t.getPrescription().getId());	
 	        pstmt.close();
 	        System.out.println("Treatment with ID " + t.getId() + " updated successfully.");
 	    } catch (SQLException e) {
@@ -75,19 +75,23 @@ public List<Treatment> searchTreatmentByType(String typeParameter) {
 	return lista;
 }
 
-public List<Treatment> showAllTreatments() {
-	List<Treatment> tratamientos = new ArrayList<Treatment>();
+
+
+public List<Treatment> searchTreatmentByPrescription(Integer prescriptionID){
+	List<Treatment> treatments = new ArrayList<Treatment>();
+	
 	try {
-		String sql = "SELECT * FROM treatments";
-		PreparedStatement p;
-		p = c.prepareStatement(sql);
+		String sql = "SELECT * FROM treatment WHERE prescription_id = " + prescriptionID;
+	    PreparedStatement p = c.prepareStatement(sql);
 		ResultSet rs = p.executeQuery();
 		while (rs.next()) {
 			Integer id = rs.getInt("id");
 			String name = rs.getString("name");
-			String type = rs.getString("type");
-			Treatment t = new Treatment(id, name, type);
-			tratamientos.add(t);
+			String type= rs.getString("type");
+			Prescription pres= conMan.getPrescription().getPrescriptionById(prescriptionID);
+			Treatment trs = new Treatment(id, name, type, pres);
+			treatments.add(trs);
+		
 		}
 		rs.close();
 		p.close();
@@ -95,9 +99,12 @@ public List<Treatment> showAllTreatments() {
 		System.out.println("Error in the database");
 		e.printStackTrace();
 	}
-	return tratamientos;
+	return treatments;
 }
 
+	
+	
+	
 }
 
 

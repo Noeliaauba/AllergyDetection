@@ -7,8 +7,7 @@ public class Doctor {
  
 	 private Integer id;
 	 private String name;
-	 
-	private List <Prescription> prescriptions ;
+	 private List <Prescription> prescriptions ;
 	 
 	 
 	 public Doctor () {

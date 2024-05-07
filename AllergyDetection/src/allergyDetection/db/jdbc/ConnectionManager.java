@@ -93,8 +93,7 @@ public class ConnectionManager {
 			
 			String create4 = "CREATE TABLE prescription ( "
 					+ " id INTEGER PRIMARY KEY AUTOINCREMENT,"
-					+ " treatment_required INTEGER REFERENCES treatment(id),"
-					+ " isUsed BOOLEAN,"
+					+ " isUsed TEXT,"
 					+ " given_to INTEGER REFERENCES patient(id),"
 					+ " given_by INTEGER REFERENCES doctor(id),"
 					+ " PRIMARY KEY (patient_id, doctor_id))";
@@ -115,7 +114,8 @@ public class ConnectionManager {
 			String create6 = "CREATE TABLE treatment ( "
 					+ " id INTEGER PRIMARY KEY AUTOINCREMENT,"
 					+ "name TEXT NOT NULL,"
-					+ " type TEXT)";		
+					+ "type TEXT,"
+					+ "prescription_id INTEGER REFERENCES prescription(id))";		
 			createTables6.executeUpdate(create6);
 			createTables6.close();
 			
@@ -265,6 +265,11 @@ public class ConnectionManager {
 
 	public TreatmentManager getTreatment() {
 		return treatmentManag;
+	}
+
+	public Object getPatientManager() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

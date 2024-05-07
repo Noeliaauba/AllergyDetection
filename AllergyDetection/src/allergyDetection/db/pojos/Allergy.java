@@ -8,11 +8,7 @@ public class Allergy {
 
 	private Integer allergyID;
 	private String allergyName;
-	private String allergyType;	//i think it is better to do an enum with all allergy type that can be,
-								// so we will need to do another class enum called allergyType...DO NOT DO ENUM
-//Maybe we can do private List<Symtoms_related> Symptoms;
-	// Additional method to add to a list
-	
+	private String allergyType;	
 	private List<Patient> patients;
 	private List <Treatment> treatments;
 	private List<Symptom> symptoms;

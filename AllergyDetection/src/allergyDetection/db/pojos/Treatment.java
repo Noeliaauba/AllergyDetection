@@ -16,11 +16,18 @@ public class Treatment {
 	
 	}
 	
-	public Treatment (Integer _id, String _name, String _treatmentType) {
+	public Treatment (Integer _id, String _name, String _treatmentType,Prescription _prescriptionreq) {
 		this.id=_id;
 		this.name=_name;
 		this.treatment_type=_treatmentType;
+		this.prescription=_prescriptionreq;
 	}
+	
+	public Treatment (Integer _id, String _name, String _treatmentType) {
+		this.id=_id;
+		this.name=_name;
+	}
+	
 	
 	
 	@Override
@@ -62,6 +69,7 @@ public class Treatment {
 		 this.treatment_type= _treatment_type;
 	 }
 	 
+	
 	 public String toString() {
 	    	return "Treatment [id=" + id + ", treatment type=" + treatment_type + "]";
 	    }
