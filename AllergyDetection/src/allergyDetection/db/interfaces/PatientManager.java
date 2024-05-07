@@ -9,8 +9,7 @@ public interface PatientManager {
 	public void deletePatient(Integer id);
 	public Patient getPatientByID(Integer id);
 	public void assignedAllergytoPatient(Integer patientId, Integer allergyId);
-	
-
+	public void assignedSymptomtoPatient(Integer patientId, Integer symptomId);
 	//Hacer los metodos de select by id y modify
 
 

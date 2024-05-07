@@ -5,9 +5,7 @@ import allergyDetection.db.pojos.Doctor;
 import allergyDetection.db.pojos.Patient;
 import allergyDetection.db.pojos.Prescription;
 import allergyDetection.db.pojos.Treatment;
-
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -25,13 +23,11 @@ public class JDBCPrescriptionManager implements PrescriptionManager {
 	public void addPrescription(Prescription k) {
 		try {
 			String template = "INSERT INTO prescription (treatment_required, isUsed, given_to, given_by) VALUES (?, ?, ?, ?)";
-			PreparedStatement pstmt;
-			pstmt = c.prepareStatement(template);
+			PreparedStatement pstmt= c.prepareStatement(template);
 			pstmt.setInt(1, k.getTreatment_required().getId());		//because Treatment has an Id that is a number
 			pstmt.setBoolean(2, k.getIsUsed());
 			pstmt.setInt(3, k.getGiven_To().getId());		//because Patient has an Id that is a number
 			pstmt.setInt(4, k.getGiven_by().getId());		//because Doctor has an Id that is a number
-	
 			pstmt.executeUpdate();
 			pstmt.close();
 		} catch (SQLException e) {
@@ -40,11 +36,10 @@ public class JDBCPrescriptionManager implements PrescriptionManager {
 		}		
 	}
 
-
 	@Override   
 	public void modifyPrescription(Prescription k) {
 		try {
-	        String query = "UPDATE prescription  SET treatment_required = ?, isUsed = ?,given_to = ?,given_by = ?,  WHERE id = ?";
+	        String query = "UPDATE prescription  SET treatment_required = ?, isUsed = ?, given_to = ?, given_by = ?,  WHERE id = ?";
 	        PreparedStatement pstmt = c.prepareStatement(query);
 	        pstmt.setInt(1, k.getTreatment_required().getId());		//because Treatment has an Id that is a number
 			pstmt.setBoolean(2, k.getIsUsed());
@@ -83,7 +78,21 @@ public class JDBCPrescriptionManager implements PrescriptionManager {
 		
 	}
 
-
+	@Override
+	public Prescription getPrescriptionById(Integer id) {
+		try {
+			String sql = "SELECT * FROM prescription WHERE id = " + id;
+			Statement st = c.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+			rs.next();
+			Prescription pr = new Prescription (rs.getInt("id"), rs.getInt("treat_required"), rs.getString("isUsed"), rs.getInt("given_to"), rs.getInt("given_by"));
+			return pr;
+		} catch (SQLException e) {
+			System.out.println("Error in the database");
+			e.printStackTrace();
+		}
+		return null;
+	}
 	
 	@Override
 	public Prescription showPrescription(Integer id) {
@@ -98,7 +107,7 @@ public class JDBCPrescriptionManager implements PrescriptionManager {
 	            //Now everything of the prescription object
 	            Treatment treatment = new Treatment(); 
 	            treatment.setId(rs.getInt("treatment_id")); 
-	            Boolean isUsed = rs.getBoolean("isUsed");
+	            String isUsed = rs.getString("isUsed");
 	            Patient patient = new Patient(); 
 	            patient.setId(rs.getInt("patient_id")); 
 	            Doctor doctor = new Doctor(); 
@@ -115,20 +124,11 @@ public class JDBCPrescriptionManager implements PrescriptionManager {
 	    return prescription;
 	}
 	
+	
+
 	@Override
-	public Prescription getPrescriptionById(Integer id) {
-		try {
-			String sql = "SELECT * FROM patient WHERE id = " + id;
-			Statement st;
-			st = c.createStatement();
-			ResultSet rs = st.executeQuery(sql);
-			rs.next();
-			Prescription pr = new Prescription (rs.getInt("id"), null, null, null, null);
-			return pr;
-		} catch (SQLException e) {
-			System.out.println("Error in the database");
-			e.printStackTrace();
-		}
+	public List<Prescription> searchPrescriptionByUse(String is_Used) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

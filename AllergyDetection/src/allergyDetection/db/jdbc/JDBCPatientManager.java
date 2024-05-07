@@ -1,7 +1,9 @@
 package allergyDetection.db.jdbc;
+import allergyDetection.db.pojos.Allergy;
 import allergyDetection.db.pojos.Patient;
-
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import allergyDetection.db.interfaces.*;
 
@@ -16,15 +18,15 @@ public class JDBCPatientManager implements PatientManager {
 	}
 	
 @Override
-	public void addPatient(Patient p) {
+public void addPatient(Patient p) {
 		try {
-			String template = "INSERT INTO patients (name,dob,gender ) VALUES (?, ?, ?)";
+			String template = "INSERT INTO patient (name, dateOfBirth, gender ) VALUES (?, ?, ?)";
 			PreparedStatement pstmt;
 			pstmt = c.prepareStatement(template);
 			pstmt.setString(1, p.getName());
 			pstmt.setDate(2, p.getDob());
 			pstmt.setString(3, p.getGender());
-			
+
 			pstmt.executeUpdate();
 			pstmt.close();
 		} catch (SQLException e) {
@@ -34,28 +36,10 @@ public class JDBCPatientManager implements PatientManager {
 
 }
 
-
-@Override
-public Patient getPatientByID(Integer id) {
-	try {
-		String sql = "SELECT * FROM patients WHERE id = " + id;
-		Statement st;
-		st = c.createStatement();
-		ResultSet rs = st.executeQuery(sql);
-		rs.next();
-		Patient p = new Patient (rs.getInt("id"), rs.getString("name"), rs.getDate("dob"), rs.getString("gender"));
-		return p;
-	} catch (SQLException e) {
-		System.out.println("Error in the database");
-		e.printStackTrace();
-	}
-	return null;
-}
-
 @Override
 public void modifyPatient(Patient p) {
 	 try {
-	        String query = "UPDATE patients SET name = ?, dob = ?, gender = ? WHERE id = ?";
+	        String query = "UPDATE patient SET name = ?, dateOfBith = ?, gender = ? WHERE id = ?";
 	        PreparedStatement pstmt = c.prepareStatement(query);
 	        pstmt.setString(1, p.getName());
 	        pstmt.setDate(2, p.getDob()); 
@@ -69,12 +53,11 @@ public void modifyPatient(Patient p) {
 	        e.printStackTrace();
 	    }
 }
-	
 
 @Override
 public void deletePatient(Integer id) {
 	try {
-	String st = "DELETE FROM patients WHERE id = ?";
+	String st = "DELETE FROM patient WHERE id = ?";
 	PreparedStatement pstmt = c.prepareStatement(st);
     pstmt.setInt(1, id);
         int rowsAffected = pstmt.executeUpdate();
@@ -89,6 +72,46 @@ public void deletePatient(Integer id) {
     e.printStackTrace();
 }	
 }
+
+@Override
+public Patient getPatientByID(Integer id) {
+	try {
+		String sql = "SELECT * FROM patient WHERE id = " + id;
+		Statement st= c.createStatement();
+		ResultSet rs = st.executeQuery(sql);
+		rs.next();
+		Patient p = new Patient (rs.getInt("id"), rs.getString("name"), rs.getDate("dateOfBith"), rs.getString("gender"));
+		return p;
+	} catch (SQLException e) {
+		System.out.println("Error in the database");
+		e.printStackTrace();
+	}
+	return null;
+}
+
+public List<Patient> searchPatient(String name_Patient) {
+	List<Patient> patients = new ArrayList<Patient>();
+	try {
+		String sql = "SELECT * FROM patient WHERE name LIKE ?";
+		PreparedStatement p = c.prepareStatement(sql);
+		ResultSet rs = p.executeQuery();
+		while (rs.next()) {
+			Integer id = rs.getInt("id");
+			String name = rs.getString("name");
+			Date dob= rs.getDate("dateOfBirth");
+			String gender= rs.getString("gender");
+			Patient pat = new Patient(id, name, dob, gender);
+			patients.add(pat);
+		}
+		rs.close();
+		p.close();
+	} catch (SQLException e) {
+		System.out.println("Error in the database");
+		e.printStackTrace();
+	}
+	return patients;
+}
+
 public void assignedAllergytoPatient(Integer patientId, Integer allergyId) {
 	try {
 		String template = "INSERT INTO SUFFERS (patient_id, allergy_id) VALUES (?,?)";
@@ -103,6 +126,7 @@ public void assignedAllergytoPatient(Integer patientId, Integer allergyId) {
 	}
 	
 }
+
 public void assignedSymptomtoPatient(Integer patientId, Integer symptomId) {
 	try {
 		String template = "INSERT INTO HAS (patient_id, symptom_id) VALUES (?,?)";

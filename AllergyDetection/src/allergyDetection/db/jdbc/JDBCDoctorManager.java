@@ -22,7 +22,7 @@ public class JDBCDoctorManager implements DoctorManager {
 	@Override
 	public void addDoctor(Doctor d) {
 		try {
-			String template = "INSERT INTO doctors (name) VALUES (?)";
+			String template = "INSERT INTO doctor (name) VALUES (?)";
 			PreparedStatement pstmt;
 			pstmt = c.prepareStatement(template);
 			pstmt.setString(1, d.getName());
