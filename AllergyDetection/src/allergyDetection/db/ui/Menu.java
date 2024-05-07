@@ -8,9 +8,7 @@ import java.io.InputStreamReader;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-
+import java.util.*;
 import allergyDetection.db.*;
 import allergyDetection.db.interfaces.*;
 import allergyDetection.db.jdbc.ConnectionManager;
@@ -20,7 +18,7 @@ import allergyDetection.db.pojos.*;
 
 
 
-public class UserMain {
+public class Menu {
 
 	private static BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -36,18 +34,23 @@ public class UserMain {
 	
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		System.out.println("WELCOME TO THE PROGRAMM!");
-		// Manager setup
 		// ALWAYS JDBC first
-	
+		conMan = new ConnectionManager();
+		patientManag = conMan.getPatient();
+		doctorManag = conMan.getDoctor();
+		allergyManag= conMan.getAllergy();
+		symptomManag= conMan.getSymptom();
+		treatmentManag= conMan.getTreatment();
+		prescriptionManag= conMan.getPrescription();
+	}
 		// JAP later
-		
-		
-	System.out.println("Welcome! Select an option: ");
+			
+	/*System.out.println("Chose your desired option: ");
 	System.out.println("1) Log in. ");
 	System.out.println("2) Sign up.");
 	System.out.println("0) End the program.");
-		//int variableWhileInitial=1;
-		//while (variableWhileInitial!=0) {
+		int variableWhileInitial=1;
+		while (variableWhileInitial!=0) {
 	        int option = Integer.parseInt(r.readLine());
 	        switch (option) {
 	            case 1:
@@ -58,15 +61,15 @@ public class UserMain {
 	                break;
 	            case 0:
 	                System.out.println("Exiting the programm...");
-	                //TODO closing the program
-	                //variableWhileInitial=0;
+	                variableWhileInitial=0;
+	                conMan.close();
 	                return;
 	            default:
-	                System.out.println("Insert an integer that corresponds to one of the following options. Use 0 For exit the program");
+	                System.out.println("Insert one of the following options:");
 	        }
 		}
 		
-		
+/*		
 	private static void menuLogin() throws NumberFormatException, IOException {
 		//TODO method 
 	}
@@ -136,10 +139,11 @@ public static void showPrescription() throws IOException, NumberFormatException{
 
 
   	
-
+*/
+		
 	public static void menuDoctor() throws NumberFormatException, IOException {
-		System.out.println("Welcome Doctor! We are delighted with your great job!");
 		int variableWhileDoctor=1;
+		System.out.println("Welcome Doctor! We are delighted with your great job!");
 		while(variableWhileDoctor !=0) {
 		System.out.println("Select the option desire: ");
 		System.out.println("1) ADD A PATIENT TO THE DATA BASE");
@@ -159,14 +163,12 @@ public static void showPrescription() throws IOException, NumberFormatException{
 		
 		case 2: 
 			deletePatient();
-			
 			break;
 		
 		case 3: 
 			modifyPatient();
-			
 			break;
-		
+		/*
 		case 4: 
 			//showMedicalScore();
 			//TODO the method. This method can be done here 
@@ -197,20 +199,11 @@ public static void showPrescription() throws IOException, NumberFormatException{
 		
 		default:
 			System.out.println("You inserted a number not accepted. Please, select again a number of the following options");
-		}
+		
+		*/}
 		
 		}
 	}
-	
-	private  Integer id;
-	private String name;
-	private Date dob;
-	private String gender;
-	
-
-	private List <Prescription> prescriptions; 
-	private List <Allergy> allergies;
-	private List<Symptom> symptoms;
 	
 	
 	
@@ -225,50 +218,61 @@ public static void showPrescription() throws IOException, NumberFormatException{
 		Date date = Date.valueOf(localDate);
 		System.out.println("PATIENT GENDER: ");
 		String gender = r.readLine();
-		Patient patient = new Patient(id,name,date,gender);			//we follow the constructor that is in class Patient
+		Patient patient = new Patient(id,name,date,gender);		
 		patientManag.addPatient(patient);
 	}	
 	
 	private static void deletePatient()  throws NumberFormatException, IOException {
 		System.out.println("You will delete a patient from the data base information. ");
-		System.out.println("Please, write the id of the patient that your want to delete: ");
-		System.out.println("PATIENT ID: ");
-		Integer id = Integer.parseInt(r.readLine());
-		patientManag.deletePatient(id);
+		List<Patient> patients = new ArrayList<Patient>();
+		System.out.println("Introduce the name of the patient you want to select:");
+		String Name = r.readLine();
+		patients= patientManag.searchPatient(Name);
+		for (Patient p : patients) {
+			System.out.println(p);
+		}
+		
+	    System.out.println("Introduce the PATIENT ID TO DELETE");
+		Integer Id = Integer.parseInt(r.readLine());
+		patientManag.deletePatient(Id);
 	}	
 	
 	private static void modifyPatient() throws NumberFormatException, IOException {
 		// SHOW THE LIST OF PATIENTS , HERE YOU CAN SELECT THE PATIENT INSERT ID
-	
-		Patient p=null;
-		System.out.println("Here are the actual patient's values");
-		System.out.println("Type a new value to modyfy them or just press enter to keep their value.");
-		System.out.println("id (" + p.getId() + "): ");
-		Integer newId = Integer.parseInt(r.readLine());
+		List<Patient> patients = new ArrayList<Patient>();
+		Patient p_empty=null;
+		System.out.println("Introduce the name of the patient you want to select:");
+		String Name = r.readLine();
+		patients= patientManag.searchPatient(Name);
+		for (Patient p : patients) {
+			System.out.println(p);
+		}
+		
+	    System.out.println("Introduce the PATIENT ID TO MODIFY");
+		Integer Id = Integer.parseInt(r.readLine());
+		Patient p=patientManag.getPatientByID(Id);
+		System.out.println("Here are the actual author's values");
+		System.out.println("Press enter to keep them or type a new value.");
 		System.out.println("Name (" + p.getName() + "): ");
 		String newName = r.readLine();
-		System.out.println("The Date of Birth of the patient(DD-MM-YYYY format): "+p.getDob());
-		LocalDate localDate = LocalDate.parse(r.readLine(), formatter);
-		Date newDob = Date.valueOf(localDate);
 		System.out.println("Gender (" + p.getGender() + "): ");
 		String newGender = r.readLine();
+		if (newName== p.getName()) {
+			p_empty.setName(p.getName());
+		}
+		else { 
+            p_empty.setName(newName);
+		}
+		if (newGender== p.getGender()) {
+			p_empty.setGender(p.getGender());
+		}
+		else { 
+			p_empty.setGender(newGender);
+		}
+		patientManag.modifyPatient(p_empty);
 		
-		if(!newId.equals("")) {
-			p.setId(newId);
-			}
-		if(!newName.equals("")) {
-			p.setName(newName);
-			}
-		if(!newDob.equals("")) {
-			p.setDob(newDob);
-			}
-		if(!newGender.equals("")) {
-			p.setGender(newGender);
-			}
-		patientManag.modifyPatient(p);
-		
-		//TODO about the prescriptions and allergies and symptoms??? How do we do --> Ask Rodrigo
-	}
+	}}
+/*	
 	private static void addPrescription()  throws NumberFormatException, IOException {
 		System.out.println("Please, write the information of the patient and the doctor:");
 		System.out.println("Treatment name: ");
