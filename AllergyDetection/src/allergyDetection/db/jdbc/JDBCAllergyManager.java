@@ -58,7 +58,7 @@ public class JDBCAllergyManager implements AllergyManager {
 	    }
 
 	}
-
+	@Override
 	public Allergy getAllergyByID(Integer id) {
 		try {
 		String sentence = "SELECT * FROM allergy WHERE id = " + id;
@@ -101,7 +101,7 @@ public class JDBCAllergyManager implements AllergyManager {
 		return lista; }*/
 	
 
-	
+	@Override
 	public List<Allergy> searchAllergy(String type_Allergy) {
 		List<Allergy> allergies = new ArrayList<Allergy>();
 		try {
@@ -124,6 +124,7 @@ public class JDBCAllergyManager implements AllergyManager {
 		return allergies;
 	}
 	
+	@Override
 	public List<Allergy> searchAllergybyPatient(Integer patientId){
 		List<Allergy> allergies = new ArrayList<Allergy>();
 		try {

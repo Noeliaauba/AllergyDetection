@@ -124,6 +124,7 @@ public class JDBCPrescriptionManager implements PrescriptionManager {
 	    return prescriptions;
 	}
 	
+	@Override
 	public List <Prescription> searchPrescriptionByDoctor(Integer doctorid) {
 		List<Prescription> prescriptions = new ArrayList<Prescription>();
 	    try {

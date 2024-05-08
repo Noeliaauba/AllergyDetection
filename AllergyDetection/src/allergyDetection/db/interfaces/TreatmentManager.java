@@ -10,5 +10,6 @@ public interface TreatmentManager {
 	public void modifyTreatment(Treatment t); 
 	public List<Treatment> searchTreatmentByType(String type);
 	public List <Treatment> searchTreatmentByPrescription(Integer prescriptionid);
+	public Treatment getTreatmentById(Integer id); 
 	
 }

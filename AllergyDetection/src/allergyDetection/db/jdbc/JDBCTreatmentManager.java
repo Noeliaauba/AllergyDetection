@@ -1,11 +1,16 @@
 package allergyDetection.db.jdbc;
+import allergyDetection.db.pojos.Allergy;
+import allergyDetection.db.pojos.Doctor;
+import allergyDetection.db.pojos.Patient;
 import allergyDetection.db.pojos.Prescription;
+import allergyDetection.db.pojos.Symptom;
 import allergyDetection.db.pojos.Treatment;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import allergyDetection.db.interfaces.*;
 import allergyDetection.db.interfaces.TreatmentManager;
 
 public class JDBCTreatmentManager implements TreatmentManager {
@@ -51,6 +56,7 @@ public void modifyTreatment(Treatment t) {
 	    }
 }
 
+@Override
 public List<Treatment> searchTreatmentByType(String typeParameter) {
 	List<Treatment> lista = new ArrayList<Treatment>();
 	try {
@@ -76,7 +82,7 @@ public List<Treatment> searchTreatmentByType(String typeParameter) {
 }
 
 
-
+@Override
 public List<Treatment> searchTreatmentByPrescription(Integer prescriptionID){
 	List<Treatment> treatments = new ArrayList<Treatment>();
 	
@@ -102,7 +108,45 @@ public List<Treatment> searchTreatmentByPrescription(Integer prescriptionID){
 	return treatments;
 }
 
-	
+
+
+		
+@Override
+public Treatment getTreatmentById (Integer id) {
+    try {
+        String sql = "SELECT * FROM treatment WHERE id = ?";
+        PreparedStatement pstmt = c.prepareStatement(sql);
+        pstmt.setInt(1, id);
+        ResultSet rs = pstmt.executeQuery();
+
+        if (rs.next()) {
+            // Retrieve treatment data from the ResultSet
+            String name = rs.getString("name");
+            String treatmentType = rs.getString("treatment_type");
+            Integer prescriptionId = rs.getInt("prescription"); // Assuming there is a prescription_id column
+            
+            // Retrieve the associated prescription using the provided PrescriptionManager
+            Prescription prescription = null;
+            if (prescriptionId != null) {
+                prescription = getPrescriptionById(prescriptionId);
+            }
+
+            // Retrieve associated allergies
+            List<Allergy> allergies = getAllergiesByTreatmentId(id);	//TODO this get
+
+            // Create and return the Treatment object
+            Treatment treatment = new Treatment(id, name, treatmentType, prescription);
+            treatment.setAllergies(allergies);
+            return treatment;
+        }
+    } catch (SQLException e) {
+        System.out.println("Error in the database");
+        e.printStackTrace();
+    }
+    return null;
+}
+
+
 	
 	
 }

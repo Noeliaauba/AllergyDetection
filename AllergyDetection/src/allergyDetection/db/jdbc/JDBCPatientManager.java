@@ -89,6 +89,7 @@ public Patient getPatientByID(Integer id) {
 	return null;
 }
 
+@Override
 public List<Patient> searchPatient(String name_Patient) {
 	List<Patient> patients = new ArrayList<Patient>();
 	try {
@@ -112,6 +113,7 @@ public List<Patient> searchPatient(String name_Patient) {
 	return patients;
 }
 
+@Override
 public void assignedAllergytoPatient(Integer patientId, Integer allergyId) {
 	try {
 		String template = "INSERT INTO SUFFERS (patient_id, allergy_id) VALUES (?,?)";
@@ -127,6 +129,7 @@ public void assignedAllergytoPatient(Integer patientId, Integer allergyId) {
 	
 }
 
+@Override
 public void assignedSymptomtoPatient(Integer patientId, Integer symptomId) {
 	try {
 		String template = "INSERT INTO HAS (patient_id, symptom_id) VALUES (?,?)";

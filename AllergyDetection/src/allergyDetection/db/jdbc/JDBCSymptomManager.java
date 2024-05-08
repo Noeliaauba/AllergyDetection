@@ -60,6 +60,7 @@ public class JDBCSymptomManager implements SymptomManager {
 
 	}
 	
+	@Override
 	public Symptom getSymptomByID(Integer id) {
 		try {
 			String sql = "SELECT * FROM symptom WHERE id = " + id;
