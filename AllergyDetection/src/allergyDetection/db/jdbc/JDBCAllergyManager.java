@@ -75,7 +75,7 @@ public class JDBCAllergyManager implements AllergyManager {
 	return null;
 }
 	
-	@Override
+	 //@Override
 	 //public List<Allergy> searchAllergybyTreatment(Treatment t) {
 		//return null;
 		/*List<Allergy> allergylist = new ArrayList<Allergy>();
