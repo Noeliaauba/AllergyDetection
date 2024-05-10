@@ -1,5 +1,6 @@
 package allergyDetection.db.jdbc;
 import java.sql.Connection;
+
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -75,7 +76,8 @@ public class JDBCAllergyManager implements AllergyManager {
 	return null;
 }
 	
-	//@Override
+
+
 	 //public List<Allergy> searchAllergybyTreatment(Treatment t) {
 		//return null;
 		/*List<Allergy> allergylist = new ArrayList<Allergy>();

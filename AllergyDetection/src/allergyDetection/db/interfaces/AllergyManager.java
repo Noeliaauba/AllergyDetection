@@ -11,7 +11,6 @@ public interface AllergyManager {
 	public List<Allergy> searchAllergy(String type_Allergy);
 	public List<Allergy> searchAllergybyPatient(Integer patientID);	
 	//public List<Allergy> searchAllergybyTreatment(Integer treatmentId);
-	
 	public void assignedSymptomtoAllergy(Integer symptomId, Integer allergyId);
 	public void assignedTreatmenttoAllergy(Integer treatmentId, Integer allergyId);
 	// allMan.searchAllergybyTreatment(t.getId());

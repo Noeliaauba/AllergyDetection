@@ -114,37 +114,22 @@ public List<Treatment> searchTreatmentByPrescription(Integer prescriptionID){
 @Override
 public Treatment getTreatmentById (Integer id) {
     try {
-        String sql = "SELECT * FROM treatment WHERE id = ?";
-        PreparedStatement pstmt = c.prepareStatement(sql);
-        pstmt.setInt(1, id);
-        ResultSet rs = pstmt.executeQuery();
-
-        if (rs.next()) {
-            // Retrieve treatment data from the ResultSet
-            String name = rs.getString("name");
-            String treatmentType = rs.getString("treatment_type");
-            Integer prescriptionId = rs.getInt("prescription"); // Assuming there is a prescription_id column
-            
-            // Retrieve the associated prescription using the provided PrescriptionManager
-            Prescription prescription = null;
-            if (prescriptionId != null) {
-                prescription = getPrescriptionById(prescriptionId);
-            }
-
-            // Retrieve associated allergies
-            List<Allergy> allergies = getAllergiesByTreatmentId(id);	//TODO this get
-
-            // Create and return the Treatment object
-            Treatment treatment = new Treatment(id, name, treatmentType, prescription);
-            treatment.setAllergies(allergies);
-            return treatment;
-        }
+    	String sql = "SELECT * FROM treatment WHERE id = " + id;
+		Statement st = c.createStatement();
+		ResultSet rs = st.executeQuery(sql);
+		rs.next();
+		int prescriptionid = rs.getInt("prescription_id ");
+		Prescription p = conMan.getPrescription().getPrescriptionById(prescriptionid);
+		Treatment t = new Treatment (rs.getInt("id"), rs.getString("name"),rs.getString("type"),p);
+		return t;
+        
     } catch (SQLException e) {
         System.out.println("Error in the database");
         e.printStackTrace();
     }
     return null;
 }
+
 
 
 	
