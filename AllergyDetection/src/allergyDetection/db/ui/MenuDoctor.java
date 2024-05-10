@@ -11,6 +11,7 @@ import java.util.List;
 
 import allergyDetection.db.interfaces.PatientManager;
 import allergyDetection.db.*;
+import allergyDetection.db.jdbc.*;
 import allergyDetection.db.pojos.Patient;
 
 public class MenuDoctor {
