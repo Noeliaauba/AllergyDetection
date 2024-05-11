@@ -1,6 +1,7 @@
 package allergyDetection.db.pojos;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 public class Patient {
@@ -16,6 +17,9 @@ public class Patient {
 		
 		
 		public Patient () {
+			this.prescriptions = new ArrayList<Prescription>();
+			this.allergies = new ArrayList<Allergy>();
+			this.symptoms = new ArrayList<Symptom>();
 			
 		}
 	

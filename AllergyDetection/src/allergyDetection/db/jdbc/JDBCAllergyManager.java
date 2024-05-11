@@ -91,8 +91,8 @@ public class JDBCAllergyManager implements AllergyManager {
 				Integer id = rs.getInt("id");
 				String name = rs.getString("name");
 				String type = rs.getString("type");
-				Treatment t = new Treatment(id, name, type);
-				lista.add(t);
+				Treatment t = new Treatment(id, name, type); maybe is treatment new_t pq colisionaria con el treatment t q le pasas
+				lista.add(t); 
 			}
 			rs.close();
 			p.close();

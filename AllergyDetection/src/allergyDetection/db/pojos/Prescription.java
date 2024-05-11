@@ -1,5 +1,6 @@
 package allergyDetection.db.pojos;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -16,6 +17,7 @@ public class Prescription {
 	private Patient patient;
 	
 	public Prescription() {
+		this.treatments = new ArrayList<Treatment>();
 	}
 	
 	public Prescription (Integer _id, String _isUsed, Patient _given_to, Doctor _given_by) {
