@@ -12,6 +12,7 @@ import java.util.List;
 import allergyDetection.db.interfaces.AllergyManager;
 import allergyDetection.db.pojos.Allergy;
 import allergyDetection.db.pojos.Symptom;
+import allergyDetection.db.pojos.Treatment;
 
 public class JDBCAllergyManager implements AllergyManager {
 	
@@ -78,29 +79,33 @@ public class JDBCAllergyManager implements AllergyManager {
 	
 
 
-	 //public List<Allergy> searchAllergybyTreatment(Treatment t) {
-		//return null;
-		/*List<Allergy> allergylist = new ArrayList<Allergy>();
+	 public List<Allergy> searchAllergybyTreatment(Treatment t) {
+		
+		List<Allergy> allergylist = new ArrayList<Allergy>();
 		try {
-			String sql = "SELECT * FROM allergies WHERE  LIKE ?";
+			String sql = "SELECT * FROM allergies WHERE treatment LIKE ?";
 			PreparedStatement p;
 			p = c.prepareStatement(sql);
-			p.setString(1, "%" + typeParameter + "%");
+			//p.setString(1, "%" + typeParameter + "%");
 			ResultSet rs = p.executeQuery();
 			while (rs.next()) {
-				Integer id = rs.getInt("id");
+				Integer id =  rs.getInt("id");
 				String name = rs.getString("name");
 				String type = rs.getString("type");
-				Treatment t = new Treatment(id, name, type); maybe is treatment new_t pq colisionaria con el treatment t q le pasas
-				lista.add(t); 
+				Allergy newallergy=new Allergy(id,name,type);
+				allergylist.add(newallergy);
+				//Treatment t = new Treatment(id, name, type); maybe is treatment new_t pq colisionaria con el treatment t q le pasas
+				//lista.add(t); 
 			}
 			rs.close();
 			p.close();
+			return allergylist;
 		} catch (SQLException e) {
 			System.out.println("Error in the database");
 			e.printStackTrace();
 		}
-		return lista; }*/
+		return null;
+	}
 	
 
 	@Override
