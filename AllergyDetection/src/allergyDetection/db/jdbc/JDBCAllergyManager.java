@@ -86,6 +86,7 @@ public class JDBCAllergyManager implements AllergyManager {
 			String sql = "SELECT * FROM allergies WHERE treatment LIKE ?";
 			PreparedStatement p;
 			p = c.prepareStatement(sql);
+			//p.setString(1, t); //hay que ver como cogerlo
 			//p.setString(1, "%" + typeParameter + "%");
 			ResultSet rs = p.executeQuery();
 			while (rs.next()) {
