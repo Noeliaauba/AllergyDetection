@@ -20,6 +20,11 @@ public class Treatment implements Serializable{
 	
 	}
 	
+	public Treatment (String _name, String _treatmentType,Prescription _prescriptionreq) {
+		this.name=_name;
+		this.treatment_type=_treatmentType;
+		this.prescription=_prescriptionreq;
+	}
 	public Treatment (Integer _id, String _name, String _treatmentType,Prescription _prescriptionreq) {
 		this.id=_id;
 		this.name=_name;

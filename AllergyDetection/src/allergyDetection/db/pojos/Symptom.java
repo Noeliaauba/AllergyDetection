@@ -21,6 +21,11 @@ public class Symptom implements Serializable{
 
 	}
 	
+	public Symptom (String _symptom_name, String _symptom_type) {
+		this.symptom_name= _symptom_name;
+		this.symptom_type=_symptom_type;
+	}
+	
 	public Symptom (Integer _id, String _symptom_name, String _symptom_type) {
 		this.id=_id;
 		this.symptom_name= _symptom_name;

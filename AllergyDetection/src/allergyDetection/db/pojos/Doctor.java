@@ -19,6 +19,10 @@ public class Doctor implements Serializable{
 	
 	 }
 	 
+	 public Doctor (String _name) {
+			this.name = _name;
+			}
+	 
 	 public Doctor (Integer _id, String _name) {
 		    this.id= _id;
 			this.name = _name;

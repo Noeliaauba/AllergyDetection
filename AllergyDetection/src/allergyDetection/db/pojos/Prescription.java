@@ -30,6 +30,12 @@ public class Prescription implements Serializable {
 		this.given_to = _given_to;
 		this.given_by=_given_by;
 		}
+	
+	public Prescription (String _isUsed, Patient _given_to, Doctor _given_by) {
+		this.isUsed=_isUsed;
+		this.given_to = _given_to;
+		this.given_by=_given_by;
+		}
 	public Prescription (Patient _given_to, Doctor _given_by) {
 		this.given_to=_given_to;
 		this.given_by=_given_by;

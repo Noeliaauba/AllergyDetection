@@ -24,6 +24,10 @@ public class Allergy implements Serializable {
 		this.symptoms= new ArrayList<Symptom>();
 	}
 	
+	public Allergy(String _allergyName, String _allergyType) {
+		this.allergyName=_allergyName;
+		this.allergyType=_allergyType;
+	}
 	
 	public Allergy(Integer _allergyID,String _allergyName, String _allergyType) {
 		this.allergyID=_allergyID;
