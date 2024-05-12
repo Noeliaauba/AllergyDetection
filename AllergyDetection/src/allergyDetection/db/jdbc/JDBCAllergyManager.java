@@ -79,33 +79,27 @@ public class JDBCAllergyManager implements AllergyManager {
 	
 
 
-	 public List<Allergy> searchAllergybyTreatment(Treatment t) {
-		
+	 public List<Allergy> searchAllergybyTreatment(Integer treatmentID) {
 		List<Allergy> allergylist = new ArrayList<Allergy>();
 		try {
-			String sql = "SELECT * FROM allergies WHERE treatment LIKE ?";
-			PreparedStatement p;
-			p = c.prepareStatement(sql);
-			//p.setString(1, t); //hay que ver como cogerlo
-			//p.setString(1, "%" + typeParameter + "%");
+			String sql = "SELECT allergy.id, allergy.name, allergy.type FROM allergy INNER JOIN OWNS ON allergy.id=OWNS.allergy_id WHERE OWNS.treatment_id= ?";
+			PreparedStatement p= c.prepareStatement(sql);
+			p.setInt(1,treatmentID);
 			ResultSet rs = p.executeQuery();
 			while (rs.next()) {
-				Integer id =  rs.getInt("id");
+				Integer id = rs.getInt("id");
 				String name = rs.getString("name");
 				String type = rs.getString("type");
-				Allergy newallergy=new Allergy(id,name,type);
-				allergylist.add(newallergy);
-				//Treatment t = new Treatment(id, name, type); maybe is treatment new_t pq colisionaria con el treatment t q le pasas
-				//lista.add(t); 
+				Allergy a = new Allergy(id, name, type);
+				allergylist.add(a);
 			}
 			rs.close();
 			p.close();
-			return allergylist;
 		} catch (SQLException e) {
 			System.out.println("Error in the database");
 			e.printStackTrace();
 		}
-		return null;
+		return allergylist;
 	}
 	
 
