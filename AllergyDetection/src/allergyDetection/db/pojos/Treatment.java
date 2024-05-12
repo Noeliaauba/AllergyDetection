@@ -1,11 +1,13 @@
 package allergyDetection.db.pojos;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Treatment {
+public class Treatment implements Serializable{
 	
+	private static final long serialVersionUID = 2510589484868867965L;
 	private Integer id;
 	private String treatment_type;
 	private String name;
