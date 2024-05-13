@@ -93,8 +93,6 @@ public class MenuDoctor {
 	
 	private static void addPatient()  throws NumberFormatException, IOException {
 		System.out.println("Please, write the information of the patient:");
-		//System.out.println("PATIENT ID: ");   NO ESTOY SEGURA DE QUE HAYA QUE PEDIR EL ID PORQUE ESTA EL AUTOINCREMENT
-		Integer id = Integer.parseInt(r.readLine());
 		System.out.println("PATIENT NAME: ");
 		String name = r.readLine();
 		System.out.println("DATE OF BIRTH OF THE PATIENT(DD-MM-YYYY format): ");
@@ -102,7 +100,7 @@ public class MenuDoctor {
 		Date date = Date.valueOf(localDate);
 		System.out.println("PATIENT GENDER: ");
 		String gender = r.readLine();
-		Patient patient = new Patient(id,name,date,gender);		
+		Patient patient = new Patient(name,date,gender);		
 		patientManag.addPatient(patient);
 	}	
 	

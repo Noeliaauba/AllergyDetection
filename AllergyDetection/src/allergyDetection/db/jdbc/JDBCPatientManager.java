@@ -93,7 +93,7 @@ public Patient getPatientByID(Integer id) {
 public List<Patient> searchPatient(String name_Patient) {
 	List<Patient> patients = new ArrayList<Patient>();
 	try {
-		String sql = "SELECT * FROM patient WHERE name LIKE ?";
+		String sql = "SELECT * FROM patient WHERE name=" + name_Patient;
 		PreparedStatement p = c.prepareStatement(sql);
 		ResultSet rs = p.executeQuery();
 		while (rs.next()) {
