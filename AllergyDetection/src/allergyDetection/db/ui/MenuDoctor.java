@@ -13,16 +13,20 @@ import allergyDetection.db.interfaces.PatientManager;
 import allergyDetection.db.*;
 import allergyDetection.db.jdbc.*;
 import allergyDetection.db.pojos.Patient;
+import allergyDetection.db.jdbc.ConnectionManager;
 
 public class MenuDoctor {
 	
 	
 	private static BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
-	private static PatientManager patientManag;
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-	
+	private static PatientManager patientManag;
+	private static ConnectionManager conMan;
 	
 	public static void menuDoctor() throws NumberFormatException, IOException {
+		conMan = new ConnectionManager();
+		patientManag = conMan.getPatient();
+		
 		int variableWhileDoctor=1;
 		System.out.println("Welcome Doctor! We are delighted with your great job!");
 		System.out.println("");
@@ -89,7 +93,7 @@ public class MenuDoctor {
 	
 	private static void addPatient()  throws NumberFormatException, IOException {
 		System.out.println("Please, write the information of the patient:");
-		System.out.println("PATIENT ID: ");
+		//System.out.println("PATIENT ID: ");   NO ESTOY SEGURA DE QUE HAYA QUE PEDIR EL ID PORQUE ESTA EL AUTOINCREMENT
 		Integer id = Integer.parseInt(r.readLine());
 		System.out.println("PATIENT NAME: ");
 		String name = r.readLine();

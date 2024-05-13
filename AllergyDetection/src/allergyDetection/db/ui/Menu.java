@@ -48,13 +48,13 @@ public class Menu {
 		symptomManag= conMan.getSymptom();
 		treatmentManag= conMan.getTreatment();
 		prescriptionManag= conMan.getPrescription();
-	}
+	
 	
 	
 	//------------------------------------------------------------------------
 		// JAP later
 			
-	/*System.out.println("Chose your desired option: ");
+	System.out.println("Chose your desired option: ");
 	System.out.println("1) Log in. ");
 	System.out.println("2) Sign up.");
 	System.out.println("0) End the program.");
@@ -77,8 +77,8 @@ public class Menu {
 	                System.out.println("Insert one of the following options:");
 	        }
 		}
+	}	
 		
-/*		
 	private static void menuLogin() throws NumberFormatException, IOException {
 		//TODO method 
 	}
@@ -87,7 +87,7 @@ public class Menu {
 		//TODO method
 	}
 	
-	*/
+	
 	
 
 

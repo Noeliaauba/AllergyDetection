@@ -1,10 +1,13 @@
 package allergyDetection.db.pojos;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Treatment {
+public class Treatment implements Serializable{
 	
+	private static final long serialVersionUID = 2510589484868867965L;
 	private Integer id;
 	private String treatment_type;
 	private String name;
@@ -13,9 +16,15 @@ public class Treatment {
 	
 	
 	public Treatment () {
+		this.allergies = new ArrayList<Allergy>();
 	
 	}
 	
+	public Treatment (String _name, String _treatmentType,Prescription _prescriptionreq) {
+		this.name=_name;
+		this.treatment_type=_treatmentType;
+		this.prescription=_prescriptionreq;
+	}
 	public Treatment (Integer _id, String _name, String _treatmentType,Prescription _prescriptionreq) {
 		this.id=_id;
 		this.name=_name;

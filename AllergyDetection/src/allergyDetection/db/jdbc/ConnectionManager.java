@@ -113,9 +113,9 @@ public class ConnectionManager {
 			Statement createTables6 = c.createStatement();
 			String create6 = "CREATE TABLE treatment ( "
 					+ " id INTEGER PRIMARY KEY AUTOINCREMENT,"
-					+ "name TEXT NOT NULL,"
-					+ "type TEXT,"
-					+ "prescription_id INTEGER REFERENCES prescription(id))";		
+					+ " name TEXT NOT NULL,"
+					+ " type TEXT,"
+					+ " prescription_id INTEGER REFERENCES prescription(id))";		
 			createTables6.executeUpdate(create6);
 			createTables6.close();
 			

@@ -12,6 +12,7 @@ import java.util.List;
 import allergyDetection.db.interfaces.AllergyManager;
 import allergyDetection.db.pojos.Allergy;
 import allergyDetection.db.pojos.Symptom;
+import allergyDetection.db.pojos.Treatment;
 
 public class JDBCAllergyManager implements AllergyManager {
 	
@@ -78,21 +79,19 @@ public class JDBCAllergyManager implements AllergyManager {
 	
 
 
-	 //public List<Allergy> searchAllergybyTreatment(Treatment t) {
-		//return null;
-		/*List<Allergy> allergylist = new ArrayList<Allergy>();
+	 public List<Allergy> searchAllergybyTreatment(Integer treatmentID) {
+		List<Allergy> allergylist = new ArrayList<Allergy>();
 		try {
-			String sql = "SELECT * FROM allergies WHERE  LIKE ?";
-			PreparedStatement p;
-			p = c.prepareStatement(sql);
-			p.setString(1, "%" + typeParameter + "%");
+			String sql = "SELECT allergy.id, allergy.name, allergy.type FROM allergy INNER JOIN OWNS ON allergy.id=OWNS.allergy_id WHERE OWNS.treatment_id= ?";
+			PreparedStatement p= c.prepareStatement(sql);
+			p.setInt(1,treatmentID);
 			ResultSet rs = p.executeQuery();
 			while (rs.next()) {
 				Integer id = rs.getInt("id");
 				String name = rs.getString("name");
 				String type = rs.getString("type");
-				Treatment t = new Treatment(id, name, type);
-				lista.add(t);
+				Allergy a = new Allergy(id, name, type);
+				allergylist.add(a);
 			}
 			rs.close();
 			p.close();
@@ -100,7 +99,8 @@ public class JDBCAllergyManager implements AllergyManager {
 			System.out.println("Error in the database");
 			e.printStackTrace();
 		}
-		return lista; }*/
+		return allergylist;
+	}
 	
 
 	@Override
