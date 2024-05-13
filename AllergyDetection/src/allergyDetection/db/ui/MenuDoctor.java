@@ -9,6 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+import allergyDetection.db.interfaces.AllergyManager;
 import allergyDetection.db.interfaces.PatientManager;
 import allergyDetection.db.interfaces.SymptomManager;
 import allergyDetection.db.*;
@@ -23,12 +24,14 @@ public class MenuDoctor {
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 	private static PatientManager patientManag;
 	private static SymptomManager symptomManag;
+	private static AllergyManager allergyManag;
 	private static ConnectionManager conMan;
 	
 	public static void menuDoctor() throws NumberFormatException, IOException {
 		conMan = new ConnectionManager();
 		patientManag = conMan.getPatient();
 		symptomManag= conMan.getSymptom();
+		allergyManag= conMan.getAllergy();
 		
 		int variableWhileDoctor=1;
 		System.out.println("Welcome Doctor! We are delighted with your great job!");
@@ -38,8 +41,9 @@ public class MenuDoctor {
 		System.out.println("1) ADD A PATIENT TO THE DATA BASE");
 		System.out.println("2) DELETE A PATIENT FROM THE DATA BASE");
 		System.out.println("3) MODIFY THE INFORMATION OF A PATIENT"); 
-		//System.out.println("4) See the patient medical score");		//it was said "patient records" are we looking for the same?
 		System.out.println("4) ADD SYMPTOMS TO PATIENT");
+		System.out.println("5) ADD ALLERGY TO PATIENT");
+		System.out.println("6) See the patient medical score");	
 		System.out.println("6) Write a prescription for a patient. Remember that the patient must be registered first.");
 		System.out.println("7) Modify the prescription of a patient.Remember that the patient and the prescription must be created first.");
 		System.out.println("0) Select this option to exit.");
@@ -61,21 +65,21 @@ public class MenuDoctor {
 		case 4: 
 			controlSymptom();
 			break;
-			/*	
+			
 		case 5: 
-			addSymptom();
+			controlAllergy();
 			
 
 			break;	
-		case 6: 
-			addPrescription();
 			
+		case 6: 
+			
+			elaborateDiagnose();
 
 			break;
 			
 		case 7: 
-			//modifyPrescription();
-			//TODO the method. This method can be done here 
+			medicalScore();
 
 			break;
 		
@@ -87,7 +91,7 @@ public class MenuDoctor {
 		default:
 			System.out.println("You inserted a number not accepted. Please, select again a number of the following options");
 		
-		*/}
+		}
 		
 		}
 	}
@@ -157,9 +161,9 @@ public class MenuDoctor {
 	}
 	
 private static void controlSymptom() throws NumberFormatException, IOException{
-	System.out.println("You will see the information of a type of symptom:");
+	System.out.println("You will see the information of a type of symptom pre-saved:");
 	List<Symptom> listadosintomas = new ArrayList<Symptom>();
-	System.out.println("Introduce the type of symptom you want to see:");
+	System.out.println("Introduce the type of symptom you want to see (Respiratory), (Cutaneous), (Digestive), (Others):");
 	String type = r.readLine();
 	listadosintomas= symptomManag.searchSymptom(type);
 	for (Symptom s : listadosintomas) {
@@ -169,7 +173,7 @@ private static void controlSymptom() throws NumberFormatException, IOException{
 	String selection = r.readLine();
 	while(selection.equals("y")) {
 		addSymptom();
-		System.out.println("Introduce the type of symptom you want to see:");
+		System.out.println("Introduce the type of symptom you want to see (Respiratory), (Cutaneous), (Digestive), (Others):");
 		String type2 = r.readLine();
 		listadosintomas= symptomManag.searchSymptom(type2);
 		for (Symptom s : listadosintomas) {
@@ -192,9 +196,6 @@ private static void controlSymptom() throws NumberFormatException, IOException{
 	patientManag.assignedSymptomtoPatient(patientId, symptomId);
 	}
 	
-	
-	
-	
 
 private static void addSymptom() throws NumberFormatException, IOException {
 	System.out.println("Please, write the symptom information:");
@@ -205,6 +206,85 @@ private static void addSymptom() throws NumberFormatException, IOException {
 	Symptom sm = new Symptom(name,type);		
 	symptomManag.addSymptom(sm);
 }	
+
+private static void controlAllergy() throws NumberFormatException, IOException{
+	System.out.println("You will see the information of a type of allergy pre-saved:");
+	List<Allergy> allergies = new ArrayList<Allergy>();
+	System.out.println("Introduce the type of allergy you want to see (Alimentary), (Stationary), (Cutaneous), (Drugs), (Insect):");
+	String type = r.readLine();
+	allergies= allergyManag.searchAllergy(type);
+	for (Allergy a : allergies) {
+		System.out.println(a);
+	}
+	System.out.println("Do you want to add a new Allergy? YES[y]/NO[n]:");
+	String selection = r.readLine();
+	while(selection.equals("y")) {
+		addAllergy();
+		System.out.println("Introduce the type of Allergy you want to see (Alimentary), (Stationary), (Cutaneous), (Drugs), (Insect):");
+		String type2 = r.readLine();
+		allergies= allergyManag.searchAllergy(type2);
+		for (Allergy a : allergies) {
+			System.out.println(a);
+		}
+		System.out.println("Do you want to add a new Allergy? YES[y]/NO[n]:");
+		selection = r.readLine();
+		}
+	List<Patient> patients = new ArrayList<Patient>();
+	System.out.println("Insert name the patient you want to add the Allergy. ");
+	String Name = r.readLine();
+	patients= patientManag.searchPatient(Name);
+	for (Patient p : patients) {
+		System.out.println(p);
+	}
+	System.out.println("Introduce the PATIENT ID to add the Allergy detected");
+	Integer patientId = Integer.parseInt(r.readLine());
+	System.out.println("Introduce the Allergy ID to add");
+	Integer allergyId = Integer.parseInt(r.readLine());
+	patientManag.assignedAllergytoPatient(patientId, allergyId);
+	
+
+	}
+	
+	
+
+private static void addAllergy() throws NumberFormatException, IOException {
+	System.out.println("Please, write the allergy information:");
+	System.out.println("ALLERGY NAME: ");
+	String name = r.readLine();
+	System.out.println("ALLERGY TYPE: ");
+	String type = r.readLine();
+	Allergy s = new Allergy(name,type);		
+	allergyManag.addAllergy(s);
+}	
+//ACABAR ESTO
+public void assignedSymptomtoAllergy(Integer symptomId, Integer allergyId);
+private static void elaborateDiagnose() throws NumberFormatException, IOException {
+	List<Patient> patients = new ArrayList<Patient>();
+	System.out.println("Introduce the name of the patient:");
+	String Name = r.readLine();
+	patients= patientManag.searchPatient(Name);
+	for (Patient p : patients) {
+		System.out.println(p);
+	}
+	
+    System.out.println("Introduce the PATIENT ID to select ");
+	Integer Id = Integer.parseInt(r.readLine());
+}
+
+
+private static void medicalScore() throws NumberFormatException, IOException {
+	List<Patient> patients = new ArrayList<Patient>();
+	System.out.println("Introduce the name of the patient to see the MEDICAL SCORE:");
+	String Name = r.readLine();
+	patients= patientManag.searchPatient(Name);
+	for (Patient p : patients) {
+		System.out.println(p);
+	}
+	
+    System.out.println("Introduce the PATIENT ID to select ");
+	Integer Id = Integer.parseInt(r.readLine());
+	//tenemos el id del paciente queremos visulaizar has y suffers
+}
 
 
 

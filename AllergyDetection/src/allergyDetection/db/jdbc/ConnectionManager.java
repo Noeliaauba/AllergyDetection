@@ -170,7 +170,7 @@ public class ConnectionManager {
 					+ " name TEXT NOT NULL,"
 					+ " type TEXT NOT NULL,"
 					+ " prescription_id INTEGER REFERENCES prescription(id))";		
-			createTables6.executeUpdate(create5);
+			createTables6.executeUpdate(create6);
 			createTables6.close();
 			
 			Statement insertTables6 = c.createStatement();
@@ -196,7 +196,7 @@ public class ConnectionManager {
 			String create7 = "CREATE TABLE HAS ( "
 					+ " patient_id INTEGER REFERENCES patient(id),"
 					+ " symptom_id INTEGER REFERENCES symptom(id),"
-					+ " PRIMARY KEY (patient_id, symptom_id)";
+					+ " PRIMARY KEY (patient_id, symptom_id))";
 			createTables7.executeUpdate(create7);
 			createTables7.close();
 			
@@ -204,7 +204,7 @@ public class ConnectionManager {
 			String create8 = "CREATE TABLE PRODUCES ( "
 					+ " symptom_id INTEGER REFERENCES symptom(id),"
 					+ " allergy_id INTEGER REFERENCES allergy(id),"
-					+ " PRIMARY KEY (symptom_id, allergy_id)";
+					+ " PRIMARY KEY (symptom_id, allergy_id))";
 			createTables8.executeUpdate(create8);
 			createTables8.close();
 			
@@ -213,7 +213,7 @@ public class ConnectionManager {
 			String create9 = "CREATE TABLE SUFFERS ( "
 					+ " patient_id INTEGER REFERENCES patient(id),"
 					+ " allergy_id INTEGER REFERENCES allergy(id),"
-					+ " PRIMARY KEY (patient_id, allergy_id)";
+					+ " PRIMARY KEY (patient_id, allergy_id))";
 			createTables9.executeUpdate(create9);
 			createTables9.close();
 			
@@ -222,7 +222,7 @@ public class ConnectionManager {
 			String create10 = "CREATE TABLE OWNS ( "
 					+ " allergy_id INTEGER REFERENCES allergy(id),"
 					+ " treatment_id INTEGER REFERENCES allergy(name),"
-					+ " PRIMARY KEY (treatment_id,allergy_id)";
+					+ " PRIMARY KEY (treatment_id,allergy_id))";
 			createTables10.executeUpdate(create10);
 			createTables10.close();
 			

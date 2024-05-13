@@ -1,12 +1,6 @@
 package allergyDetection.db.interfaces;
-import allergyDetection.db.pojos.Doctor;
+
 import allergyDetection.db.pojos.Patient;
-import allergyDetection.db.pojos.Prescription;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public interface PatientManager {
