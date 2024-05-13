@@ -48,8 +48,8 @@ public class MenuPatient {
 	}
 	
 	//Patients methods.
-/*
-public static void showPrescription() throws IOException, NumberFormatException{
+
+/*public static void showPrescription() throws IOException, NumberFormatException{
 		try {
 			System.out.println("Here is your prescription:\n");
 			JDBCPrescriptionManager.getPrescriptionsById(id);
@@ -70,8 +70,8 @@ public static void showPrescription() throws IOException, NumberFormatException{
             System.out.println("Invalid ID format. Please enter a valid integer ID.");
         }
     }
-
 */
+
 
 
 }
