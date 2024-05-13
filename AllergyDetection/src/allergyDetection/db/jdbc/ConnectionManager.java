@@ -73,6 +73,7 @@ public class ConnectionManager {
 			createTables1.close();
 			
 			
+			
 			Statement createTables2 = c.createStatement();
 			String create2 = "CREATE TABLE doctor ( "
 					+ " id INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -88,74 +89,8 @@ public class ConnectionManager {
 					+ " type TEXT NOT NULL)";	
 			createTables3.executeUpdate(create3);
 			createTables3.close();
-			Statement createTables4 = c.createStatement();
 			
-			
-			String create4 = "CREATE TABLE prescription ( "
-					+ " id INTEGER PRIMARY KEY AUTOINCREMENT,"
-					+ " isUsed TEXT,"
-					+ " given_to INTEGER REFERENCES patient(id),"
-					+ " given_by INTEGER REFERENCES doctor(id),"
-					+ " PRIMARY KEY (patient_id, doctor_id))";
-			createTables4.executeUpdate(create4);
-			createTables4.close();
-			
-			
-			Statement createTables5 = c.createStatement();
-			String create5 = "CREATE TABLE symptom ( "
-					+ " id INTEGER PRIMARY KEY AUTOINCREMENT,"
-					+ " name TEXT NOT NULL,"
-					+ " type TEXT)";		
-			createTables5.executeUpdate(create5);
-			createTables5.close();
-			
-			
-			Statement createTables6 = c.createStatement();
-			String create6 = "CREATE TABLE treatment ( "
-					+ " id INTEGER PRIMARY KEY AUTOINCREMENT,"
-					+ " name TEXT NOT NULL,"
-					+ " type TEXT,"
-					+ " prescription_id INTEGER REFERENCES prescription(id))";		
-			createTables6.executeUpdate(create6);
-			createTables6.close();
-			
-			
-			Statement createTables7 = c.createStatement();
-			String create7 = "CREATE TABLE HAS ( "
-					+ " patient_id INTEGER REFERENCES patient(id),"
-					+ " symptom_id INTEGER REFERENCES symptom(id),"
-					+ " PRIMARY KEY (patient_id, symptom_id)";
-			createTables7.executeUpdate(create7);
-			createTables7.close();
-			
-			
-			Statement createTables8 = c.createStatement();
-			String create8 = "CREATE TABLE PRODUCES ( "
-					+ " symptom_id INTEGER REFERENCES symptom(id),"
-					+ " allergy_id INTEGER REFERENCES allergy(id),"
-					+ " PRIMARY KEY (symptom_id, allergy_id)";
-			createTables8.executeUpdate(create8);
-			createTables8.close();
-			
-			
-			Statement createTables9 = c.createStatement();
-			String create9 = "CREATE TABLE SUFFERS ( "
-					+ " patient_id INTEGER REFERENCES patient(id),"
-					+ " allergy_id INTEGER REFERENCES allergy(id),"
-					+ " PRIMARY KEY (patient_id, allergy_id)";
-			createTables9.executeUpdate(create9);
-			createTables9.close();
-			
-			
-			Statement createTables10 = c.createStatement();
-			String create10 = "CREATE TABLE OWNS ( "
-					+ " allergy_id INTEGER REFERENCES allergy(id),"
-					+ " treatment_id INTEGER REFERENCES allergy(name),"
-					+ " PRIMARY KEY (treatment_id,allergy_id)";
-			createTables10.executeUpdate(create10);
-			createTables10.close();
-			
-			
+
 			Statement insertTables3 = c.createStatement();
 			String insert3_1 = "INSERT INTO allergy (name, type) VALUES ('Dairy allergy', 'Alimentary')";
 			insertTables3.executeUpdate(insert3_1);
@@ -163,7 +98,7 @@ public class ConnectionManager {
 			insertTables3.executeUpdate(insert3_2);
 			String insert3_3 = "INSERT INTO allergy (name, type) VALUES ('Nut allergy', 'Alimentary')";
 			insertTables3.executeUpdate(insert3_3);
-			String insert3_4 = "INSERT INTO allergies (name, type) VALUES ('Dust Mite allergy', 'Stationary')";
+			String insert3_4 = "INSERT INTO allergy (name, type) VALUES ('Dust Mite allergy', 'Stationary')";
 			insertTables3.executeUpdate(insert3_4);
 			String insert3_5 = "INSERT INTO allergy (name, type) VALUES ('Insect allergy', 'Insect')";
 			insertTables3.executeUpdate(insert3_5);
@@ -175,6 +110,13 @@ public class ConnectionManager {
 			insertTables3.executeUpdate(insert3_8);
 			insertTables3.close();
 			
+			Statement createTables4 = c.createStatement();
+			String create4 = "CREATE TABLE symptom ( "
+					+ " id INTEGER PRIMARY KEY AUTOINCREMENT,"
+					+ " name TEXT NOT NULL,"
+					+ " type TEXT)";		
+			createTables4.executeUpdate(create4);
+			createTables4.close();
 			
 			Statement insertTables5 = c.createStatement();
 			String insert5_1 = "INSERT INTO symptom (name, type) VALUES ('Sneeze', 'Respiratory')";
@@ -210,7 +152,26 @@ public class ConnectionManager {
 			String insert5_16 = "INSERT INTO symptom (name, type) VALUES ('Headache', 'Others')";
 			insertTables5.executeUpdate(insert5_16);
 			insertTables5.close();
+
+			Statement createTables5 = c.createStatement();
+			String create5 = "CREATE TABLE prescription ( "
+					+ " id INTEGER PRIMARY KEY AUTOINCREMENT,"
+					+ " isUsed TEXT,"
+					+ " given_to INTEGER,"
+					+ " given_by INTEGER,"
+					+ " FOREIGN KEY (given_to) REFERENCES patient(id),"
+					+ " FOREIGN KEY (given_by) REFERENCES doctor(id))";
+			createTables5.executeUpdate(create5);
+			createTables5.close();
 			
+			Statement createTables6 = c.createStatement();
+			String create6 = "CREATE TABLE treatment ( "
+					+ " id INTEGER PRIMARY KEY AUTOINCREMENT,"
+					+ " name TEXT NOT NULL,"
+					+ " type TEXT NOT NULL,"
+					+ " prescription_id INTEGER REFERENCES prescription(id))";		
+			createTables6.executeUpdate(create5);
+			createTables6.close();
 			
 			Statement insertTables6 = c.createStatement();
 			String insert6_1 = "INSERT INTO treatment (name, type) VALUES ('Desloratadina', 'Antihistamines')";
@@ -225,15 +186,50 @@ public class ConnectionManager {
 			insertTables6.executeUpdate(insert6_5);
 			String insert6_6 = "INSERT INTO treatment (name, type) VALUES ('Prednisona', 'Corticosteroids')";
 			insertTables6.executeUpdate(insert6_6);
-			String insert6_7 = "INSERT INTO treatment (name, type) VALUES ('Oximetazolina ', 'Decongestants')";
+			String insert6_7 = "INSERT INTO treatment (name, type) VALUES ('Oximetazolina', 'Decongestants')";
 			insertTables6.executeUpdate(insert6_7);
 			String insert6_8 = "INSERT INTO treatment (name, type) VALUES ('Metaproterenol', 'Bronchodilators')";
 			insertTables6.executeUpdate(insert6_8);
 			insertTables6.close();
 			
+			Statement createTables7 = c.createStatement();
+			String create7 = "CREATE TABLE HAS ( "
+					+ " patient_id INTEGER REFERENCES patient(id),"
+					+ " symptom_id INTEGER REFERENCES symptom(id),"
+					+ " PRIMARY KEY (patient_id, symptom_id)";
+			createTables7.executeUpdate(create7);
+			createTables7.close();
+			
+			Statement createTables8 = c.createStatement();
+			String create8 = "CREATE TABLE PRODUCES ( "
+					+ " symptom_id INTEGER REFERENCES symptom(id),"
+					+ " allergy_id INTEGER REFERENCES allergy(id),"
+					+ " PRIMARY KEY (symptom_id, allergy_id)";
+			createTables8.executeUpdate(create8);
+			createTables8.close();
+			
+			
+			Statement createTables9 = c.createStatement();
+			String create9 = "CREATE TABLE SUFFERS ( "
+					+ " patient_id INTEGER REFERENCES patient(id),"
+					+ " allergy_id INTEGER REFERENCES allergy(id),"
+					+ " PRIMARY KEY (patient_id, allergy_id)";
+			createTables9.executeUpdate(create9);
+			createTables9.close();
+			
+			
+			Statement createTables10 = c.createStatement();
+			String create10 = "CREATE TABLE OWNS ( "
+					+ " allergy_id INTEGER REFERENCES allergy(id),"
+					+ " treatment_id INTEGER REFERENCES allergy(name),"
+					+ " PRIMARY KEY (treatment_id,allergy_id)";
+			createTables10.executeUpdate(create10);
+			createTables10.close();
+			
+			
 					
 	} catch (SQLException sqlE) {
-			if (sqlE.getMessage().contains("Already exist")){
+			if (sqlE.getMessage().contains("already exist")){
 				System.out.println("No need to create the tables; already there");
 			}
 			else {

@@ -19,7 +19,11 @@ public class Treatment implements Serializable{
 		this.allergies = new ArrayList<Allergy>();
 	
 	}
-	
+	public Treatment (String _name, String _treatmentType) {
+		this.name=_name;
+		this.treatment_type=_treatmentType;
+
+	}
 	public Treatment (String _name, String _treatmentType,Prescription _prescriptionreq) {
 		this.name=_name;
 		this.treatment_type=_treatmentType;

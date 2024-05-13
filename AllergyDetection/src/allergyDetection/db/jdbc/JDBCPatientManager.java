@@ -39,7 +39,7 @@ public void addPatient(Patient p) {
 @Override
 public void modifyPatient(Patient p) {
 	 try {
-	        String query = "UPDATE patient SET name = ?, dateOfBith = ?, gender = ? WHERE id = ?";
+	        String query = "UPDATE patient SET name = ?, dateOfBirth = ?, gender = ? WHERE id = ?";
 	        PreparedStatement pstmt = c.prepareStatement(query);
 	        pstmt.setString(1, p.getName());
 	        pstmt.setDate(2, p.getDob()); 
@@ -75,26 +75,27 @@ public void deletePatient(Integer id) {
 
 @Override
 public Patient getPatientByID(Integer id) {
+	Patient p=null;
 	try {
 		String sql = "SELECT * FROM patient WHERE id = " + id;
 		Statement st= c.createStatement();
 		ResultSet rs = st.executeQuery(sql);
 		rs.next();
-		Patient p = new Patient (rs.getInt("id"), rs.getString("name"), rs.getDate("dateOfBith"), rs.getString("gender"));
-		return p;
+		p = new Patient (rs.getInt("id"), rs.getString("name"), rs.getDate("dateOfBirth"), rs.getString("gender"));
 	} catch (SQLException e) {
 		System.out.println("Error in the database");
 		e.printStackTrace();
 	}
-	return null;
+	return p;
 }
 
 @Override
 public List<Patient> searchPatient(String name_Patient) {
 	List<Patient> patients = new ArrayList<Patient>();
 	try {
-		String sql = "SELECT * FROM patient WHERE name=" + name_Patient;
+		String sql = "SELECT * FROM patient WHERE name LIKE ?";
 		PreparedStatement p = c.prepareStatement(sql);
+		p.setString(1, name_Patient);
 		ResultSet rs = p.executeQuery();
 		while (rs.next()) {
 			Integer id = rs.getInt("id");

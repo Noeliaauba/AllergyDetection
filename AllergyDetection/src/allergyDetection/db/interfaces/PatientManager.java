@@ -17,7 +17,6 @@ public interface PatientManager {
 	public List<Patient> searchPatient(String name_Patient);
 	public void assignedAllergytoPatient(Integer patientId, Integer allergyId);
 	public void assignedSymptomtoPatient(Integer patientId, Integer symptomId);
-	//Hacer los metodos de select by id y modify
 
 
 }
