@@ -37,6 +37,7 @@ public class Menu {
 		System.out.println("WELCOME TO THE PROGRAMM!");
 		System.out.println("");
 		
+		
 		MenuDoctor.menuDoctor();
 		
 		// ALWAYS JDBC first
