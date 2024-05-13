@@ -7,8 +7,6 @@ import java.util.Objects;
 
 import javax.persistence.*;
 
-import library.db.pojos.User;
-
 @Entity
 @Table(name = "roles")
 
