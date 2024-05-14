@@ -20,12 +20,13 @@ public class JDBCPatientManager implements PatientManager {
 @Override
 public void addPatient(Patient p) {
 		try {
-			String template = "INSERT INTO patient (name, dateOfBirth, gender ) VALUES (?, ?, ?)";
+			String template = "INSERT INTO patient (name, surname, dateOfBirth, gender ) VALUES (?, ?, ?, ?)";
 			PreparedStatement pstmt;
 			pstmt = c.prepareStatement(template);
 			pstmt.setString(1, p.getName());
-			pstmt.setDate(2, p.getDob());
-			pstmt.setString(3, p.getGender());
+			pstmt.setString(2, p.getSurname());
+			pstmt.setDate(3, p.getDob());
+			pstmt.setString(4, p.getGender());
 
 			pstmt.executeUpdate();
 			pstmt.close();
@@ -39,12 +40,13 @@ public void addPatient(Patient p) {
 @Override
 public void modifyPatient(Patient p) {
 	 try {
-	        String query = "UPDATE patient SET name = ?, dateOfBirth = ?, gender = ? WHERE id = ?";
+	        String query = "UPDATE patient SET name = ?, surname = ?, dateOfBirth = ?, gender = ? WHERE id = ?";
 	        PreparedStatement pstmt = c.prepareStatement(query);
 	        pstmt.setString(1, p.getName());
-	        pstmt.setDate(2, p.getDob()); 
-	        pstmt.setString(3, p.getGender());
-	        pstmt.setInt(4, p.getId());
+	        pstmt.setString(2, p.getSurname());
+	        pstmt.setDate(3, p.getDob()); 
+	        pstmt.setString(4, p.getGender());
+	        pstmt.setInt(5, p.getId());
 	        pstmt.executeUpdate();
 	        pstmt.close();
 	        System.out.println("Patient with ID " + p.getId() + " updated successfully.");
@@ -81,7 +83,7 @@ public Patient getPatientByID(Integer id) {
 		Statement st= c.createStatement();
 		ResultSet rs = st.executeQuery(sql);
 		rs.next();
-		p = new Patient (rs.getInt("id"), rs.getString("name"), rs.getDate("dateOfBirth"), rs.getString("gender"));
+		p = new Patient (rs.getInt("id"), rs.getString("name"), rs.getString("surname"), rs.getDate("dateOfBirth"), rs.getString("gender"));
 	} catch (SQLException e) {
 		System.out.println("Error in the database");
 		e.printStackTrace();
@@ -100,9 +102,10 @@ public List<Patient> searchPatient(String name_Patient) {
 		while (rs.next()) {
 			Integer id = rs.getInt("id");
 			String name = rs.getString("name");
+			String surname = rs.getString("surname");
 			Date dob= rs.getDate("dateOfBirth");
 			String gender= rs.getString("gender");
-			Patient pat = new Patient(id, name, dob, gender);
+			Patient pat = new Patient(id, name, surname, dob, gender);
 			patients.add(pat);
 		}
 		rs.close();
