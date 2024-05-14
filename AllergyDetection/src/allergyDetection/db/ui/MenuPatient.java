@@ -74,21 +74,25 @@ public class MenuPatient {
 	}
 
 public static void showPrescription() throws IOException, NumberFormatException{
+	
 		try {
 			System.out.println("You will see a prescription. ");
 			
-			System.out.println("Insert patient id:");
-			int id=Integer.parseInt(r.readLine());
-			
-			Prescription prescription = new Prescription();
-			prescription=prescriptionManager.getPrescriptionById(id);
+			System.out.println("Insert patient id: ");
+			int patientId=Integer.parseInt(r.readLine());
 			
 			Patient patient = new Patient();
-			patient= patientManager.getPatientByID(id);
+			patient= patientManager.getPatientByID(patientId);
 			
-            List<Prescription> prescriptions = new ArrayList<Prescription>();
+			List<Prescription> prescriptions = new ArrayList<Prescription>();
+			prescriptions=prescriptionManager.searchPrescriptionByPatient(patientId);
+			
+			System.out.println("Insert prescription id:");
+			int prescriptionId=Integer.parseInt(r.readLine());
+			Prescription prescription =new Prescription();
+			prescription=prescriptionManager.getPrescriptionById(prescriptionId);
 
-            if (prescription.equals(patient)) {
+            if (prescriptions.equals(patient)) {
             	 System.out.println("Prescriptions for patient with ID :" + patient.getId());
             	 
                  for (Prescription p : prescriptions) {
