@@ -38,8 +38,8 @@ public class Menu {
 		System.out.println("");
 		
 		
-		MenuDoctor.menuDoctor();
-		MenuPatient.menuPatient();
+		//MenuDoctor.menuDoctor();
+		//MenuPatient.menuPatient();
 		
 		// ALWAYS JDBC first
 		conMan = new ConnectionManager();
@@ -81,11 +81,35 @@ public class Menu {
 	}	
 		
 	private static void menuLogin() throws NumberFormatException, IOException {
-		//TODO method 
+		System.out.println("Introduce your username : ");
+		System.out.println("Introduce your password : ");
+		
 	}
 	
 	private static void menuSignUp() throws NumberFormatException, IOException {
-		//TODO method
+		System.out.println("Chose your desired option: ");
+		System.out.println("1) Menu Doctor. ");
+		System.out.println("2) Menu Patient. ");
+		System.out.println("0) End the program. ");
+		int variableWhileInitial=1;
+		while (variableWhileInitial!=0) {
+	        int option = Integer.parseInt(r.readLine());
+	        switch (option) {
+	            case 1:
+	            	MenuDoctor.menuDoctor();
+	                break;
+	            case 2:
+	            	MenuPatient.menuPatient();
+	                break;
+	            case 0:
+	                System.out.println("Exiting the programm...");
+	                variableWhileInitial=0;
+	                conMan.close();
+	                return;
+	            default:
+	                System.out.println("Insert one of the following options:");
+	        }
+		}
 	}
 	
 	
