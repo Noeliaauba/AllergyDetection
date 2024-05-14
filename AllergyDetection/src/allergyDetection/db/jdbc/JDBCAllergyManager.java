@@ -109,6 +109,7 @@ public class JDBCAllergyManager implements AllergyManager {
 		try {
 			String sql = "SELECT * FROM allergy WHERE type LIKE ?";
 			PreparedStatement p = c.prepareStatement(sql);
+			p.setString(1, type_Allergy);
 			ResultSet rs = p.executeQuery();
 			while (rs.next()) {
 				Integer id = rs.getInt("id");
@@ -169,10 +170,11 @@ public class JDBCAllergyManager implements AllergyManager {
 	
 	public void assignedTreatmenttoAllergy(Integer treatmentId, Integer allergyId) {
 		try {
+
 			String template = "INSERT INTO OWNS (treatment_id, allergy_id) VALUES (?,?)";
 			PreparedStatement pstmt = c.prepareStatement(template);
 			pstmt.setInt(1, treatmentId);
-			pstmt.setInt(2,allergyId);
+			pstmt.setInt(2, allergyId);
 			pstmt.executeUpdate();
 			pstmt.close();
 		} catch (SQLException e) {

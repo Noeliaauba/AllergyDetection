@@ -60,10 +60,9 @@ public void modifyTreatment(Treatment t) {
 public List<Treatment> searchTreatmentByType(String typeParameter) {
 	List<Treatment> lista = new ArrayList<Treatment>();
 	try {
-		String sql = "SELECT * FROM treatments WHERE type LIKE ?";
-		PreparedStatement p;
-		p = c.prepareStatement(sql);
-		p.setString(1, "%" + typeParameter + "%");
+		String sql = "SELECT * FROM treatment WHERE type LIKE ?";
+		PreparedStatement p= c.prepareStatement(sql);
+		p.setString(1, typeParameter );
 		ResultSet rs = p.executeQuery();
 		while (rs.next()) {
 			Integer id = rs.getInt("id");
