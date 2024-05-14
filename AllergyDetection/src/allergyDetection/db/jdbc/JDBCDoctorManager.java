@@ -22,10 +22,11 @@ public class JDBCDoctorManager implements DoctorManager {
 	@Override
 	public void addDoctor(Doctor d) {
 		try {
-			String template = "INSERT INTO doctor (name) VALUES (?)";
+			String template = "INSERT INTO doctor (name, surname) VALUES (?, ?)";
 			PreparedStatement pstmt;
 			pstmt = c.prepareStatement(template);
 			pstmt.setString(1, d.getName());
+			pstmt.setString(2, d.getSurname());
 			pstmt.executeUpdate();
 			pstmt.close();
 		} catch (SQLException e) {
@@ -42,7 +43,7 @@ public class JDBCDoctorManager implements DoctorManager {
 			st = c.createStatement();
 			ResultSet rs = st.executeQuery(sql);
 			rs.next();
-			Doctor d = new Doctor (rs.getInt("id"), rs.getString("name"));
+			Doctor d = new Doctor (rs.getInt("id"), rs.getString("name"), rs.getString("surname"));
 			return d;
 		} catch (SQLException e) {
 			System.out.println("Error in the database");

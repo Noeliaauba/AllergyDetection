@@ -77,9 +77,19 @@ public class ConnectionManager {
 			Statement createTables2 = c.createStatement();
 			String create2 = "CREATE TABLE doctor ( "
 					+ " id INTEGER PRIMARY KEY AUTOINCREMENT,"
-					+ " name TEXT NOT NULL)";
+					+ " name TEXT NOT NULL"
+					+ " surname TEXT NOT NULL)";
 			createTables2.executeUpdate(create2);
 			createTables2.close();
+			
+			Statement insertTables2 = c.createStatement();
+			String insert2_1 = "INSERT INTO doctor (name, surname) VALUES ('Manuel', 'Garcia')";
+			insertTables2.executeUpdate(insert2_1);
+			String insert2_2 = "INSERT INTO doctor (name, surname) VALUES ('Juan', 'Urquijo')";
+			insertTables2.executeUpdate(insert2_2);
+			String insert2_3 = "INSERT INTO doctor (name, surname) VALUES ('Claudia', 'Gonzalez')";
+			insertTables2.executeUpdate(insert2_3);
+			insertTables2.close();
 			
 			
 			Statement createTables3 = c.createStatement();
