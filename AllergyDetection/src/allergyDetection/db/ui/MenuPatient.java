@@ -1,20 +1,35 @@
 package allergyDetection.db.ui;
 
 import java.io.BufferedReader;
+
+import allergyDetection.db.jdbc.ConnectionManager;
+import allergyDetection.db.interfaces.*;
 import java.io.IOException;
 import java.io.InputStreamReader;
+
+import java.util.ArrayList;
 import java.util.List;
 
-import allergyDetection.db.jdbc.JDBCPrescriptionManager;
 import allergyDetection.db.pojos.Patient;
 import allergyDetection.db.pojos.Prescription;
 
 public class MenuPatient {
 	
+	
 	private static BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
+
+	private static PrescriptionManager prescriptionManager;
+	private static PatientManager patientManager;
+	private static ConnectionManager conMan;
 	
 	
 	public static void  menuPatient() throws NumberFormatException, IOException{
+		conMan = new ConnectionManager();
+		
+		
+		prescriptionManager =conMan.getPrescription();
+		patientManager = conMan.getPatient();
+		
 		System.out.println("Welcome patient! Select the option: ");
 		int variableWhilePatient=1;
 		while(variableWhilePatient!=0) {
@@ -25,18 +40,17 @@ public class MenuPatient {
 		switch (choicePatient) {
 		
 		case 1: 
-			//checkMedicalScore();
-			//TODO the method. This method can be done here 
+			checkMedicalScore(); 
 			break;
 		
 		case 2: 
-			//showPrescription();
-			//TODO the method. This method can be done here 
+			showPrescription();
+			
 			break;
 		
 		case 0:
 			variableWhilePatient=0;
-			//conMan.close();	
+			conMan.close();	
 			break;
 		
 		default:
@@ -47,22 +61,43 @@ public class MenuPatient {
 
 	}
 	
-	//Patients methods.
+	
+	public static void checkMedicalScore()throws IOException, NumberFormatException {
+		
+		Patient patient =new Patient();
+		System.out.println("Insert patient id:");
+		int id =Integer.parseInt(r.readLine());
+		System.out.print("Patient with id:" + patient.getId());
+		System.out.println("Medical Score:"+ patient.toString());
+		
+		
+	}
 
-/*public static void showPrescription() throws IOException, NumberFormatException{
+public static void showPrescription() throws IOException, NumberFormatException{
 		try {
-			System.out.println("Here is your prescription:\n");
-			JDBCPrescriptionManager.getPrescriptionsById(id);
-            // Fetch prescriptions by patient ID
-            List<Prescription> prescriptions = getPrescriptionsById(id); 
+			System.out.println("You will see a prescription. ");
+			
+			System.out.println("Insert patient id:");
+			int id=Integer.parseInt(r.readLine());
+			
+			Prescription prescription = new Prescription();
+			prescription=prescriptionManager.getPrescriptionById(id);
+			
+			Patient patient = new Patient();
+			patient= patientManager.getPatientByID(id);
+			
+            List<Prescription> prescriptions = new ArrayList<Prescription>();
 
-            if (prescriptions.isEmpty()) {
-                System.out.println("No prescriptions found for the given ID.");
+            if (prescription.equals(patient)) {
+            	 System.out.println("Prescriptions for patient with ID :" + patient.getId());
+            	 
+                 for (Prescription p : prescriptions) {
+                     System.out.println(prescription);
+                 }
+                
             } else {
-                System.out.println("Prescriptions for patient with ID " + Patient.getId() + ":");
-                for (Prescription prescription : prescriptions) {
-                    System.out.println(prescription);
-                }
+            	System.out.println("No prescriptions found for the given ID.");
+               
             }
         } catch (IOException e) {
             System.out.println("Error reading input.");
@@ -70,7 +105,6 @@ public class MenuPatient {
             System.out.println("Invalid ID format. Please enter a valid integer ID.");
         }
     }
-*/
 
 
 
