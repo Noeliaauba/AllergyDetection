@@ -39,6 +39,7 @@ public class Menu {
 		
 		
 		MenuDoctor.menuDoctor();
+		MenuPatient.menuPatient();
 		
 		// ALWAYS JDBC first
 		conMan = new ConnectionManager();
