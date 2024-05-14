@@ -16,6 +16,10 @@ import allergyDetection.db.jdbc.ConnectionManager;
 import allergyDetection.db.jdbc.JDBCPatientManager;
 import allergyDetection.db.jdbc.*;
 import allergyDetection.db.pojos.*;
+import allergyDetection.db.interfaces.UserManager;
+import allergyDetection.db.jpa.JPAUserManager;
+import allergyDetection.db.pojos.User;
+import allergyDetection.db.pojos.Role;
 
 
 
@@ -30,6 +34,7 @@ public class Menu {
 	private static PrescriptionManager prescriptionManag;
 	private static SymptomManager symptomManag;
 	private static TreatmentManager treatmentManag;
+	private static UserManager userMan;
 	 
 	
 	
@@ -49,18 +54,15 @@ public class Menu {
 		symptomManag= conMan.getSymptom();
 		treatmentManag= conMan.getTreatment();
 		prescriptionManag= conMan.getPrescription();
+		userMan = new JPAUserManager();
 	
-	
-	
-	//------------------------------------------------------------------------
-		// JAP later
-			
+	int variableWhileInitial=1;
+	while (variableWhileInitial!=0) {	
 	System.out.println("Chose your desired option: ");
 	System.out.println("1) Log in. ");
 	System.out.println("2) Sign up.");
 	System.out.println("0) End the program.");
-		int variableWhileInitial=1;
-		while (variableWhileInitial!=0) {
+
 	        int option = Integer.parseInt(r.readLine());
 	        
 	        switch (option) {
@@ -82,13 +84,46 @@ public class Menu {
 	}	
 		
 	private static void menuLogin() throws NumberFormatException, IOException {
-		System.out.println("Introduce your username : ");
-		System.out.println("Introduce your password : ");
+		System.out.print("Introduce your username:");
+		String username = r.readLine();
+		System.out.print("Introduce your password:");
+		String password = r.readLine();
+		User u = userMan.login(username, password);
+		// REMOVE LATER just testing
+		if (u == null)
+			System.out.println("Wrong password");
+		else
+			System.out.println(u);
 		
 	}
 	
 	private static void menuSignUp() throws NumberFormatException, IOException {
-		System.out.println("Chose your desired option: ");
+		System.out.print("Choose a username:");
+		String username = r.readLine();
+		System.out.print("Choose a password:");
+		String password = r.readLine();
+		System.out.println("Are you a patient or a doctor? ");
+		List<Role> roles = userMan.getAllRoles();
+		System.out.println(roles);
+		String roleName = r.readLine().toLowerCase();
+		Role r = userMan.getRole(roleName);
+		User u = new User(username, password, r);
+		userMan.register(u);
+	}
+	
+	
+	
+
+
+	
+	//............................................................
+
+
+	
+	}
+/*	
+	//parte de carmen del supuesto sign up
+	 * System.out.println("Chose your desired option: ");
 		System.out.println("1) Menu Doctor. ");
 		System.out.println("2) Menu Patient. ");
 		System.out.println("0) End the program. ");
@@ -111,22 +146,9 @@ public class Menu {
 	                System.out.println("Insert one of the following options:");
 	        }
 		}
-	}
-	
-	
-	
-
-
-	
-	//............................................................
-
-
-	
-	}
-/*	
-	
+	 */
 	//method of lists in case we need.
-	private static void listPrescriptions() throws IOException{
+	/*private static void listPrescriptions() throws IOException{
 		System.out.println("Enter the prescription id");
 		Integer id = Integer.parseInt(r.readLine());
 		System.out.println("These are the available prescriptions, choose one by typing their id:");
