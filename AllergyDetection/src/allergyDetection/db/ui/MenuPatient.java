@@ -17,8 +17,6 @@ public class MenuPatient {
 	
 	
 	private static BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
-	
-	
 
 	private static PrescriptionManager prescriptionManager;
 	private static PatientManager patientManager;
