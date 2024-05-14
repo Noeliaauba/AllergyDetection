@@ -11,6 +11,7 @@ import java.util.List;
 
 import allergyDetection.db.interfaces.AllergyManager;
 import allergyDetection.db.interfaces.PatientManager;
+import allergyDetection.db.interfaces.PrescriptionManager;
 import allergyDetection.db.interfaces.SymptomManager;
 import allergyDetection.db.interfaces.TreatmentManager;
 import allergyDetection.db.*;
@@ -27,6 +28,7 @@ public class MenuDoctor {
 	private static SymptomManager symptomManag;
 	private static AllergyManager allergyManag;
 	private static TreatmentManager treatmentManag;
+	private static PrescriptionManager prescriptionManag;
 	private static ConnectionManager conMan;
 	
 	public static void menuDoctor() throws NumberFormatException, IOException {
@@ -35,6 +37,7 @@ public class MenuDoctor {
 		symptomManag= conMan.getSymptom();
 		allergyManag= conMan.getAllergy();
 		treatmentManag= conMan.getTreatment();
+		prescriptionManag= conMan.getPrescription();
 		
 		int variableWhileDoctor=1;
 		System.out.println("Welcome Doctor! We are delighted with your great job!");
@@ -78,7 +81,7 @@ public class MenuDoctor {
 			break;
 			
 		case 7: 
-			//elaborateDiagnose();
+			addPrescription();
 			break;
 		
 		case 0:
@@ -292,9 +295,6 @@ private static void diagnoseTreatment() throws NumberFormatException, IOExceptio
 }
 
 
-private static void controlPrescrption() throws NumberFormatException, IOException {
-	
-}
 
 private static void addPrescription() throws NumberFormatException, IOException {
 	System.out.println("Please, select the PATIENT to elaborate the prescription:");
@@ -304,15 +304,11 @@ private static void addPrescription() throws NumberFormatException, IOException 
 		System.out.println(p);
 	System.out.println("PATIENT ID: ");
 	Integer patId = Integer.parseInt(r.readLine());
-	System.out.println("PATIENT SURNAME: ");
-	String surname = r.readLine();
-	System.out.println("DATE OF BIRTH OF THE PATIENT(DD-MM-YYYY format): ");
-	LocalDate localDate = LocalDate.parse(r.readLine(), formatter);
-	Date date = Date.valueOf(localDate);
-	System.out.println("PATIENT GENDER: ");
-	String gender = r.readLine();
-	Patient patient = new Patient(name,surname,date,gender);		
-	patientManag.addPatient(patient);
+	Patient patient= patientManag.getPatientByID(patId);
+	Doctor doctor= new Doctor(4, "Sonia", "Ramos");
+	Prescription ps = new Prescription("NO",patient,doctor);		
+	prescriptionManag.addPrescription(ps);
 }	
 }
 
+}
