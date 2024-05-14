@@ -11,6 +11,7 @@ public class Doctor implements Serializable{
 	 private static final long serialVersionUID = 8046264880783423216L;
 	 private Integer id;
 	 private String name;
+	 private String surname;
 	 private List <Prescription> prescriptions ;
 	 
 	 
@@ -19,13 +20,15 @@ public class Doctor implements Serializable{
 	
 	 }
 	 
-	 public Doctor (String _name) {
+	 public Doctor (String _name, String _surname) {
 			this.name = _name;
+			this.surname = _surname;
 			}
 	 
-	 public Doctor (Integer _id, String _name) {
+	 public Doctor (Integer _id, String _name, String _surname) {
 		    this.id= _id;
 			this.name = _name;
+			this.surname = _surname;
 			}
 	
 	 @Override
@@ -61,9 +64,15 @@ public class Doctor implements Serializable{
 		public void setName(String _name) {
 			this.name = _name;
 		}
+		public String getSurname() {
+			return surname;
+		}
 		
+		public void setSurname(String _surname) {
+			this.surname = _surname;
+		}
 		public String toString() {
-			return "Doctor [id=" + id + ", name=" + name + "]";
+			return "Doctor [id=" + id + ", name=" + name + ", surname=" + surname + "]";
 		}
 
 		public List <Prescription> getPrescriptions() {
