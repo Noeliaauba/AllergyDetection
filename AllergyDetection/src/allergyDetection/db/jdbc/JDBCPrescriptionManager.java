@@ -3,8 +3,7 @@ import allergyDetection.db.interfaces.PrescriptionManager;
 import allergyDetection.db.pojos.Doctor;
 import allergyDetection.db.pojos.Patient;
 import allergyDetection.db.pojos.Prescription;
-
-
+import allergyDetection.db.pojos.Treatment;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -24,11 +23,12 @@ public class JDBCPrescriptionManager implements PrescriptionManager {
 	@Override
 	public void addPrescription(Prescription k) {
 		try {
-			String template = "INSERT INTO prescription (isUsed, given_to, given_by) VALUES (?, ?, ?)";
+			String template = "INSERT INTO prescription (isUsed, given_to, given_by, treatment_req) VALUES (?, ?, ?, ?)";
 			PreparedStatement pstmt= c.prepareStatement(template);
 			pstmt.setString(1, k.getIsUsed());
-			pstmt.setInt(2, k.getGiven_To().getId());		//because Patient has an Id that is a number
-			pstmt.setInt(3, k.getGiven_by().getId());		//because Doctor has an Id that is a number
+			pstmt.setInt(2, k.getGiven_To().getId());		
+			pstmt.setInt(3, k.getGiven_by().getId());
+			pstmt.setInt(4, k.getTreatment().getId());
 			pstmt.executeUpdate();
 			pstmt.close();
 		} catch (SQLException e) {
@@ -40,14 +40,13 @@ public class JDBCPrescriptionManager implements PrescriptionManager {
 	@Override   
 	public void modifyPrescription(Prescription k) {
 		try {
-	        String query = "UPDATE prescription  SET  isUsed = ?, given_to = ?, given_by = ?,  WHERE id = ?";
+	        String query = "UPDATE prescription  SET  isUsed = ?, given_to = ?, given_by = ?, treatment_req = ?  WHERE id = ?";
 	        PreparedStatement pstmt = c.prepareStatement(query);
-	       	//because Treatment has an Id that is a number
 			pstmt.setString(1, k.getIsUsed());
-			pstmt.setInt(2, k.getGiven_To().getId());		//because Patient has an Id that is a number
-			pstmt.setInt(3, k.getGiven_by().getId());		//because Doctor has an Id that is a number
-			pstmt.setInt(4, k.getId());
-
+			pstmt.setInt(2, k.getGiven_To().getId());		
+			pstmt.setInt(3, k.getGiven_by().getId());	
+			pstmt.setInt(4, k.getTreatment().getId());
+			pstmt.setInt(5, k.getId());
 	        pstmt.executeUpdate();
 	        pstmt.close();
 	        System.out.println("Prescription with ID: " + k.getId() + " updated successfully.");
@@ -86,9 +85,11 @@ public class JDBCPrescriptionManager implements PrescriptionManager {
 			rs.next();
 			int patientid = rs.getInt("givenTo");
 			int doctorid= rs.getInt("given_by");
+			int treatmentid= rs.getInt("treatment_req");
 			Patient p = conMan.getPatient().getPatientByID(patientid);
 			Doctor d= conMan.getDoctor().getDoctorByID(doctorid);
-			Prescription pr = new Prescription (rs.getInt("id"), rs.getString("isUsed"), p, d);
+			Treatment t= conMan.getTreatment().getTreatmentById(treatmentid);
+			Prescription pr = new Prescription (rs.getInt("id"), rs.getString("isUsed"), p, d, t);
 			return pr;
 		} catch (SQLException e) {
 			System.out.println("Error in the database");
@@ -101,7 +102,7 @@ public class JDBCPrescriptionManager implements PrescriptionManager {
 	public List <Prescription> searchPrescriptionByPatient(Integer patientid) {
 		List<Prescription> prescriptions = new ArrayList<Prescription>();
 	    try {
-	        String query = "SELECT prescription.id, prescription.isUsed,prescription.given_to, prescription.given_by FROM prescription INNER JOIN patient ON prescription.given_to=patient.id WHERE patient.id= ?";
+	        String query = "SELECT prescription.id, prescription.isUsed ,prescription.given_to, prescription.given_by, prescription.treatment_req FROM prescription INNER JOIN patient ON prescription.given_to=patient.id WHERE patient.id= ?";
 	        PreparedStatement pstmt = c.prepareStatement(query);
 	        pstmt.setInt(1, patientid);	
 	        ResultSet rs = pstmt.executeQuery();
@@ -112,7 +113,9 @@ public class JDBCPrescriptionManager implements PrescriptionManager {
 	            patient.setId(rs.getInt("patient_id")); 
 	            Doctor doctor = new Doctor(); 
 	            doctor.setId(rs.getInt("doctor_id")); 
-	            Prescription p = new Prescription(prescriptionId, isUsed, patient, doctor);
+	            Treatment treatment= new Treatment ();
+	            treatment.setId(rs.getInt("treatment_req"));
+	            Prescription p = new Prescription(prescriptionId, isUsed, patient, doctor, treatment);
 				prescriptions.add(p);
 	        }
 	        rs.close();
@@ -128,7 +131,7 @@ public class JDBCPrescriptionManager implements PrescriptionManager {
 	public List <Prescription> searchPrescriptionByDoctor(Integer doctorid) {
 		List<Prescription> prescriptions = new ArrayList<Prescription>();
 	    try {
-	        String query = "SELECT prescription.id, prescription.isUsed,prescription.given_to, prescription.given_by FROM prescription INNER JOIN doctor ON prescription.given_to=doctor.id WHERE doctor.id= ?";
+	        String query = "SELECT prescription.id, prescription.isUsed,prescription.given_to, prescription.given_by, prescription.treatment_req FROM prescription INNER JOIN doctor ON prescription.given_to=doctor.id WHERE doctor.id= ?";
 	        PreparedStatement pstmt = c.prepareStatement(query);
 	        pstmt.setInt(1, doctorid);	
 	        ResultSet rs = pstmt.executeQuery();
@@ -139,7 +142,9 @@ public class JDBCPrescriptionManager implements PrescriptionManager {
 	            patient.setId(rs.getInt("patient_id")); 
 	            Doctor doctor = new Doctor(); 
 	            doctor.setId(rs.getInt("doctor_id")); 
-	            Prescription p = new Prescription(prescriptionId, isUsed, patient, doctor);
+	            Treatment treatment= new Treatment ();
+	            treatment.setId(rs.getInt("treatment_req"));
+	            Prescription p = new Prescription(prescriptionId, isUsed, patient, doctor, treatment);
 				prescriptions.add(p);
 	        }
 	        rs.close();

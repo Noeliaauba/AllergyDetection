@@ -43,11 +43,10 @@ public class JDBCTreatmentManager implements TreatmentManager {
 @Override
 public void modifyTreatment(Treatment t) {
 	 try {
-	        String query = "UPDATE treatments SET name = ?, type = ? , prescription_id = ? WHERE id = ?";
+	        String query = "UPDATE treatments SET name = ?, type = ?  WHERE id = ?";
 	        PreparedStatement pstmt = c.prepareStatement(query);
 	        pstmt.setString(1, t.getName());
 	        pstmt.setString(2, t.getTreatmentType());
-	        pstmt.setInt(3, t.getPrescription().getId());	
 	        pstmt.close();
 	        System.out.println("Treatment with ID " + t.getId() + " updated successfully.");
 	    } catch (SQLException e) {
@@ -80,36 +79,7 @@ public List<Treatment> searchTreatmentByType(String typeParameter) {
 	return lista;
 }
 
-
-@Override
-public List<Treatment> searchTreatmentByPrescription(Integer prescriptionID){
-	List<Treatment> treatments = new ArrayList<Treatment>();
 	
-	try {
-		String sql = "SELECT * FROM treatment WHERE prescription_id = " + prescriptionID;
-	    PreparedStatement p = c.prepareStatement(sql);
-		ResultSet rs = p.executeQuery();
-		while (rs.next()) {
-			Integer id = rs.getInt("id");
-			String name = rs.getString("name");
-			String type= rs.getString("type");
-			Prescription pres= conMan.getPrescription().getPrescriptionById(prescriptionID);
-			Treatment trs = new Treatment(id, name, type, pres);
-			treatments.add(trs);
-		
-		}
-		rs.close();
-		p.close();
-	} catch (SQLException e) {
-		System.out.println("Error in the database");
-		e.printStackTrace();
-	}
-	return treatments;
-}
-
-
-
-		
 @Override
 public Treatment getTreatmentById (Integer id) {
     try {
@@ -117,9 +87,7 @@ public Treatment getTreatmentById (Integer id) {
 		Statement st = c.createStatement();
 		ResultSet rs = st.executeQuery(sql);
 		rs.next();
-		int prescriptionid = rs.getInt("prescription_id ");
-		Prescription p = conMan.getPrescription().getPrescriptionById(prescriptionid);
-		Treatment t = new Treatment (rs.getInt("id"), rs.getString("name"),rs.getString("type"),p);
+		Treatment t = new Treatment (rs.getInt("id"), rs.getString("name"),rs.getString("type"));
 		return t;
         
     } catch (SQLException e) {
@@ -130,7 +98,29 @@ public Treatment getTreatmentById (Integer id) {
 }
 
 
-
+public List<Treatment> searchTreatmentByAllergy(Integer allergyID) {
+	List<Treatment> tratamientos = new ArrayList<Treatment>();
+	try {
+		String sql = "SELECT treatment.id, treatment.name, treatment.treatment_type, FROM treatment INNER JOIN OWNS ON treatment.id=OWNS.treatment_id WHERE OWNS.allergy_id= ?";
+		PreparedStatement p= c.prepareStatement(sql);
+		p.setInt(1,allergyID);
+		ResultSet rs = p.executeQuery();
+		while (rs.next()) {
+			Integer id = rs.getInt("id");
+			String name = rs.getString("name");
+			String type = rs.getString("type");
+			Treatment t = new Treatment(id, name, type);
+			tratamientos.add(t);
+		}
+		rs.close();
+		p.close();
+	} catch (SQLException e) {
+		System.out.println("Error in the database");
+		e.printStackTrace();
+	}
+	return tratamientos;
+	
+}
 	
 	
 }

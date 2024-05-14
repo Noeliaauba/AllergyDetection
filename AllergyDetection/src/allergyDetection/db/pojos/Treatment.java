@@ -11,37 +11,24 @@ public class Treatment implements Serializable{
 	private Integer id;
 	private String treatment_type;
 	private String name;
-	private Prescription prescription;
 	private List<Allergy> allergies;
-	
+	private List<Prescription> prescriptions;
 	
 	public Treatment () {
 		this.allergies = new ArrayList<Allergy>();
-	
+	    this.prescriptions= new ArrayList<Prescription>();
 	}
 	public Treatment (String _name, String _treatmentType) {
 		this.name=_name;
 		this.treatment_type=_treatmentType;
+	}
 
-	}
-	public Treatment (String _name, String _treatmentType,Prescription _prescriptionreq) {
-		this.name=_name;
-		this.treatment_type=_treatmentType;
-		this.prescription=_prescriptionreq;
-	}
-	public Treatment (Integer _id, String _name, String _treatmentType,Prescription _prescriptionreq) {
-		this.id=_id;
-		this.name=_name;
-		this.treatment_type=_treatmentType;
-		this.prescription=_prescriptionreq;
-	}
-	
 	public Treatment (Integer _id, String _name, String _treatmentType) {
 		this.id=_id;
 		this.name=_name;
-		this.treatment_type= _treatmentType;
-		
+		this.treatment_type=_treatmentType;
 	}
+	
 	
 	
 	
@@ -86,7 +73,7 @@ public class Treatment implements Serializable{
 	 
 	
 	 public String toString() {
-	    	return "Treatment [id=" + id + ", name= "+name +", treatment type=" + treatment_type + "]";
+	    	return "Treatment [id=" + id + ", name= "+name + "]";
 	    }
 
 	public List<Allergy> getAllergies() {
@@ -97,12 +84,12 @@ public class Treatment implements Serializable{
 		this.allergies = allergies;
 	}
 
-	public Prescription getPrescription() {
-		return prescription;
+	public List<Prescription> getPrescription() {
+		return prescriptions;
 	}
 
-	public void setPrescription(Prescription prescription) {
-		this.prescription = prescription;
+	public void setPrescription(List<Prescription> prescriptions) {
+		this.prescriptions = prescriptions;
 	}
 	    
 

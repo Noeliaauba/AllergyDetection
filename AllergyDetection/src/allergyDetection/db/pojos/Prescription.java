@@ -13,32 +13,29 @@ public class Prescription implements Serializable {
 	private String isUsed;
 	private Patient given_to;
 	private Doctor given_by;
-	
-	private List<Treatment> treatments;
-	
+	private Treatment treatment;
 	private Doctor doctor;
-	
 	private Patient patient;
 	
-	public Prescription() {
-		this.treatments = new ArrayList<Treatment>();
-	}
 	
-	public Prescription (Integer _id, String _isUsed, Patient _given_to, Doctor _given_by) {
+	public Prescription (Integer _id, String _isUsed, Patient _given_to, Doctor _given_by, Treatment _treatment) {
 		this.id= _id;
 		this.isUsed=_isUsed;
 		this.given_to = _given_to;
 		this.given_by=_given_by;
+		this.treatment= _treatment;
 		}
 	
-	public Prescription (String _isUsed, Patient _given_to, Doctor _given_by) {
+	public Prescription (String _isUsed, Patient _given_to, Doctor _given_by, Treatment _treatment) {
 		this.isUsed=_isUsed;
 		this.given_to = _given_to;
 		this.given_by=_given_by;
+		this.treatment= _treatment;
 		}
-	public Prescription (Patient _given_to, Doctor _given_by) {
+	public Prescription (Patient _given_to, Doctor _given_by, Treatment _treatment) {
 		this.given_to=_given_to;
 		this.given_by=_given_by;
+		this.treatment= _treatment;
 	}
 	
 	 public Integer getId() {
@@ -75,11 +72,17 @@ public class Prescription implements Serializable {
 	    public void setGivenBy(Doctor _given_by) {
 	        this.given_by = _given_by;
 	    }
+	    public Treatment getTreatment() {
+	        return treatment;
+	    }
 
+	    public void setTreatment(Treatment _treatment) {
+	        this.treatment = _treatment;
+	    }
 	    
 	    @Override
 	    public String toString() {
-	    	return "Prescription [id=" + id + ", ¿is used?=" + isUsed +", given to=" + given_to +", given by="+given_by+ "]";
+	    	return "Prescription [id=" + id + ", ¿Is Used?=" + isUsed +", given to=" + given_to +", given by="+ given_by+",treatment="+ treatment + "]";
 	    }
 
 		@Override
@@ -115,12 +118,6 @@ public class Prescription implements Serializable {
 			this.doctor = doctor;
 		}
 
-		public List<Treatment> getTreatments() {
-			return treatments;
-		}
-
-		public void setTreatments(List<Treatment> treatments) {
-			this.treatments = treatments;
-		}
+	
 
 }

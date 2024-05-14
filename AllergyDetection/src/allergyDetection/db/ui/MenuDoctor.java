@@ -302,13 +302,36 @@ private static void addPrescription() throws NumberFormatException, IOException 
 	patients= patientManag.searchPatient("");
 	for (Patient p : patients) {
 		System.out.println(p);
+	}
 	System.out.println("PATIENT ID: ");
 	Integer patId = Integer.parseInt(r.readLine());
+	List<Allergy> allergies = new ArrayList<Allergy>();
+	allergies= allergyManag.searchAllergybyPatient(patId);
+	for (Allergy a : allergies) {
+		System.out.println(a);
+	}
+	System.out.println("Select the ALLERGY to treat:");
+	System.out.println("ALLERGY ID:");
+	Integer allergyId = Integer.parseInt(r.readLine());
+	List<Treatment> treatments = new ArrayList<Treatment>();
+	treatments=treatmentManag.searchTreatmentByAllergy(allergyId);
+	for (Treatment t : treatments) {
+		System.out.println(t);
+	}
+	System.out.println("Select the TREATMENT to ADD in the prescription:");
+	System.out.println("TREATMENT ID:");
+	Integer treatmentId = Integer.parseInt(r.readLine());
+	Treatment tratamiento= treatmentManag.getTreatmentById(treatmentId);
 	Patient patient= patientManag.getPatientByID(patId);
 	Doctor doctor= new Doctor(4, "Sonia", "Ramos");
-	Prescription ps = new Prescription("NO",patient,doctor);		
+	Prescription ps = new Prescription("NO",patient,doctor,tratamiento);		
 	prescriptionManag.addPrescription(ps);
-}	
 }
 
+
+
+
+
 }
+
+

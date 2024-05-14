@@ -12,12 +12,11 @@ public class Symptom implements Serializable{
 	private String symptom_name;
 	private String symptom_type;
 	private List<Patient> patients;
-	private List<Allergy> allergies;
+	
 	
 	
 	public Symptom () {
 		this.patients = new ArrayList<Patient>();
-		this.allergies = new ArrayList<Allergy>();
 
 	}
 	
@@ -84,12 +83,5 @@ public class Symptom implements Serializable{
 		this.patients = patients;
 	}
 
-	public List<Allergy> getAllergies() {
-		return allergies;
-	}
-
-	public void setAllergies(List<Allergy> allergies) {
-		this.allergies = allergies;
-	}
 	    
 }

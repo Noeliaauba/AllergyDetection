@@ -77,7 +77,7 @@ public class ConnectionManager {
 			Statement createTables2 = c.createStatement();
 			String create2 = "CREATE TABLE doctor ( "
 					+ " id INTEGER PRIMARY KEY AUTOINCREMENT,"
-					+ " name TEXT NOT NULL"
+					+ " name TEXT NOT NULL,"
 					+ " surname TEXT NOT NULL)";
 			createTables2.executeUpdate(create2);
 			createTables2.close();
@@ -169,8 +169,10 @@ public class ConnectionManager {
 					+ " isUsed TEXT,"
 					+ " given_to INTEGER,"
 					+ " given_by INTEGER,"
+					+ " treatment_req INTEGER"
 					+ " FOREIGN KEY (given_to) REFERENCES patient(id),"
-					+ " FOREIGN KEY (given_by) REFERENCES doctor(id))";
+					+ " FOREIGN KEY (given_by) REFERENCES doctor(id)),"
+					+ " FOREIGN KEY (treatment_req) REFERENCES treatment (id))";
 			createTables5.executeUpdate(create5);
 			createTables5.close();
 			
@@ -178,8 +180,7 @@ public class ConnectionManager {
 			String create6 = "CREATE TABLE treatment ( "
 					+ " id INTEGER PRIMARY KEY AUTOINCREMENT,"
 					+ " name TEXT NOT NULL,"
-					+ " type TEXT NOT NULL,"
-					+ " prescription_id INTEGER REFERENCES prescription(id))";		
+					+ " type TEXT NOT NULL)";		
 			createTables6.executeUpdate(create6);
 			createTables6.close();
 			
@@ -210,22 +211,14 @@ public class ConnectionManager {
 			createTables7.executeUpdate(create7);
 			createTables7.close();
 			
+			
 			Statement createTables8 = c.createStatement();
-			String create8 = "CREATE TABLE PRODUCES ( "
-					+ " symptom_id INTEGER REFERENCES symptom(id),"
-					+ " allergy_id INTEGER REFERENCES allergy(id),"
-					+ " PRIMARY KEY (symptom_id, allergy_id))";
-			createTables8.executeUpdate(create8);
-			createTables8.close();
-			
-			
-			Statement createTables9 = c.createStatement();
-			String create9 = "CREATE TABLE SUFFERS ( "
+			String create8 = "CREATE TABLE SUFFERS ( "
 					+ " patient_id INTEGER REFERENCES patient(id),"
 					+ " allergy_id INTEGER REFERENCES allergy(id),"
 					+ " PRIMARY KEY (patient_id, allergy_id))";
-			createTables9.executeUpdate(create9);
-			createTables9.close();
+			createTables8.executeUpdate(create8);
+			createTables8.close();
 			
 			
 			Statement createTables10 = c.createStatement();
@@ -272,12 +265,6 @@ public class ConnectionManager {
 	public TreatmentManager getTreatment() {
 		return treatmentManag;
 	}
-
-	public Object getPatientManager() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	
 	
 	

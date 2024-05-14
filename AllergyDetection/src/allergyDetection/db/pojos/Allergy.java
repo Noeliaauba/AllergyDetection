@@ -16,12 +16,10 @@ public class Allergy implements Serializable {
 	private String allergyType;	
 	private List<Patient> patients;
 	private List <Treatment> treatments;
-	private List<Symptom> symptoms;
 
 	public Allergy() {
 		this.patients = new ArrayList<Patient>();
 		this.treatments= new ArrayList<Treatment>();
-		this.symptoms= new ArrayList<Symptom>();
 	}
 	
 	public Allergy(String _allergyName, String _allergyType) {
@@ -92,15 +90,6 @@ public class Allergy implements Serializable {
 		this.patients = patients;
 	}
 
-
-	public List<Symptom> getSymptoms() {
-		return symptoms;
-	}
-
-
-	public void setSymptoms(List<Symptom> symptoms) {
-		this.symptoms = symptoms;
-	}
 
 
 	public List <Treatment> getTreatments() {
