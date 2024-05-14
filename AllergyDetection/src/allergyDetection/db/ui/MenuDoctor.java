@@ -12,6 +12,7 @@ import java.util.List;
 import allergyDetection.db.interfaces.AllergyManager;
 import allergyDetection.db.interfaces.PatientManager;
 import allergyDetection.db.interfaces.SymptomManager;
+import allergyDetection.db.interfaces.TreatmentManager;
 import allergyDetection.db.*;
 import allergyDetection.db.jdbc.*;
 import allergyDetection.db.pojos.*;
@@ -25,6 +26,7 @@ public class MenuDoctor {
 	private static PatientManager patientManag;
 	private static SymptomManager symptomManag;
 	private static AllergyManager allergyManag;
+	private static TreatmentManager treatmentManag;
 	private static ConnectionManager conMan;
 	
 	public static void menuDoctor() throws NumberFormatException, IOException {
@@ -32,6 +34,7 @@ public class MenuDoctor {
 		patientManag = conMan.getPatient();
 		symptomManag= conMan.getSymptom();
 		allergyManag= conMan.getAllergy();
+		treatmentManag= conMan.getTreatment();
 		
 		int variableWhileDoctor=1;
 		System.out.println("Welcome Doctor! We are delighted with your great job!");
@@ -44,7 +47,7 @@ public class MenuDoctor {
 		System.out.println("4) ADD SYMPTOMS TO PATIENT");
 		System.out.println("5) ADD ALLERGY TO PATIENT");
 		System.out.println("6) See the patient medical score");	
-		System.out.println("6) Write a prescription for a patient. Remember that the patient must be registered first.");
+		System.out.println("7) DIAGNOSE A TREATMENT");
 		System.out.println("7) Modify the prescription of a patient.Remember that the patient and the prescription must be created first.");
 		System.out.println("0) Select this option to exit.");
 	
@@ -74,12 +77,12 @@ public class MenuDoctor {
 			
 		case 6: 
 			
-			elaborateDiagnose();
+			//elaborateDiagnose();
 
 			break;
 			
 		case 7: 
-			medicalScore();
+			diagnoseTreatment();
 
 			break;
 		
@@ -256,7 +259,7 @@ private static void addAllergy() throws NumberFormatException, IOException {
 	Allergy s = new Allergy(name,type);		
 	allergyManag.addAllergy(s);
 }	
-//ACABAR ESTO
+/*ACABAR ESTO
 public void assignedSymptomtoAllergy(Integer symptomId, Integer allergyId);
 private static void elaborateDiagnose() throws NumberFormatException, IOException {
 	List<Patient> patients = new ArrayList<Patient>();
@@ -270,20 +273,38 @@ private static void elaborateDiagnose() throws NumberFormatException, IOExceptio
     System.out.println("Introduce the PATIENT ID to select ");
 	Integer Id = Integer.parseInt(r.readLine());
 }
+*/
 
-
-private static void medicalScore() throws NumberFormatException, IOException {
+private static void diagnoseTreatment() throws NumberFormatException, IOException {
 	List<Patient> patients = new ArrayList<Patient>();
-	System.out.println("Introduce the name of the patient to see the MEDICAL SCORE:");
+	System.out.println("Introduce the name of the patient you want to treat:");
 	String Name = r.readLine();
 	patients= patientManag.searchPatient(Name);
 	for (Patient p : patients) {
 		System.out.println(p);
 	}
 	
-    System.out.println("Introduce the PATIENT ID to select ");
-	Integer Id = Integer.parseInt(r.readLine());
-	//tenemos el id del paciente queremos visulaizar has y suffers
+    System.out.println("Introduce the PATIENT ID TO TREAT");
+	Integer patientId = Integer.parseInt(r.readLine());
+	List<Allergy> allergies = new ArrayList<Allergy>();
+	System.out.println("Here are the allergies assigned to the patient");
+	allergies=allergyManag.searchAllergybyPatient(patientId);
+	for (Allergy a : allergies) {
+		System.out.println(a);
+	}
+	System.out.println("Introduce the ALLERGY ID you select to TREAT");
+	Integer allergyId = Integer.parseInt(r.readLine());
+	List<Treatment> treats = new ArrayList<Treatment>();
+	//System.out.println("Introduce the type of treatments you want to filter: (Antihistamines), (Corticosteroids), (Decongestant),(Bronchodilators), (Vaccine)");
+	//String types = r.readLine();
+	treats= treatmentManag.searchTreatmentByType("");
+	System.out.println("Here are the available treatments:");
+	for (Treatment t : treats) {
+		System.out.println(t);
+	}
+	System.out.println("Introduce the TREATMENT ID you think is appropiate for the allergy ");
+	Integer treatmentId = Integer.parseInt(r.readLine());
+    allergyManag.assignedTreatmenttoAllergy(treatmentId, allergyId);
 }
 
 
