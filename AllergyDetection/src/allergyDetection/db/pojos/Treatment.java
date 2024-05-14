@@ -39,6 +39,8 @@ public class Treatment implements Serializable{
 	public Treatment (Integer _id, String _name, String _treatmentType) {
 		this.id=_id;
 		this.name=_name;
+		this.treatment_type= _treatmentType;
+		
 	}
 	
 	
@@ -84,7 +86,7 @@ public class Treatment implements Serializable{
 	 
 	
 	 public String toString() {
-	    	return "Treatment [id=" + id + ", treatment type=" + treatment_type + "]";
+	    	return "Treatment [id=" + id + ", name= "+name +", treatment type=" + treatment_type + "]";
 	    }
 
 	public List<Allergy> getAllergies() {

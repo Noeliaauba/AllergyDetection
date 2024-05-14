@@ -73,7 +73,6 @@ public class ConnectionManager {
 			createTables1.close();
 			
 			
-			
 			Statement createTables2 = c.createStatement();
 			String create2 = "CREATE TABLE doctor ( "
 					+ " id INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -221,7 +220,7 @@ public class ConnectionManager {
 			Statement createTables10 = c.createStatement();
 			String create10 = "CREATE TABLE OWNS ( "
 					+ " allergy_id INTEGER REFERENCES allergy(id),"
-					+ " treatment_id INTEGER REFERENCES allergy(name),"
+					+ " treatment_id INTEGER REFERENCES treatment(id),"
 					+ " PRIMARY KEY (treatment_id,allergy_id))";
 			createTables10.executeUpdate(create10);
 			createTables10.close();

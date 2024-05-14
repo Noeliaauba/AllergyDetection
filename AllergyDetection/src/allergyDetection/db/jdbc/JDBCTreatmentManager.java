@@ -62,7 +62,7 @@ public List<Treatment> searchTreatmentByType(String typeParameter) {
 	try {
 		String sql = "SELECT * FROM treatment WHERE type LIKE ?";
 		PreparedStatement p= c.prepareStatement(sql);
-		p.setString(1, typeParameter );
+		p.setString(1, "%" + typeParameter + "%");
 		ResultSet rs = p.executeQuery();
 		while (rs.next()) {
 			Integer id = rs.getInt("id");
