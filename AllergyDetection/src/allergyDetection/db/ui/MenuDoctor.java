@@ -51,7 +51,6 @@ public class MenuDoctor {
 		System.out.println("5) ADD ALLERGY TO PATIENT");
 		System.out.println("6) DIAGNOSE A TREATMENT");	
 		System.out.println("7) CREATE A PATIENT'S PRESCRIPTION");
-		System.out.println("7) See the patient medical score Modify the prescription of a patient.Remember that the patient and the prescription must be created first.");
 		System.out.println("0) Select this option to exit.");
 	
 		int choiceDoctor = Integer.parseInt(r.readLine());
