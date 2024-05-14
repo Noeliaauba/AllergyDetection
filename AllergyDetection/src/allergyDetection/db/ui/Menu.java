@@ -62,6 +62,7 @@ public class Menu {
 		int variableWhileInitial=1;
 		while (variableWhileInitial!=0) {
 	        int option = Integer.parseInt(r.readLine());
+	        
 	        switch (option) {
 	            case 1:
 	                menuLogin();
