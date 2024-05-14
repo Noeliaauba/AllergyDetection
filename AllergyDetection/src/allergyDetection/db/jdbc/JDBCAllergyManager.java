@@ -170,7 +170,6 @@ public class JDBCAllergyManager implements AllergyManager {
 	
 	public void assignedTreatmenttoAllergy(Integer treatmentId, Integer allergyId) {
 		try {
-
 			String template = "INSERT INTO OWNS (treatment_id, allergy_id) VALUES (?,?)";
 			PreparedStatement pstmt = c.prepareStatement(template);
 			pstmt.setInt(1, treatmentId);

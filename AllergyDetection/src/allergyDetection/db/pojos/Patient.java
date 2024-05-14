@@ -10,6 +10,7 @@ public class Patient implements Serializable {
 		private static final long serialVersionUID = 5415639098561047229L;
 		private Integer id;
 		private String name;
+		private String surname;
 		private Date dob;
 		private String gender;
 		
@@ -25,15 +26,17 @@ public class Patient implements Serializable {
 			
 		}
 	
-		public Patient (String _name, Date _dob, String _gender) {
+		public Patient  (String _name,String _surname, Date _dob, String _gender) {
 			this.name = _name;
+			this.surname=_surname;
 			this.setDob(_dob);
 			this.gender = _gender;
 			}
 		
-		public Patient (Integer _id, String _name, Date _dob, String _gender) {
+		public Patient (Integer _id, String _name,  String _surname, Date _dob, String _gender) {
 			this.id= _id;
 			this.name = _name;
+			this.surname=_surname;
 			this.setDob(_dob);
 			this.gender = _gender;
 			}
@@ -71,6 +74,14 @@ public class Patient implements Serializable {
 		public void setName(String _name) {
 			this.name = _name;
 		}
+	
+		public String getSurname() {
+			return surname;
+		}
+		
+		public void setSurname(String _surname) {
+			this.surname = _surname;
+		}
 
 		public Date getDob() {
 			return dob;
@@ -88,7 +99,7 @@ public class Patient implements Serializable {
 			this.gender = _gender;
 		}
 		public String toString() {
-			return "Patient [id=" + id + ", name=" + name + ", dob=" + dob +", gender=" + gender + "]";
+			return "Patient [id=" + id + ", name=" + name + ", surname=" + id +" dob=" + dob +", gender=" + gender + "]";
 		}
 
 
