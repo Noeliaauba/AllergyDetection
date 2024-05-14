@@ -87,16 +87,16 @@ public static void showPrescription() throws IOException, NumberFormatException{
 			List<Prescription> prescriptions = new ArrayList<Prescription>();
 			prescriptions=prescriptionManager.searchPrescriptionByPatient(patientId);
 			
-			System.out.println("Insert prescription id:");
+			/*System.out.println("Insert prescription id:");
 			int prescriptionId=Integer.parseInt(r.readLine());
 			Prescription prescription =new Prescription();
-			prescription=prescriptionManager.getPrescriptionById(prescriptionId);
+			prescription=prescriptionManager.getPrescriptionById(prescriptionId);*/
 
-            if (prescriptions.equals(patient)) {
+            if (patient.equals(prescriptions)) {
             	 System.out.println("Prescriptions for patient with ID :" + patient.getId());
             	 
                  for (Prescription p : prescriptions) {
-                     System.out.println(prescription);
+                     System.out.println(p);
                  }
                 
             } else {
