@@ -94,7 +94,7 @@ public class Menu {
 			System.out.println("Wrong password");
 		else
 			System.out.println(u);
-		
+		//anadir un if para abrir un menu u otro en funcion de q seas doctor o patient
 	}
 	
 	private static void menuSignUp() throws NumberFormatException, IOException {
@@ -109,6 +109,7 @@ public class Menu {
 		Role r = userMan.getRole(roleName);
 		User u = new User(username, password, r);
 		userMan.register(u);
+		
 	}
 	
 	
