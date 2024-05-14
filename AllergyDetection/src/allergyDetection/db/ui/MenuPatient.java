@@ -74,6 +74,7 @@ public class MenuPatient {
 	}
 
 public static void showPrescription() throws IOException, NumberFormatException{
+	
 		try {
 			System.out.println("You will see a prescription. ");
 			
