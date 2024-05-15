@@ -102,6 +102,32 @@ public class JDBCSymptomManager implements SymptomManager {
 		return symptoms;
 		
 	}
+	
+	public List<Symptom> searchSymptombyPatient(Integer patientID){
+		List<Symptom> syms = new ArrayList<Symptom>();
+		try {
+			String sql = "SELECT symptom.id, symptom.name, symptom.type FROM symptom INNER JOIN HAS ON symptom.id=HAS.symptom_id WHERE SUFFERS.patient_id= ?";
+			PreparedStatement p= c.prepareStatement(sql);
+			p.setInt(1,patientID);
+			ResultSet rs = p.executeQuery();
+			while (rs.next()) {
+				Integer id = rs.getInt("id");
+				String name = rs.getString("name");
+				String type = rs.getString("type");
+				Symptom s = new Symptom(id, name, type);
+				syms.add(s);
+			}
+			rs.close();
+			p.close();
+		} catch (SQLException e) {
+			System.out.println("Error in the database");
+			e.printStackTrace();
+		}
+		return syms;
+		
+		
+		
+	}
 
 	@Override
 	public List<Symptom> searchSymptomybyAllergy(Integer allergyID) {

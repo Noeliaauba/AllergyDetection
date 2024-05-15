@@ -171,7 +171,7 @@ public class ConnectionManager {
 					+ " given_by INTEGER,"
 					+ " treatment_req INTEGER"
 					+ " FOREIGN KEY (given_to) REFERENCES patient(id),"
-					+ " FOREIGN KEY (given_by) REFERENCES doctor(id)),"
+					+ " FOREIGN KEY (given_by) REFERENCES doctor(id),"
 					+ " FOREIGN KEY (treatment_req) REFERENCES treatment (id))";
 			createTables5.executeUpdate(create5);
 			createTables5.close();

@@ -10,8 +10,12 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import allergyDetection.db.pojos.Allergy;
+import allergyDetection.db.pojos.Doctor;
 import allergyDetection.db.pojos.Patient;
 import allergyDetection.db.pojos.Prescription;
+import allergyDetection.db.pojos.Symptom;
+import allergyDetection.db.pojos.Treatment;
 
 public class MenuPatient {
 	
@@ -20,15 +24,17 @@ public class MenuPatient {
 
 	private static PrescriptionManager prescriptionManager;
 	private static PatientManager patientManager;
+	private static SymptomManager symptomManag;
+	private static AllergyManager allergyManag;
 	private static ConnectionManager conMan;
 	
 	
 	public static void  menuPatient() throws NumberFormatException, IOException{
 		conMan = new ConnectionManager();
-		
-		
 		prescriptionManager =conMan.getPrescription();
 		patientManager = conMan.getPatient();
+		symptomManag= conMan.getSymptom();
+		allergyManag= conMan.getAllergy();
 		
 		System.out.println("Welcome patient! Select the option: ");
 		int variableWhilePatient=1;
@@ -44,8 +50,7 @@ public class MenuPatient {
 			break;
 		
 		case 2: 
-			showPrescription();
-			
+			showPrescriptions();
 			break;
 		
 		case 0:
@@ -63,53 +68,45 @@ public class MenuPatient {
 	
 	
 	public static void checkMedicalScore()throws IOException, NumberFormatException {
-		
-		Patient patient =new Patient();
-		System.out.println("Insert patient id:");
-		int id =Integer.parseInt(r.readLine());
-		System.out.print("Patient with id:" + patient.getId());
-		System.out.println("Medical Score:"+ patient.toString());
-		
-		
+		System.out.println("You will see your MEDICAL SCORE: ");
+		System.out.println("Insert patient id: ");
+		int patientId=Integer.parseInt(r.readLine());
+		//Patient patient = patientManager.getPatientByID(patientId);
+		List<Symptom> symptoms= symptomManag.searchSymptombyPatient(patientId);
+		List<Allergy> allergies= allergyManag.searchAllergybyPatient(patientId);
+		System.out.println("MEDICAL SCORE: ");
+		System.out.println("SYMPTOMS SAVED: ");
+		for (Symptom s : symptoms) {
+			System.out.println(s);
+		}
+		System.out.println("ALLERGIES DETECTED: ");
+		for (Allergy a : allergies) {
+			System.out.println(a);
+		}
 	}
 
-public static void showPrescription() throws IOException, NumberFormatException{
-	
+public static void showPrescriptions() throws IOException, NumberFormatException{
 		try {
-			System.out.println("You will see a prescription. ");
-			
+			System.out.println("You will see your desired PRESCRIPTION. ");
 			System.out.println("Insert patient id: ");
 			int patientId=Integer.parseInt(r.readLine());
-			
-			Patient patient = new Patient();
-			patient= patientManager.getPatientByID(patientId);
-			
-			List<Prescription> prescriptions = new ArrayList<Prescription>();
-			prescriptions=prescriptionManager.searchPrescriptionByPatient(patientId);
-			
-			/*System.out.println("Insert prescription id:");
-			int prescriptionId=Integer.parseInt(r.readLine());
-			Prescription prescription =new Prescription();
-			prescription=prescriptionManager.getPrescriptionById(prescriptionId);*/
-
-            if (patient.equals(prescriptions)) {
-            	 System.out.println("Prescriptions for patient with ID :" + patient.getId());
-            	 
-                 for (Prescription p : prescriptions) {
-                     System.out.println(p);
-                 }
-                
-            } else {
-            	System.out.println("No prescriptions found for the given ID.");
-               
-            }
+			//Patient patient = patientManager.getPatientByID(patientId);
+			List<Prescription> prescriptions = prescriptionManager.searchPrescriptionByPatient(patientId);
+			if(prescriptions.isEmpty()) {
+				System.out.println("No prescriptions found for the PATIENT.");
+			}
+			else {
+				System.out.println("Here are your available PRESCRIPTIONS:");
+			for (Prescription p : prescriptions) {
+				System.out.println(p);
+			}
+			}
         } catch (IOException e) {
             System.out.println("Error reading input.");
         } catch (NumberFormatException e) {
             System.out.println("Invalid ID format. Please enter a valid integer ID.");
         }
     }
-
 
 
 }

@@ -11,7 +11,7 @@ public interface SymptomManager {
 	public Symptom getSymptomByID(Integer id);
 	public List<Symptom> searchSymptom(String type_Symptom);
 	public List<Symptom> searchSymptomybyAllergy(Integer allergyID);	
-
+	public List<Symptom> searchSymptombyPatient(Integer patientID);	
 	
-	// symMan.searchSympton("")
+	// symMan.searchSymptonBY PATIENT("")
 }

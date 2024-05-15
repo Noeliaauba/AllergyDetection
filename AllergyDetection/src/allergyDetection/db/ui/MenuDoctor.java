@@ -167,7 +167,7 @@ public class MenuDoctor {
 		
 	}
 	
-private static void controlSymptom() throws NumberFormatException, IOException{
+    private static void controlSymptom() throws NumberFormatException, IOException{
 	System.out.println("You will see the information of a type of symptom pre-saved:");
 	List<Symptom> listadosintomas = new ArrayList<Symptom>();
 	System.out.println("Introduce the TYPE of SYMPTOM you want to see (Respiratory), (Cutaneous), (Digestive), (Others):");
@@ -204,7 +204,7 @@ private static void controlSymptom() throws NumberFormatException, IOException{
 	}
 	
 
-private static void addSymptom() throws NumberFormatException, IOException {
+    private static void addSymptom() throws NumberFormatException, IOException {
 	System.out.println("Please, write the symptom information:");
 	System.out.println("SYMPTOM NAME: ");
 	String name = r.readLine();
@@ -214,7 +214,7 @@ private static void addSymptom() throws NumberFormatException, IOException {
 	symptomManag.addSymptom(sm);
 }	
 
-private static void controlAllergy() throws NumberFormatException, IOException{
+    private static void controlAllergy() throws NumberFormatException, IOException{
 	System.out.println("You will see the information of a type of allergy pre-saved:");
 	List<Allergy> allergies = new ArrayList<Allergy>();
 	System.out.println("Introduce the TYPE of ALLERGY you want to see (Alimentary), (Stationary), (Cutaneous), (Drugs), (Insect):");
@@ -252,9 +252,7 @@ private static void controlAllergy() throws NumberFormatException, IOException{
 
 	}
 	
-	
-
-private static void addAllergy() throws NumberFormatException, IOException {
+    private static void addAllergy() throws NumberFormatException, IOException {
 	System.out.println("Please, write the allergy information:");
 	System.out.println("ALLERGY NAME: ");
 	String name = r.readLine();
@@ -264,7 +262,7 @@ private static void addAllergy() throws NumberFormatException, IOException {
 	allergyManag.addAllergy(s);
 }	
 
-private static void diagnoseTreatment() throws NumberFormatException, IOException {
+    private static void diagnoseTreatment() throws NumberFormatException, IOException {
 	List<Patient> patients = new ArrayList<Patient>();
 	System.out.println("Introduce the NAME of the PATIENT you want to treat:");
 	String Name = r.readLine();
@@ -294,8 +292,7 @@ private static void diagnoseTreatment() throws NumberFormatException, IOExceptio
 }
 
 
-
-private static void addPrescription() throws NumberFormatException, IOException {
+    private static void addPrescription() throws NumberFormatException, IOException {
 	System.out.println("Please, select the PATIENT to elaborate the prescription:");
 	List<Patient> patients = new ArrayList<Patient>();
 	patients= patientManag.searchPatient("");
