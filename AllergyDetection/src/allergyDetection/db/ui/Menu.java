@@ -18,8 +18,6 @@ import allergyDetection.db.jdbc.*;
 import allergyDetection.db.pojos.*;
 import allergyDetection.db.interfaces.UserManager;
 import allergyDetection.db.jpa.JPAUserManager;
-import allergyDetection.db.pojos.User;
-import allergyDetection.db.pojos.Role;
 
 
 
@@ -120,7 +118,18 @@ public class Menu {
 		  doctorManag.addDoctor(d);
 		}
 		if(u.getRole().getId()==2) {
-			//patientManag.addPatient(u);
+			System.out.println("Please, write the information of the patient:");
+			System.out.println("PATIENT NAME: ");
+			String name = r.readLine();
+			System.out.println("PATIENT SURNAME: ");
+			String surname = r.readLine();
+			System.out.println("DATE OF BIRTH (DD-MM-YYYY format): ");
+			LocalDate localDate = LocalDate.parse(r.readLine(), formatter);
+			Date date = Date.valueOf(localDate);
+			System.out.println("PATIENT GENDER: ");
+			String gender = r.readLine();
+			Patient p= new Patient(name,surname,date,gender,u.getUsername());
+			patientManag.addPatient(p);
 			}
 		
 	}

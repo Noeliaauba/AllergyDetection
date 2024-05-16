@@ -23,7 +23,7 @@ public class MenuPatient {
 	private static BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
 
 	private static PrescriptionManager prescriptionManager;
-	private static PatientManager patientManager;
+	private static PatientManager patientManag;
 	private static SymptomManager symptomManag;
 	private static AllergyManager allergyManag;
 	private static ConnectionManager conMan;
@@ -32,12 +32,13 @@ public class MenuPatient {
 	public static void  menuPatient(String username) throws NumberFormatException, IOException{
 		conMan = new ConnectionManager();
 		prescriptionManager =conMan.getPrescription();
-		patientManager = conMan.getPatient();
+		patientManag = conMan.getPatient();
 		symptomManag= conMan.getSymptom();
 		allergyManag= conMan.getAllergy();
 		
 		System.out.println("Welcome patient! Select the option: ");
 		int variableWhilePatient=1;
+		Patient p= patientManag.getPatientByusername(username);
 		while(variableWhilePatient!=0) {
 		System.out.println("1) CHECK YOUR MEDICAL SCORE");
 		System.out.println("2) SHOW PRESCRIPTION");
@@ -46,11 +47,11 @@ public class MenuPatient {
 		switch (choicePatient) {
 		
 		case 1: 
-			checkMedicalScore(); 
+			checkMedicalScore(p); 
 			break;
 		
 		case 2: 
-			showPrescriptions();
+			showPrescriptions(p);
 			break;
 		
 		case 0:
@@ -67,11 +68,9 @@ public class MenuPatient {
 	}
 	
 	
-	public static void checkMedicalScore()throws IOException, NumberFormatException {
+	public static void checkMedicalScore(Patient p)throws IOException, NumberFormatException {
 		System.out.println("You will see your MEDICAL SCORE: ");
-		System.out.println("Insert patient id: ");
-		int patientId=Integer.parseInt(r.readLine());
-		//Patient patient = patientManager.getPatientByID(patientId);
+		int patientId=p.getId();
 		List<Symptom> symptoms= symptomManag.searchSymptombyPatient(patientId);
 		List<Allergy> allergies= allergyManag.searchAllergybyPatient(patientId);
 		System.out.println("MEDICAL SCORE: ");
@@ -85,24 +84,19 @@ public class MenuPatient {
 		}
 	}
 
-public static void showPrescriptions() throws IOException, NumberFormatException{
+public static void showPrescriptions(Patient p) throws IOException, NumberFormatException{
 		try {
 			System.out.println("You will see your desired PRESCRIPTION. ");
-			System.out.println("Insert patient id: ");
-			int patientId=Integer.parseInt(r.readLine());
-			//Patient patient = patientManager.getPatientByID(patientId);
+			int patientId=p.getId();
 			List<Prescription> prescriptions = prescriptionManager.searchPrescriptionByPatient(patientId);
 			if(prescriptions.isEmpty()) {
 				System.out.println("No prescriptions found for the PATIENT.");
 			}
 			else {
 				System.out.println("Here are your available PRESCRIPTIONS:");
-			for (Prescription p : prescriptions) {
-				System.out.println(p);
-			}
-			}
-        } catch (IOException e) {
-            System.out.println("Error reading input.");
+			for (Prescription presc : prescriptions) {
+				System.out.println(presc);
+			}}
         } catch (NumberFormatException e) {
             System.out.println("Invalid ID format. Please enter a valid integer ID.");
         }
@@ -110,5 +104,4 @@ public static void showPrescriptions() throws IOException, NumberFormatException
 
 
 }
-/*
- */
+

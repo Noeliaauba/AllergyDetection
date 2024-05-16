@@ -42,8 +42,8 @@ public class Patient implements Serializable {
 			this.setDob(_dob);
 			this.gender = _gender;
 			}
-		public Patient (Integer _id, String _name,  String _surname, Date _dob, String _gender,String _username) {
-			this.id= _id;
+		
+		public Patient (String _name,  String _surname, Date _dob, String _gender, String _username) {
 			this.name = _name;
 			this.surname=_surname;
 			this.setDob(_dob);

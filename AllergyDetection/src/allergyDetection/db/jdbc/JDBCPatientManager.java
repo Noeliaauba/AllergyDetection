@@ -1,5 +1,6 @@
 package allergyDetection.db.jdbc;
 import allergyDetection.db.pojos.Allergy;
+import allergyDetection.db.pojos.Doctor;
 import allergyDetection.db.pojos.Patient;
 import java.sql.*;
 import java.util.ArrayList;
@@ -92,21 +93,23 @@ public Patient getPatientByID(Integer id) {
 }
 
 public Patient getPatientByusername(String username) {
-	Patient p=null;
 	try {
-		String sql = "SELECT * FROM patient WHERE username = " + username;
-		Statement st= c.createStatement();
-		ResultSet rs = st.executeQuery(sql);
+		String sql = "SELECT * FROM patient WHERE username = ?";
+		PreparedStatement p= c.prepareStatement(sql);
+		p.setString(1, username);
+		ResultSet rs = p.executeQuery();
 		rs.next();
-		p = new Patient (rs.getInt("id"), rs.getString("name"), rs.getString("surname"), rs.getDate("dateOfBirth"), rs.getString("gender"));
+		Patient pat = new Patient (rs.getInt("id"), rs.getString("name"), rs.getString("surname"), rs.getDate("dateOfBirth"), rs.getString("gender"));
+		p.close();
+		return pat;
 	} catch (SQLException e) {
 		System.out.println("Error in the database");
 		e.printStackTrace();
 	}
-	return p;
+	return null;
 }
-
-
+		
+		
 @Override
 public List<Patient> searchPatient(String name_Patient) {
 	List<Patient> patients = new ArrayList<Patient>();
