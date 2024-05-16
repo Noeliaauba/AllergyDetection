@@ -102,8 +102,8 @@ public class Menu {
 		System.out.print("Choose a password:");
 		String password = r.readLine();
 		System.out.println("Are you a patient or a doctor? ");
-		List<Role> roles = userMan.getAllRoles();
-		System.out.println(roles);
+		//List<Role> roles = userMan.getAllRoles();
+		//System.out.println(roles);
 		String roleName = r.readLine().toLowerCase();
 		Role role = userMan.getRole(roleName);
 		User u = new User(username, password, role);
@@ -128,8 +128,8 @@ public class Menu {
 			Date date = Date.valueOf(localDate);
 			System.out.println("PATIENT GENDER: ");
 			String gender = r.readLine();
-			Patient p= new Patient(name,surname,date,gender,u.getUsername());
-			patientManag.addPatient(p);
+			Patient pat= new Patient(name,surname,date,gender,u.getUsername());
+		patientManag.addPatient(pat);
 			}
 		
 	}
