@@ -69,7 +69,8 @@ public class ConnectionManager {
 					+ " name TEXT NOT NULL,"
 					+ " surname TEXT NOT NULL,"
 					+ " dateOfBirth DATE,"
-					+ " gender TEXT)";		
+					+ " gender TEXT"
+					+ " username UNIQUE TEXT)";		
 			createTables1.executeUpdate(create1);
 			createTables1.close();
 			
@@ -78,7 +79,8 @@ public class ConnectionManager {
 			String create2 = "CREATE TABLE doctor ( "
 					+ " id INTEGER PRIMARY KEY AUTOINCREMENT,"
 					+ " name TEXT NOT NULL,"
-					+ " surname TEXT NOT NULL)";
+					+ " surname TEXT NOT NULL"
+					+ " username UNIQUE TEXT)";	
 			createTables2.executeUpdate(create2);
 			createTables2.close();
 			
