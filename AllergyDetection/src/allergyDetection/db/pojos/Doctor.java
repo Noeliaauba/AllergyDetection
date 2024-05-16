@@ -40,7 +40,13 @@ public class Doctor implements Serializable{
 			
 			}
 	
-	 @Override
+	 public Doctor(String _name, String _surname,String _username) {
+		    this.name = _name;
+			this.surname = _surname;
+			this.username=_username;
+	}
+
+	@Override
 	 public int hashCode() {
 			return Objects.hash(id);
 		}

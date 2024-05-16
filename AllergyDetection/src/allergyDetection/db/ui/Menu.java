@@ -39,12 +39,9 @@ public class Menu {
 	
 	
 	public static void main(String[] args) throws NumberFormatException, IOException {
-		System.out.println("WELCOME TO THE PROGRAMM!");
+		System.out.println("WELCOME TO THE ALLERGY DETECTION PROGRAM!");
 		System.out.println("");
 		
-		
-		//MenuDoctor.menuDoctor();
-		//MenuPatient.menuPatient();
 		
 		// ALWAYS JDBC first
 		conMan = new ConnectionManager();
@@ -90,11 +87,15 @@ public class Menu {
 		String password = r.readLine();
 		User u = userMan.login(username, password);
 		// REMOVE LATER just testing
-		if (u == null)
-			System.out.println("Wrong password");
-		else
-			System.out.println(u);
-		//anadir un if para abrir un menu u otro en funcion de q seas doctor o patient
+		if (u == null) 
+			System.out.println("The information is incorrect");
+		else if (u.getRole().getId()==1) {
+			MenuDoctor.menuDoctor(username);
+			
+		}
+		else if(u.getRole().getId()==2) {
+			MenuPatient.menuPatient(username);
+		}
 	}
 	
 	private static void menuSignUp() throws NumberFormatException, IOException {
@@ -106,108 +107,29 @@ public class Menu {
 		List<Role> roles = userMan.getAllRoles();
 		System.out.println(roles);
 		String roleName = r.readLine().toLowerCase();
-		Role r = userMan.getRole(roleName);
-		User u = new User(username, password, r);
+		Role role = userMan.getRole(roleName);
+		User u = new User(username, password, role);
 		userMan.register(u);
-		
-	}
-	
-	
-	
-
-
-	
-	//............................................................
-
-
-	
-	}
-/*	
-	//parte de carmen del supuesto sign up
-	 * System.out.println("Chose your desired option: ");
-		System.out.println("1) Menu Doctor. ");
-		System.out.println("2) Menu Patient. ");
-		System.out.println("0) End the program. ");
-		int variableWhileInitial=1;
-		while (variableWhileInitial!=0) {
-	        int option = Integer.parseInt(r.readLine());
-	        switch (option) {
-	            case 1:
-	            	MenuDoctor.menuDoctor();
-	                break;
-	            case 2:
-	            	MenuPatient.menuPatient();
-	                break;
-	            case 0:
-	                System.out.println("Exiting the programm...");
-	                variableWhileInitial=0;
-	                conMan.close();
-	                return;
-	            default:
-	                System.out.println("Insert one of the following options:");
-	        }
+		if(u.getRole().getId()==1) {
+			System.out.println("Please, write the information of the doctor:");
+			System.out.println("DOCTOR NAME: ");
+			String name = r.readLine();
+			System.out.println("DOCTOR SURNAME: ");
+			String surname = r.readLine();
+			Doctor d = new Doctor(name, surname, u.getUsername());
+		  doctorManag.addDoctor(d);
 		}
-	 */
-	//method of lists in case we need.
-	/*private static void listPrescriptions() throws IOException{
-		System.out.println("Enter the prescription id");
-		Integer id = Integer.parseInt(r.readLine());
-		System.out.println("These are the available prescriptions, choose one by typing their id:");
-		List<Prescription> prescription = PrescriptionManager.getPrescriptionById(id);
-		//TODO  the method getPrescriptionById
+		if(u.getRole().getId()==2) {
+			//patientManag.addPatient(u);
+			}
 		
-		System.out.println(prescription);
-	}
-	private static void listAllergies() throws IOException{
-		System.out.println("Enter the Allergy id");
-		Integer id = Integer.parseInt(r.readLine());
-		System.out.println("These are the available allergies, choose one by typing their id:");
-		List<Allergy> allergies = AllergyManager.getAllergyById(id);
-		//TODO  the method getAllergyById
-		
-		System.out.println(allergies);
-	}
-	private static void listSymptoms() throws IOException{
-		System.out.println("Enter the Symptom id");
-		Integer id = Integer.parseInt(r.readLine());
-		System.out.println("These are the available symptoms, choose one by typing their id:");
-		List<Symptom> symptoms = SymptomManager.getSymptomById(id);
-		//TODO  the method getSymptomById
-		
-		System.out.println(symptoms);
 	}
 	
 	
 	
-}
 
 
-//the code that we should add to addPatient if we add the methods lists
-/*		listPrescriptions();
-Integer prescriptionId = Integer.parseInt(r.readLine());
-Prescription prescrip= PrescriptionManager.getPrescription(prescriptionId);
-listAllergies();
-Integer allergyId = Integer.parseInt(r.readLine());
-Allergy allergy= AllergyManager.getAllergy(allergyId);
-System.out.println("To stop adding allergies, please add a (-1): ");
-while(allergyId!=-1) {
-	allergyId = Integer.parseInt(r.readLine());
-	Allergy allergy1= AllergyManager.getAllergy(allergyId);
-	System.out.println("A new allergy was added. ");
-	System.out.println("To stop adding allergies, please add a (-1): ");
-}
-listSymptoms();
-Integer symptomId = Integer.parseInt(r.readLine());
-Symptom symptom= SymptomManager.getSymptom(symptomId);
-System.out.println("To stop adding Symptoms, please add a (-1): ");
-while(symptomId!=-1) {
-	symptomId = Integer.parseInt(r.readLine());
-	Symptom symptom1= SymptomManager.getSymptom(symptomId);
-	System.out.println("A new symptom was added. ");
-	System.out.println("To stop adding symptoms, please add a (-1): ");
-}		*/
+	
 
-
-
-
-
+	
+	}

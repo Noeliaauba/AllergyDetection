@@ -91,6 +91,22 @@ public Patient getPatientByID(Integer id) {
 	return p;
 }
 
+public Patient getPatientByusername(String username) {
+	Patient p=null;
+	try {
+		String sql = "SELECT * FROM patient WHERE username = " + username;
+		Statement st= c.createStatement();
+		ResultSet rs = st.executeQuery(sql);
+		rs.next();
+		p = new Patient (rs.getInt("id"), rs.getString("name"), rs.getString("surname"), rs.getDate("dateOfBirth"), rs.getString("gender"));
+	} catch (SQLException e) {
+		System.out.println("Error in the database");
+		e.printStackTrace();
+	}
+	return p;
+}
+
+
 @Override
 public List<Patient> searchPatient(String name_Patient) {
 	List<Patient> patients = new ArrayList<Patient>();

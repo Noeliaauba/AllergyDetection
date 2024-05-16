@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import allergyDetection.db.interfaces.AllergyManager;
+import allergyDetection.db.interfaces.DoctorManager;
 import allergyDetection.db.interfaces.PatientManager;
 import allergyDetection.db.interfaces.PrescriptionManager;
 import allergyDetection.db.interfaces.SymptomManager;
@@ -25,15 +26,17 @@ public class MenuDoctor {
 	private static BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 	private static PatientManager patientManag;
+	private static DoctorManager doctorManag;
 	private static SymptomManager symptomManag;
 	private static AllergyManager allergyManag;
 	private static TreatmentManager treatmentManag;
 	private static PrescriptionManager prescriptionManag;
 	private static ConnectionManager conMan;
 	
-	public static void menuDoctor() throws NumberFormatException, IOException {
+	public static void menuDoctor(String username) throws NumberFormatException, IOException {
 		conMan = new ConnectionManager();
 		patientManag = conMan.getPatient();
+		doctorManag = conMan.getDoctor();
 		symptomManag= conMan.getSymptom();
 		allergyManag= conMan.getAllergy();
 		treatmentManag= conMan.getTreatment();
@@ -42,6 +45,7 @@ public class MenuDoctor {
 		int variableWhileDoctor=1;
 		System.out.println("Welcome Doctor! We are delighted with your great job!");
 		System.out.println("");
+		Doctor d= doctorManag.getDoctorByusername(username);
 		while(variableWhileDoctor !=0) {
 		System.out.println("Select the option desire: ");
 		System.out.println("1) ADD A PATIENT TO THE DATA BASE");
@@ -80,7 +84,7 @@ public class MenuDoctor {
 			break;
 			
 		case 7: 
-			addPrescription();
+			addPrescription(d);
 			break;
 		
 		case 0:
@@ -292,7 +296,7 @@ public class MenuDoctor {
 }
 
 
-    private static void addPrescription() throws NumberFormatException, IOException {
+    private static void addPrescription(Doctor doctor) throws NumberFormatException, IOException {
 	System.out.println("Please, select the PATIENT to elaborate the prescription:");
 	List<Patient> patients = new ArrayList<Patient>();
 	patients= patientManag.searchPatient("");
@@ -319,7 +323,6 @@ public class MenuDoctor {
 	Integer treatmentId = Integer.parseInt(r.readLine());
 	Treatment tratamiento= treatmentManag.getTreatmentById(treatmentId);
 	Patient patient= patientManag.getPatientByID(patId);
-	Doctor doctor= new Doctor(4, "Sonia", "Ramos");
 	Prescription ps = new Prescription("NO",patient,doctor,tratamiento);		
 	prescriptionManag.addPrescription(ps);
 }

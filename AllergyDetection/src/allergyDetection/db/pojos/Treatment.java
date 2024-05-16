@@ -9,7 +9,7 @@ public class Treatment implements Serializable{
 	
 	private static final long serialVersionUID = 2510589484868867965L;
 	private Integer id;
-	private String treatment_type;
+	private String type;
 	private String name;
 	private List<Allergy> allergies;
 	private List<Prescription> prescriptions;
@@ -20,13 +20,13 @@ public class Treatment implements Serializable{
 	}
 	public Treatment (String _name, String _treatmentType) {
 		this.name=_name;
-		this.treatment_type=_treatmentType;
+		this.type=_treatmentType;
 	}
 
 	public Treatment (Integer _id, String _name, String _treatmentType) {
 		this.id=_id;
 		this.name=_name;
-		this.treatment_type=_treatmentType;
+		this.type=_treatmentType;
 	}
 	
 	
@@ -65,10 +65,10 @@ public class Treatment implements Serializable{
 	}
 	
 	public String getTreatmentType() {
-		 return treatment_type;
+		 return type;
 	 }
 	 public void setTreatmentType(String _treatment_type) {
-		 this.treatment_type= _treatment_type;
+		 this.type= _treatment_type;
 	 }
 	 
 	

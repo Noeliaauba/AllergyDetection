@@ -101,7 +101,7 @@ public Treatment getTreatmentById (Integer id) {
 public List<Treatment> searchTreatmentByAllergy(Integer allergyID) {
 	List<Treatment> tratamientos = new ArrayList<Treatment>();
 	try {
-		String sql = "SELECT treatment.id, treatment.name, treatment.treatment_type, FROM treatment INNER JOIN OWNS ON treatment.id=OWNS.treatment_id WHERE OWNS.allergy_id= ?";
+		String sql = "SELECT treatment.id, treatment.name, treatment.type FROM treatment INNER JOIN OWNS ON treatment.id=OWNS.treatment_id WHERE OWNS.allergy_id= ?";
 		PreparedStatement p= c.prepareStatement(sql);
 		p.setInt(1,allergyID);
 		ResultSet rs = p.executeQuery();

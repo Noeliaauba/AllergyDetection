@@ -29,7 +29,7 @@ public class MenuPatient {
 	private static ConnectionManager conMan;
 	
 	
-	public static void  menuPatient() throws NumberFormatException, IOException{
+	public static void  menuPatient(String username) throws NumberFormatException, IOException{
 		conMan = new ConnectionManager();
 		prescriptionManager =conMan.getPrescription();
 		patientManager = conMan.getPatient();
