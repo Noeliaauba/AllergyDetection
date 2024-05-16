@@ -12,6 +12,7 @@ public class Patient implements Serializable {
 		private String name;
 		private String surname;
 		private Date dob;
+		private String username;
 		private String gender;
 		
 		private List <Prescription> prescriptions; 
@@ -31,6 +32,7 @@ public class Patient implements Serializable {
 			this.surname=_surname;
 			this.setDob(_dob);
 			this.gender = _gender;
+			
 			}
 		
 		public Patient (Integer _id, String _name,  String _surname, Date _dob, String _gender) {
@@ -40,7 +42,14 @@ public class Patient implements Serializable {
 			this.setDob(_dob);
 			this.gender = _gender;
 			}
-		
+		public Patient (Integer _id, String _name,  String _surname, Date _dob, String _gender,String _username) {
+			this.id= _id;
+			this.name = _name;
+			this.surname=_surname;
+			this.setDob(_dob);
+			this.gender = _gender;
+			this.username=_username;
+			}
 		
 		@Override
 		public int hashCode() {
@@ -99,7 +108,7 @@ public class Patient implements Serializable {
 			this.gender = _gender;
 		}
 		public String toString() {
-			return "Patient [id=" + id + ", name=" + name + ", surname=" + id +" dob=" + dob +", gender=" + gender + "]";
+			return "Patient [id=" + id + ", name=" + name + ", surname=" + id +" dob=" + dob +", gender=" + gender +"]";
 		}
 
 
@@ -130,6 +139,14 @@ public class Patient implements Serializable {
 
 		public void setSymptoms(List<Symptom> symptoms) {
 			this.symptoms = symptoms;
+		}
+
+		public String getUsername() {
+			return username;
+		}
+
+		public void setUsername(String username) {
+			this.username = username;
 		}
 }
 

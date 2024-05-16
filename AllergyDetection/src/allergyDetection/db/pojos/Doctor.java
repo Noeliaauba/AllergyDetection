@@ -12,6 +12,7 @@ public class Doctor implements Serializable{
 	 private Integer id;
 	 private String name;
 	 private String surname;
+	 private String username;
 	 private List <Prescription> prescriptions ;
 	 
 	 
@@ -29,6 +30,14 @@ public class Doctor implements Serializable{
 		    this.id= _id;
 			this.name = _name;
 			this.surname = _surname;
+			
+			}
+	 public Doctor (Integer _id, String _name, String _surname, String _username) {
+		    this.id= _id;
+			this.name = _name;
+			this.surname = _surname;
+			this.username=_username;
+			
 			}
 	
 	 @Override
@@ -81,6 +90,14 @@ public class Doctor implements Serializable{
 
 		public void setPrescriptions(List <Prescription> prescriptions) {
 			this.prescriptions = prescriptions;
+		}
+
+		public String getUsername() {
+			return username;
+		}
+
+		public void setUsername(String username) {
+			this.username = username;
 		}
 
 }
