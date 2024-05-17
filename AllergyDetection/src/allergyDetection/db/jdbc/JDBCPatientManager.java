@@ -94,20 +94,22 @@ public Patient getPatientByID(Integer id) {
 }
 
 public Patient getPatientByusername(String username) {
+	Patient pat=null;
 	try {
 		String sql = "SELECT * FROM patient WHERE username = ?";
 		PreparedStatement p= c.prepareStatement(sql);
 		p.setString(1, username);
 		ResultSet rs = p.executeQuery();
-		rs.next();
-		Patient pat = new Patient (rs.getInt("id"), rs.getString("name"), rs.getString("surname"), rs.getDate("dateOfBirth"), rs.getString("gender"));
+		if(rs.next()) {
+		pat = new Patient (rs.getInt("id"), rs.getString("name"), rs.getString("surname"), rs.getDate("dateOfBirth"), rs.getString("gender"));
+		}
 		p.close();
-		return pat;
+		rs.close();
 	} catch (SQLException e) {
 		System.out.println("Error in the database");
 		e.printStackTrace();
 	}
-	return null;
+	return pat;
 }
 		
 		
