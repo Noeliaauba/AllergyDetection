@@ -78,18 +78,19 @@ public void deletePatient(Integer id) {
 
 @Override
 public Patient getPatientByID(Integer id) {
-	Patient p=null;
+	
 	try {
 		String sql = "SELECT * FROM patient WHERE id = " + id;
 		Statement st= c.createStatement();
 		ResultSet rs = st.executeQuery(sql);
 		rs.next();
-		p = new Patient (rs.getInt("id"), rs.getString("name"), rs.getString("surname"), rs.getDate("dateOfBirth"), rs.getString("gender"));
+		Patient p = new Patient (rs.getInt("id"), rs.getString("name"), rs.getString("surname"), rs.getDate("dateOfBirth"), rs.getString("gender"));
+		return p;
 	} catch (SQLException e) {
 		System.out.println("Error in the database");
 		e.printStackTrace();
 	}
-	return p;
+	return null;
 }
 
 public Patient getPatientByusername(String username) {
