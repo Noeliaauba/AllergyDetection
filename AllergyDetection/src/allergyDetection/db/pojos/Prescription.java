@@ -14,7 +14,6 @@ public class Prescription implements Serializable {
 	private Patient given_to;
 	private Doctor given_by;
 	private Treatment treatment;
-	//ESTAS CLASES???
 	private Doctor doctor;
 	private Patient patient;
 	

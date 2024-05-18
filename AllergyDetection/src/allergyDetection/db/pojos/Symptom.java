@@ -72,7 +72,7 @@ public class Symptom implements Serializable{
 	 }
 	 
 	 public String toString() {
-	    	return "Symptom [id=" + id + ", symptom name= " + symptom_name +" symptom type=" + symptom_type + "]";
+	    	return "Symptom [id=" + id + ", symptom name= " + symptom_name +", symptom type=" + symptom_type + "]";
 	    }
 
 	public List<Patient> getPatients() {

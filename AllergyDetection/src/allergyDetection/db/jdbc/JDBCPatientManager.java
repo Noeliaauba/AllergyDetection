@@ -21,14 +21,14 @@ public class JDBCPatientManager implements PatientManager {
 @Override
 public void addPatient(Patient p) {
 		try {
-			String template = "INSERT INTO patient (name, surname, dateOfBirth, gender ) VALUES (?, ?, ?, ?)";
+			String template = "INSERT INTO patient (name, surname, dateOfBirth, gender, username) VALUES (?, ?, ?, ?, ?)";
 			PreparedStatement pstmt;
 			pstmt = c.prepareStatement(template);
 			pstmt.setString(1, p.getName());
 			pstmt.setString(2, p.getSurname());
 			pstmt.setDate(3, p.getDob());
 			pstmt.setString(4, p.getGender());
-
+			pstmt.setString(5, p.getUsername());
 			pstmt.executeUpdate();
 			pstmt.close();
 		} catch (SQLException e) {

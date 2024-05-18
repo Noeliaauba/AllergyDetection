@@ -73,7 +73,6 @@ public class MenuPatient {
 		int patientId=p.getId();
 		List<Symptom> symptoms= symptomManag.searchSymptombyPatient(patientId);
 		List<Allergy> allergies= allergyManag.searchAllergybyPatient(patientId);
-		System.out.println("MEDICAL SCORE: ");
 		System.out.println("SYMPTOMS SAVED: ");
 		for (Symptom s : symptoms) {
 			System.out.println(s);

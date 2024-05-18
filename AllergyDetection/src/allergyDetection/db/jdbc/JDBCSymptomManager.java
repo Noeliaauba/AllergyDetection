@@ -106,7 +106,7 @@ public class JDBCSymptomManager implements SymptomManager {
 	public List<Symptom> searchSymptombyPatient(Integer patientID){
 		List<Symptom> syms = new ArrayList<Symptom>();
 		try {
-			String sql = "SELECT symptom.id, symptom.name, symptom.type FROM symptom INNER JOIN HAS ON symptom.id=HAS.symptom_id WHERE SUFFERS.patient_id= ?";
+			String sql = "SELECT symptom.id, symptom.name, symptom.type FROM symptom INNER JOIN HAS ON symptom.id=HAS.symptom_id WHERE HAS.patient_id= ?";
 			PreparedStatement p= c.prepareStatement(sql);
 			p.setInt(1,patientID);
 			ResultSet rs = p.executeQuery();

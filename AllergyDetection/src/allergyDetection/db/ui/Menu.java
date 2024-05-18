@@ -102,8 +102,6 @@ public class Menu {
 		System.out.print("Choose a password:");
 		String password = r.readLine();
 		System.out.println("Are you a patient or a doctor? ");
-		//List<Role> roles = userMan.getAllRoles();
-		//System.out.println(roles);
 		String roleName = r.readLine().toLowerCase();
 		Role role = userMan.getRole(roleName);
 		User u = new User(username, password, role);
