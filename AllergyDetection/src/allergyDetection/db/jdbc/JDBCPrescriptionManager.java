@@ -1,4 +1,5 @@
 package allergyDetection.db.jdbc;
+import allergyDetection.db.interfaces.PatientManager;
 import allergyDetection.db.interfaces.PrescriptionManager;
 import allergyDetection.db.pojos.Doctor;
 import allergyDetection.db.pojos.Patient;
@@ -83,7 +84,7 @@ public class JDBCPrescriptionManager implements PrescriptionManager {
 			Statement st = c.createStatement();
 			ResultSet rs = st.executeQuery(sql);
 			rs.next();
-			int patientid = rs.getInt("givenTo");
+			int patientid = rs.getInt("given_to");
 			int doctorid= rs.getInt("given_by");
 			int treatmentid= rs.getInt("treatment_req");
 			Patient p = conMan.getPatient().getPatientByID(patientid);
@@ -109,14 +110,14 @@ public class JDBCPrescriptionManager implements PrescriptionManager {
 	        if (rs.next()) {
 	        	Integer prescriptionId = rs.getInt("id");
 	            String isUsed = rs.getString("isUsed");
-	            Patient patient = new Patient(); 
-	            patient.setId(rs.getInt("patient_id")); 
-	            Doctor doctor = new Doctor(); 
-	            doctor.setId(rs.getInt("doctor_id")); 
-	            Treatment treatment= new Treatment ();
-	            treatment.setId(rs.getInt("treatment_req"));
-	            Prescription p = new Prescription(prescriptionId, isUsed, patient, doctor, treatment);
-				prescriptions.add(p);
+	    		int patient_id = rs.getInt("given_to");
+				int doctorid= rs.getInt("given_by");
+				int treatmentid= rs.getInt("treatment_req");
+	            Patient p = conMan.getPatient().getPatientByID(patient_id);
+				Doctor d= conMan.getDoctor().getDoctorByID(doctorid);
+				Treatment t= conMan.getTreatment().getTreatmentById(treatmentid);
+	            Prescription pre = new Prescription(prescriptionId, isUsed, p, d, t);
+				prescriptions.add(pre);
 	        }
 	        rs.close();
 	        pstmt.close();

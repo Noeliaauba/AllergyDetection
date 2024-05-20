@@ -108,7 +108,7 @@ public class Patient implements Serializable {
 			this.gender = _gender;
 		}
 		public String toString() {
-			return "Patient [id=" + id + ", name=" + name + ", surname=" + id +" dob=" + dob +", gender=" + gender +"]";
+			return "Patient [id=" + id + ", name=" + name + ", surname=" + surname +" dob=" + dob +", gender=" + gender +"]";
 		}
 
 
