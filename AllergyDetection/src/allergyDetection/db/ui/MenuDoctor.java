@@ -298,9 +298,9 @@ public class MenuDoctor {
 
     private static void addPrescription(Doctor doctor) throws NumberFormatException, IOException {
 	System.out.println("Please, select the PATIENT to elaborate the prescription:");
-	List<Patient> patients = new ArrayList<Patient>();
-	patients= patientManag.searchPatient("");
-	for (Patient p : patients) {
+	List<Patient> pat = new ArrayList<Patient>();
+	pat= patientManag.searchPatient("");
+	for (Patient p : pat) {
 		System.out.println(p);
 	}
 	System.out.println("PATIENT ID: ");

@@ -119,7 +119,7 @@ public List<Patient> searchPatient(String name_Patient) {
 	try {
 		String sql = "SELECT * FROM patient WHERE name LIKE ?";
 		PreparedStatement p = c.prepareStatement(sql);
-		p.setString(1, name_Patient);
+		p.setString(1,  "%" + name_Patient + "%");
 		ResultSet rs = p.executeQuery();
 		while (rs.next()) {
 			Integer id = rs.getInt("id");
