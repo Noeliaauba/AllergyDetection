@@ -73,7 +73,7 @@ public class Treatment implements Serializable{
 	 
 	
 	 public String toString() {
-	    	return "Treatment [id=" + id + ", name= "+name + "]";
+	    	return "Treatment [id=" + id + ", name= "+name + ", type=" + type + "]";
 	    }
 
 	public List<Allergy> getAllergies() {
