@@ -42,6 +42,23 @@ public class JDBCAllergyManager implements AllergyManager {
 		}
 
 	}
+	public void deleteAllergy(Integer id) {
+		try {
+		String st = "DELETE FROM allergy WHERE id = ?";
+		PreparedStatement pstmt = c.prepareStatement(st);
+	    pstmt.setInt(1, id);
+	        int rowsAffected = pstmt.executeUpdate();
+	    if (rowsAffected > 0) {
+	        System.out.println("Deleted successfully the allergy");
+	    } else {
+	        System.out.println("Allergy not assigned to the patient" );
+	    }
+	    pstmt.close();
+	} catch (SQLException e) {
+	    System.out.println("Error in data bases with the allergy ID " + id);
+	    e.printStackTrace();
+	}	
+	}
 
 	@Override
 	public void modifyAllergy(Allergy a) {

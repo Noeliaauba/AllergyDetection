@@ -41,6 +41,24 @@ public class JDBCSymptomManager implements SymptomManager {
 		}
 
 	}
+	
+	public void deleteSymptom(Integer id) {
+		try {
+		String st = "DELETE FROM symptom WHERE id = ?";
+		PreparedStatement pstmt = c.prepareStatement(st);
+	    pstmt.setInt(1, id);
+	        int rowsAffected = pstmt.executeUpdate();
+	    if (rowsAffected > 0) {
+	        System.out.println("Deleted successfully the symptom");
+	    } else {
+	        System.out.println("Symptom not assigned to the patient" );
+	    }
+	    pstmt.close();
+	} catch (SQLException e) {
+	    System.out.println("Error in data bases with the symptom ID " + id);
+	    e.printStackTrace();
+	}
+	}
 
 	@Override
 	public void modifySymptom(Symptom s) {

@@ -7,6 +7,7 @@ import allergyDetection.db.pojos.Treatment;
 public interface AllergyManager {
 	public void addAllergy(Allergy a);
 	public void modifyAllergy(Allergy a);
+	public void deleteAllergy(Integer id);
 	public Allergy getAllergyByID(Integer id);
 	public List<Allergy> searchAllergy(String type_Allergy);
 	public List<Allergy> searchAllergybyPatient(Integer patientID);	

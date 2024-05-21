@@ -55,6 +55,7 @@ public class MenuDoctor {
 		System.out.println("5) ADD ALLERGY TO PATIENT");
 		System.out.println("6) DIAGNOSE A TREATMENT");	
 		System.out.println("7) CREATE A PATIENT'S PRESCRIPTION");
+		System.out.println("8) UPDATE MEDICAL SCORE");
 		System.out.println("0) Select this option to exit.");
 	
 		int choiceDoctor = Integer.parseInt(r.readLine());
@@ -86,7 +87,10 @@ public class MenuDoctor {
 		case 7: 
 			addPrescription(d);
 			break;
-		
+			
+		case 8: 
+			medicalScore();
+			break;
 		case 0:
 			variableWhileDoctor=0;
 			conMan.close();			
@@ -327,7 +331,47 @@ public class MenuDoctor {
 	prescriptionManag.addPrescription(ps);
 }
 
-
+    private static void medicalScore() throws NumberFormatException, IOException {
+    	System.out.println("Please, select the PATIENT to modify the medical score:");
+    	List<Patient> pat = new ArrayList<Patient>();
+    	pat= patientManag.searchPatient("");
+    	for (Patient p : pat) {
+    		System.out.println(p);
+    	}
+    	System.out.println("PATIENT ID: ");
+    	Integer patId = Integer.parseInt(r.readLine());
+    	List<Allergy> allergies = new ArrayList<Allergy>();
+    	List<Symptom> syms = new ArrayList<Symptom>();
+    	System.out.println("Do you want to DELETE a SYMPTOM? YES[y]/NO[n]:");
+    	String selection2 = r.readLine();
+    	while(selection2.equals("y")) {
+    		syms= symptomManag.searchSymptombyPatient(patId);
+        	for (Symptom s : syms) {
+        		System.out.println(s);
+        	}
+        	System.out.println("Select the SYMPTOM to delete:");
+        	System.out.println("SYMPTOM ID:");
+        	Integer symptomId = Integer.parseInt(r.readLine());
+        	symptomManag.deleteSymptom(symptomId);
+    		System.out.println("Do you want to DELETE another SYMPTOM? YES[y]/NO[n]:");
+    		selection2 = r.readLine();
+    	}
+    	System.out.println("Do you want to DELETE an ALLERGY? YES[y]/NO[n]:");
+    	String selection = r.readLine();
+    	while(selection.equals("y")) {
+    		allergies= allergyManag.searchAllergybyPatient(patId);
+        	for (Allergy a : allergies) {
+        		System.out.println(a);
+        	}
+        	System.out.println("Select the ALLERGY to delete:");
+        	System.out.println("ALLERGY ID:");
+        	Integer allergyId = Integer.parseInt(r.readLine());
+        	allergyManag.deleteAllergy(allergyId);
+    		System.out.println("Do you want to DELETE another ALLERGY? YES[y]/NO[n]:");
+    		selection = r.readLine();
+    	}
+        
+    }
 
 
 
