@@ -44,7 +44,7 @@ public class JDBCAllergyManager implements AllergyManager {
 	}
 	public void deleteAllergy(Integer id) {
 		try {
-		String st = "DELETE FROM allergy WHERE id = ?";
+		String st = "DELETE FROM SUFFERS WHERE allergy_id = ?";
 		PreparedStatement pstmt = c.prepareStatement(st);
 	    pstmt.setInt(1, id);
 	        int rowsAffected = pstmt.executeUpdate();

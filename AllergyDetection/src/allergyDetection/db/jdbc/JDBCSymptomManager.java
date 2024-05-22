@@ -44,7 +44,7 @@ public class JDBCSymptomManager implements SymptomManager {
 	
 	public void deleteSymptom(Integer id) {
 		try {
-		String st = "DELETE FROM symptom WHERE id = ?";
+		String st = "DELETE FROM HAS WHERE symptom_id = ?";
 		PreparedStatement pstmt = c.prepareStatement(st);
 	    pstmt.setInt(1, id);
 	        int rowsAffected = pstmt.executeUpdate();
