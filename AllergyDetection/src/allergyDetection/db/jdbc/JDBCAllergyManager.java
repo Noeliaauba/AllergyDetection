@@ -67,7 +67,7 @@ public class JDBCAllergyManager implements AllergyManager {
 	        PreparedStatement pstmt = c.prepareStatement(query);
 	        pstmt.setString(1, a.getAllergyName());
 	        pstmt.setString(2, a.getAllergyType()); 
-	        pstmt.setInt(5, a.getAllergyID());
+	        pstmt.setInt(3, a.getAllergyID());
 	        pstmt.executeUpdate();
 	        pstmt.close();
 	        System.out.println("Allergy with ID " + a.getAllergyID() + " updated successfully.");
