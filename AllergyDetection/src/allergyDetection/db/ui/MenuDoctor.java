@@ -1,6 +1,7 @@
 package allergyDetection.db.ui;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.Date;
@@ -15,6 +16,7 @@ import allergyDetection.db.interfaces.PatientManager;
 import allergyDetection.db.interfaces.PrescriptionManager;
 import allergyDetection.db.interfaces.SymptomManager;
 import allergyDetection.db.interfaces.TreatmentManager;
+import allergyDetection.db.interfaces.XMLManager;
 import allergyDetection.db.*;
 import allergyDetection.db.jdbc.*;
 import allergyDetection.db.pojos.*;
@@ -31,6 +33,7 @@ public class MenuDoctor {
 	private static AllergyManager allergyManag;
 	private static TreatmentManager treatmentManag;
 	private static PrescriptionManager prescriptionManag;
+	private static XMLManager xmlManag;
 	private static ConnectionManager conMan;
 	
 	public static void menuDoctor(String username) throws NumberFormatException, IOException {
@@ -56,6 +59,8 @@ public class MenuDoctor {
 		System.out.println("6) DIAGNOSE A TREATMENT");	
 		System.out.println("7) CREATE A PATIENT'S PRESCRIPTION");
 		System.out.println("8) UPDATE MEDICAL SCORE");
+		System.out.println("9) UPLOAD XML OF THE PATIENT");
+		System.out.println("10) DOWNLOAD XML FROM A PATIENT");
 		System.out.println("0) Select this option to exit.");
 	
 		int choiceDoctor = Integer.parseInt(r.readLine());
@@ -90,6 +95,14 @@ public class MenuDoctor {
 			
 		case 8: 
 			medicalScore();
+			break;
+			
+		case 9: 
+			uploadXML();
+			break;
+			
+		case 10: 
+			downloadXML();
 			break;
 		case 0:
 			variableWhileDoctor=0;
@@ -372,9 +385,33 @@ public class MenuDoctor {
     	}
         
     }
+    
 
-
-
+    private static void uploadXML() throws NumberFormatException, IOException {
+    	System.out.println("Please, select the PATIENT to UPLOAD");
+    	List<Patient> pat = new ArrayList<Patient>();
+    	pat= patientManag.searchPatient("");
+    	for (Patient ps : pat) {
+    		System.out.println(ps);
+    	}
+    	System.out.println("PATIENT ID: ");
+    	Integer patId = Integer.parseInt(r.readLine());
+    	Patient p= patientManag.getPatientByID(patId);
+    	xmlManag.patient2XML(p);
+}
+    private static void downloadXML() throws NumberFormatException, IOException {
+    	System.out.println("Please, introduce the file root to select the XML FILE");
+    	String Fpath = r.readLine();
+    	File f= new File (Fpath);
+    	  if (f.exists()) {
+              System.out.println("The XML exists.");
+             Patient pXml= xmlManag.XML2patient(f);
+             patientManag.addPatient(pXml);
+             
+          } else {
+              System.out.println("The XML does not exist.");
+          } 	
+}
 }
 
 

@@ -5,18 +5,48 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import allergyDetection.db.xml.utils.SQLDateAdapter;
+
+
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "Patient")
+@XmlType(propOrder = { "name", "surname", "dob", "gender","username" })
 public class Patient implements Serializable {
 
 		private static final long serialVersionUID = 5415639098561047229L;
+		@XmlTransient
 		private Integer id;
+		@XmlAttribute
 		private String name;
+		@XmlElement
 		private String surname;
+		@XmlElement
+		@XmlJavaTypeAdapter(SQLDateAdapter.class)
 		private Date dob;
+		@XmlTransient
 		private String username;
+		@XmlElement
 		private String gender;
 		
-		private List <Prescription> prescriptions; 
+			
+		@XmlElement(name = "Prescription")
+	    @XmlElementWrapper(name = "Prescriptions")
+		private List <Prescription> prescriptions;
+		@XmlElement(name = "Allergy")
+	    @XmlElementWrapper(name = "Allergies")
 		private List <Allergy> allergies;
+		@XmlElement(name = "Symptom")
+	    @XmlElementWrapper(name = "Symptoms")
 		private List<Symptom> symptoms;
 		
 		
@@ -44,6 +74,14 @@ public class Patient implements Serializable {
 			}
 		
 		public Patient (String _name,  String _surname, Date _dob, String _gender, String _username) {
+			this.name = _name;
+			this.surname=_surname;
+			this.setDob(_dob);
+			this.gender = _gender;
+			this.username=_username;
+			}
+		public Patient (Integer _id, String _name,  String _surname, Date _dob, String _gender, String _username) {
+			this.id=_id;
 			this.name = _name;
 			this.surname=_surname;
 			this.setDob(_dob);
