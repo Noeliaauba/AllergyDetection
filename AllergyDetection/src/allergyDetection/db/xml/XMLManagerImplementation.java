@@ -12,37 +12,38 @@ import javax.persistence.Persistence;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
 
 import allergyDetection.db.interfaces.PatientManager;
 import allergyDetection.db.interfaces.SymptomManager;
 import allergyDetection.db.interfaces.XMLManager;
 import allergyDetection.db.jdbc.ConnectionManager;
 import allergyDetection.db.pojos.Allergy;
+import allergyDetection.db.pojos.Doctor;
 import allergyDetection.db.pojos.Patient;
 import allergyDetection.db.pojos.Prescription;
 import allergyDetection.db.pojos.Symptom;
 
 public class XMLManagerImplementation implements XMLManager {
 	
-	private SymptomManager symptomManag;
 
 	@Override
-	public void patient2XML(Patient p) {
+	public File patient2XML(Patient p) {
 		try {
-		int patient_id=p.getId();
-		//COMO HACERLO CON SYMPTOMS y para guardarlos una vez cargados??
-		List<Symptom> symptoms= symptomManag.searchSymptombyPatient(patient_id);
 		JAXBContext jaxbContext = JAXBContext.newInstance(Patient.class);
 		Marshaller marshaller = jaxbContext.createMarshaller();
 		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,Boolean.TRUE);
 		File file = new File("./xmls/Sample-Patient.xml");
 		marshaller.marshal(p, file);
 		marshaller.marshal(p, System.out);
+		return file;
 		} catch (Exception e) {
-			
+			e.printStackTrace();
 		}
-		
-		
+		return null;
 	}
 
 	@Override
@@ -51,58 +52,68 @@ public class XMLManagerImplementation implements XMLManager {
 		JAXBContext jaxbContext = JAXBContext.newInstance(Patient.class);
 		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
     	Patient p = (Patient) unmarshaller.unmarshal(Fxml);
-		System.out.println("Patient:");
-		String name=p.getName();
-		System.out.println("Name: " + name);
-		String surname=p.getSurname();
-		System.out.println("Surname: " +surname);
-		Date dob= p.getDob();
-		System.out.println("Date Of Birth: " + dob);
-		String gender=p.getGender();
-		System.out.println("Gender: " + gender);
-		String username=p.getUsername();
-		System.out.println("Username: " + username);
-		List<Symptom> syms = p.getSymptoms();
-				for (Symptom s: syms) {
-					System.out.println("SYMPTOM DETECTED: " + s.getSymptom_name());
-				}
-		Patient pat= new Patient (name,surname,dob,gender,username);
-        return pat;
-		}catch (Exception e) {}
+    	return p;
+   
+	}catch (Exception e) {
+		System.out.println("ERROR: Unable to load XML file");
+		e.printStackTrace();
 		return null;
 	}
-	
-	/*
-		// Store the report in the database
-		// Create entity manager
-				factory = Persistence.createEntityManagerFactory(PERSISTENCE_PROVIDER);
-				EntityManager em = factory.createEntityManager();
-				em.getTransaction().begin();
-				em.createNativeQuery("PRAGMA foreign_keys=ON").executeUpdate();
-				em.getTransaction().commit();
-
-				// Create a transaction
-				EntityTransaction tx1 = em.getTransaction();
-
-				// Start transaction
-				tx1.begin();
-
-				// Persist
-				// We assume the authors are not already in the database
-				// In a real world, we should check if they already exist
-				// and update them instead of inserting as new
-				for (Employee employee : emps) {
-					em.persist(employee);
-				}
-				em.persist(report);
-				
-				// End transaction
-				tx1.commit();
 	}
-*/
+	
 	@Override
 	public void patient2Html(Patient p) {
-		// TODO Auto-generated method stub
+		File f= patient2XML(p);
+		TransformerFactory tFactory= TransformerFactory.newInstance();
+		try {
+			Transformer transformer=tFactory.newTransformer(new StreamSource(new File("./xmls/Patient-Style.xslt")));
+			transformer.transform(new StreamSource(f), new StreamResult (new File("./xmls/External-Patient.html")));
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public File doctor2XML(Doctor d) {
+		try {
+		JAXBContext jaxbContext = JAXBContext.newInstance(Doctor.class);
+		Marshaller marshaller = jaxbContext.createMarshaller();
+		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,Boolean.TRUE);
+		File file = new File("./xmls/Sample-Doctor.xml");
+		marshaller.marshal(d, file);
+		marshaller.marshal(d, System.out);
+		return file;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public Doctor XML2doctor(File Fxml) {
+		try {
+		JAXBContext jaxbContext = JAXBContext.newInstance(Patient.class);
+		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+    	Doctor d = (Doctor) unmarshaller.unmarshal(Fxml);
+    	return d;
+   
+	}catch (Exception e) {
+		System.out.println("ERROR: Unable to load XML file");
+		e.printStackTrace();
+		return null;
+	}
+	}
+	
+	@Override
+	public void doctor2Html(Doctor d) {
+		File f= doctor2XML(d);
+		TransformerFactory tFactory= TransformerFactory.newInstance();
+		try {
+			Transformer transformer=tFactory.newTransformer(new StreamSource(new File("./xmls/Doctor-Style.xslt")));
+			transformer.transform(new StreamSource(f), new StreamResult (new File("./xmls/External-Doctor.html")));
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
 	

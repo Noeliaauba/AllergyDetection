@@ -26,7 +26,7 @@ public class Patient implements Serializable {
 		private static final long serialVersionUID = 5415639098561047229L;
 		@XmlTransient
 		private Integer id;
-		@XmlAttribute
+		@XmlElement
 		private String name;
 		@XmlElement
 		private String surname;

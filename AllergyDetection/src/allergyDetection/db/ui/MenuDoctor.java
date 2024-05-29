@@ -59,8 +59,8 @@ public class MenuDoctor {
 		System.out.println("6) DIAGNOSE A TREATMENT");	
 		System.out.println("7) CREATE A PATIENT'S PRESCRIPTION");
 		System.out.println("8) UPDATE MEDICAL SCORE");
-		System.out.println("9) UPLOAD XML OF THE PATIENT");
-		System.out.println("10) DOWNLOAD XML FROM A PATIENT");
+		System.out.println("9) UPLOAD XML ");
+		System.out.println("10) DOWNLOAD XML");
 		System.out.println("0) Select this option to exit.");
 	
 		int choiceDoctor = Integer.parseInt(r.readLine());
@@ -98,7 +98,18 @@ public class MenuDoctor {
 			break;
 			
 		case 9: 
-			uploadXML();
+			System.out.println("Do you want to do it over a PATIENT [p] or DOCTOR[d]:");
+			String selection = r.readLine();
+			if(selection.equals("p")) {
+				System.out.println("Introduce the PATIENT ID:");
+				Integer p_id = Integer.parseInt(r.readLine());
+				Patient p=patientManag.getPatientByID(p_id);
+				uploadPatientXML(p);
+				}
+			if(selection.equals("d")) {
+				System.out.println("Your are going to upload your information:");
+				uploadDoctorXML(d);
+			}
 			break;
 			
 		case 10: 
@@ -387,17 +398,13 @@ public class MenuDoctor {
     }
     
 
-    private static void uploadXML() throws NumberFormatException, IOException {
-    	System.out.println("Please, select the PATIENT to UPLOAD");
-    	List<Patient> pat = new ArrayList<Patient>();
-    	pat= patientManag.searchPatient("");
-    	for (Patient ps : pat) {
-    		System.out.println(ps);
-    	}
-    	System.out.println("PATIENT ID: ");
-    	Integer patId = Integer.parseInt(r.readLine());
-    	Patient p= patientManag.getPatientByID(patId);
+    private static void uploadPatientXML(Patient p) throws NumberFormatException, IOException {
+    	System.out.println(p.toString());
     	xmlManag.patient2XML(p);
+}
+    private static void uploadDoctorXML(Doctor d) throws NumberFormatException, IOException {
+    	System.out.println(d.toString());
+    	xmlManag.doctor2XML(d);
 }
     private static void downloadXML() throws NumberFormatException, IOException {
     	System.out.println("Please, introduce the file root to select the XML FILE");
