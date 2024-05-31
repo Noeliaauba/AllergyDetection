@@ -28,6 +28,7 @@ public class MenuPatient {
 	private static SymptomManager symptomManag;
 	private static AllergyManager allergyManag;
 	private static ConnectionManager conMan;
+	private static XMLManager xmlManag;
 	
 	
 	public static void  menuPatient(String username) throws NumberFormatException, IOException{
@@ -36,7 +37,7 @@ public class MenuPatient {
 		patientManag = conMan.getPatient();
 		symptomManag= conMan.getSymptom();
 		allergyManag= conMan.getAllergy();
-		
+		xmlManag = conMan.getXmlManag();
 		System.out.println("Welcome patient! Select the option: ");
 		int variableWhilePatient=1;
 		Patient p= patientManag.getPatientByusername(username);
