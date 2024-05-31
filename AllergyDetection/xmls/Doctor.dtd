@@ -1,0 +1,3 @@
+<!ELEMENT Doctor (name, surname)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT surname (#PCDATA)>
