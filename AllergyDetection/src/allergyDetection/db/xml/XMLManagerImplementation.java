@@ -36,7 +36,7 @@ public class XMLManagerImplementation implements XMLManager {
 		JAXBContext jaxbContext = JAXBContext.newInstance(Patient.class);
 		Marshaller marshaller = jaxbContext.createMarshaller();
 		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,Boolean.TRUE);
-		File file = new File("./xmls/Sample-Patient.xml");
+		File file = new File("./xmls/External-Patient.xml");
 		marshaller.marshal(p, file);
 		marshaller.marshal(p, System.out);
 		return file;
@@ -79,7 +79,7 @@ public class XMLManagerImplementation implements XMLManager {
 		JAXBContext jaxbContext = JAXBContext.newInstance(Doctor.class);
 		Marshaller marshaller = jaxbContext.createMarshaller();
 		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,Boolean.TRUE);
-		File file = new File("./xmls/Sample-Doctor.xml");
+		File file = new File("./xmls/External-Doctor.xml");
 		marshaller.marshal(d, file);
 		marshaller.marshal(d, System.out);
 		return file;
