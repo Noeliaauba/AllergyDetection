@@ -39,14 +39,11 @@ public class Patient implements Serializable {
 		private String gender;
 		
 			
-		@XmlElement(name = "Prescription")
-	    @XmlElementWrapper(name = "Prescriptions")
+		@XmlTransient
 		private List <Prescription> prescriptions;
-		@XmlElement(name = "Allergy")
-	    @XmlElementWrapper(name = "Allergies")
+		@XmlTransient
 		private List <Allergy> allergies;
-		@XmlElement(name = "Symptom")
-	    @XmlElementWrapper(name = "Symptoms")
+		@XmlTransient
 		private List<Symptom> symptoms;
 		
 		

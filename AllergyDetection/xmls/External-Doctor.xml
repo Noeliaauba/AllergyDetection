@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<LabStaff>
-    <name>Juan</name>
-    <surname>Juan</surname>
-    <username>jj</username>
-</LabStaff>
+<Doctor>
+    <name>Carmen</name>
+    <surname>Caballero</surname>
+    <username>carmeencaballero</username>
+</Doctor>

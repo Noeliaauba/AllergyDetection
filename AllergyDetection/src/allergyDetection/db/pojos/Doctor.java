@@ -28,8 +28,7 @@ public class Doctor implements Serializable{
 	 @XmlTransient
 	 private String username;
 	 
-	 @XmlElement(name = "Prescription")
-	 @XmlElementWrapper(name = "Prescriptions")
+	 @XmlTransient
 	 private List <Prescription> prescriptions ;
 	 
 	 
