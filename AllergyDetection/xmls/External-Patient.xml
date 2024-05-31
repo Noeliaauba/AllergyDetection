@@ -2,5 +2,6 @@
 <Patient>
     <name>Amalia</name>
     <surname>Garcia</surname>
+     <dateOfBirth>2016-11-09</dateOfBirth>
     <gender>female</gender>
 </Patient>
