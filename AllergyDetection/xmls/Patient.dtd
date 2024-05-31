@@ -1,4 +1,5 @@
-<!ELEMENT Patient (name, surname, gender)>
+<!ELEMENT Patient (name, surname, dateOfBirth, gender)>
 <!ELEMENT name (#PCDATA)>
 <!ELEMENT surname (#PCDATA)>
+<!ELEMENT dateOfBirth (#PCDATA)>
 <!ELEMENT gender (#PCDATA)>
