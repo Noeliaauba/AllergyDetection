@@ -2,6 +2,7 @@ package allergyDetection.db.jdbc;
 
 
 import java.sql.DriverManager;
+import allergyDetection.db.xml.XMLManagerImplementation;
 
 
 import java.sql.SQLException;
@@ -19,7 +20,7 @@ public class ConnectionManager {
 	private PrescriptionManager prescriptionManag;
 	private SymptomManager symptomManag;
 	private TreatmentManager treatmentManag;
-	
+	private static XMLManager xmlManag;
 
 	public Connection getConnection() {
 		return c;
@@ -33,6 +34,7 @@ public class ConnectionManager {
 		this.prescriptionManag = new JDBCPrescriptionManager(this);
 		this.symptomManag =new JDBCSymptomManager(this);
 		this.treatmentManag =new JDBCTreatmentManager(this);
+		this.xmlManag = new XMLManagerImplementation();
 		this.createTables();
 	}
 	
@@ -267,7 +269,9 @@ public class ConnectionManager {
 	public TreatmentManager getTreatment() {
 		return treatmentManag;
 	}
-	
+	public XMLManager getXmlManag() {
+		return xmlManag;
+	}
 	
 	
 	

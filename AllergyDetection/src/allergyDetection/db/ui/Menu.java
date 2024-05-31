@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 
 
 
+
+
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.Date;
@@ -18,6 +20,7 @@ import allergyDetection.db.jdbc.*;
 import allergyDetection.db.pojos.*;
 import allergyDetection.db.interfaces.UserManager;
 import allergyDetection.db.jpa.JPAUserManager;
+import allergyDetection.db.interfaces.XMLManager;
 
 
 
@@ -33,6 +36,7 @@ public class Menu {
 	private static SymptomManager symptomManag;
 	private static TreatmentManager treatmentManag;
 	private static UserManager userMan;
+	private static XMLManager xmlManag;
 	 
 	
 	
@@ -41,7 +45,7 @@ public class Menu {
 		System.out.println("");
 		
 		
-		// ALWAYS JDBC first
+		
 		conMan = new ConnectionManager();
 		patientManag = conMan.getPatient();
 		doctorManag = conMan.getDoctor();
@@ -50,6 +54,7 @@ public class Menu {
 		treatmentManag= conMan.getTreatment();
 		prescriptionManag= conMan.getPrescription();
 		userMan = new JPAUserManager();
+		xmlManag = conMan.getXmlManag();
 	
 	int variableWhileInitial=1;
 	while (variableWhileInitial!=0) {	

@@ -1,6 +1,7 @@
 package allergyDetection.db.ui;
 
 import java.io.BufferedReader;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -31,7 +32,7 @@ public class MenuDoctor {
 	private static DoctorManager doctorManag;
 	private static SymptomManager symptomManag;
 	private static AllergyManager allergyManag;
-	private static TreatmentManager treatmentManag;
+	private static TreatmentManager  treatmentManag;
 	private static PrescriptionManager prescriptionManag;
 	private static XMLManager xmlManag;
 	private static ConnectionManager conMan;
@@ -44,6 +45,7 @@ public class MenuDoctor {
 		allergyManag= conMan.getAllergy();
 		treatmentManag= conMan.getTreatment();
 		prescriptionManag= conMan.getPrescription();
+		xmlManag = conMan.getXmlManag();
 		
 		int variableWhileDoctor=1;
 		System.out.println("Welcome Doctor! We are delighted with your great job!");
@@ -403,6 +405,7 @@ public class MenuDoctor {
     	xmlManag.patient2XML(p);
 }
     private static void uploadDoctorXML(Doctor d) throws NumberFormatException, IOException {
+    	
     	System.out.println(d.toString());
     	xmlManag.doctor2XML(d);
 }

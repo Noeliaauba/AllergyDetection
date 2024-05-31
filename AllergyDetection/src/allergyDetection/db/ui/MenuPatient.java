@@ -2,6 +2,7 @@ package allergyDetection.db.ui;
 
 import java.io.BufferedReader;
 
+
 import allergyDetection.db.jdbc.ConnectionManager;
 import allergyDetection.db.interfaces.*;
 import java.io.IOException;
