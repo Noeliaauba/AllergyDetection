@@ -20,7 +20,7 @@ import allergyDetection.db.xml.utils.SQLDateAdapter;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "Patient")
-@XmlType(propOrder = { "name", "surname", "dob", "gender","username" })
+@XmlType(propOrder = { "name", "surname", "gender" })
 public class Patient implements Serializable {
 
 		private static final long serialVersionUID = 5415639098561047229L;
@@ -30,7 +30,7 @@ public class Patient implements Serializable {
 		private String name;
 		@XmlElement
 		private String surname;
-		@XmlElement
+		@XmlTransient
 		@XmlJavaTypeAdapter(SQLDateAdapter.class)
 		private Date dob;
 		@XmlTransient
