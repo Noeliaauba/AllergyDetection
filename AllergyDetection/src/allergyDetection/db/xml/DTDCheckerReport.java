@@ -41,16 +41,16 @@ public class DTDCheckerReport {
         File xmlFile2 = new File("./xmls/External-Patient.xml"); 
         try {
         	// Create a DocumentBuilderFactory
-            DocumentBuilderFactory dBF = DocumentBuilderFactory.newInstance();
+            DocumentBuilderFactory dBF2 = DocumentBuilderFactory.newInstance();
             // Set it up so it validates XML documents
-            dBF.setValidating(true);
+            dBF2.setValidating(true);
             // Create a DocumentBuilder and an ErrorHandler (to check validity)
-            DocumentBuilder builder = dBF.newDocumentBuilder();
-            CustomErrorHandler customErrorHandler = new CustomErrorHandler();
-            builder.setErrorHandler((ErrorHandler) customErrorHandler);
+            DocumentBuilder builder2 = dBF2.newDocumentBuilder();
+            CustomErrorHandler customErrorHandler2 = new CustomErrorHandler();
+            builder2.setErrorHandler((ErrorHandler) customErrorHandler2);
             // Parse the XML file and print out the result
-            Document doc = builder.parse(xmlFile2);
-            if (customErrorHandler.isValid()) {
+            Document doc2 = builder2.parse(xmlFile2);
+            if (customErrorHandler2.isValid()) {
                 System.out.println(xmlFile2 + " was valid!");
             }
         } catch (ParserConfigurationException ex) {
