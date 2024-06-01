@@ -38,6 +38,28 @@ public class DTDCheckerReport {
             System.out.println(xmlFile + " was not accesible!");
         }
 
+        File xmlFile2 = new File("./xmls/External-Patient.xml"); 
+        try {
+        	// Create a DocumentBuilderFactory
+            DocumentBuilderFactory dBF = DocumentBuilderFactory.newInstance();
+            // Set it up so it validates XML documents
+            dBF.setValidating(true);
+            // Create a DocumentBuilder and an ErrorHandler (to check validity)
+            DocumentBuilder builder = dBF.newDocumentBuilder();
+            CustomErrorHandler customErrorHandler = new CustomErrorHandler();
+            builder.setErrorHandler((ErrorHandler) customErrorHandler);
+            // Parse the XML file and print out the result
+            Document doc = builder.parse(xmlFile2);
+            if (customErrorHandler.isValid()) {
+                System.out.println(xmlFile2 + " was valid!");
+            }
+        } catch (ParserConfigurationException ex) {
+            System.out.println(xmlFile2 + " error while parsing!");
+        } catch (SAXException ex) {
+            System.out.println(xmlFile2 + " was not well-formed!");
+        } catch (IOException ex) {
+            System.out.println(xmlFile2 + " was not accesible!");
+        }
     }
 
 }
