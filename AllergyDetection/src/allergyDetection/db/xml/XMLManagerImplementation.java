@@ -92,7 +92,7 @@ public class XMLManagerImplementation implements XMLManager {
 	@Override
 	public Doctor XML2doctor(File Fxml) {
 		try {
-		JAXBContext jaxbContext = JAXBContext.newInstance(Patient.class);
+		JAXBContext jaxbContext = JAXBContext.newInstance(Doctor.class);
 		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
     	Doctor d = (Doctor) unmarshaller.unmarshal(Fxml);
     	return d;

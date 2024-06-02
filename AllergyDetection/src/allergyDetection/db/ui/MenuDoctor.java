@@ -9,6 +9,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import allergyDetection.db.interfaces.AllergyManager;
@@ -61,7 +62,7 @@ public class MenuDoctor {
 		System.out.println("6) DIAGNOSE A TREATMENT");	
 		System.out.println("7) CREATE A PATIENT'S PRESCRIPTION");
 		System.out.println("8) UPDATE MEDICAL SCORE");
-		System.out.println("9) UPLOAD XML ");
+		System.out.println("9) GENERATE XML ");
 		System.out.println("10) DOWNLOAD XML");
 		System.out.println("0) Select this option to exit.");
 	
@@ -103,20 +104,29 @@ public class MenuDoctor {
 			System.out.println("Do you want to do it over a PATIENT [p] or DOCTOR[d]:");
 			String selection = r.readLine();
 			if(selection.equals("p")) {
-				System.out.println("Introduce the PATIENT ID:");
+				System.out.println("Please, select the PATIENT to modify the medical score:");
+		    	List<Patient> pat = new ArrayList<Patient>();
+		    	pat= patientManag.searchPatient("");
+		    	for (Patient p : pat) {
+		    		System.out.println(p);
+		    	}
+		    	System.out.println("Introduce the PATIENT ID:");
 				Integer p_id = Integer.parseInt(r.readLine());
 				Patient p=patientManag.getPatientByID(p_id);
-				uploadPatientXML(p);
+				savePatientToFile(p);
 				}
 			if(selection.equals("d")) {
-				System.out.println("Your are going to upload your information:");
-				uploadDoctorXML(d);
+				System.out.println("Your are going to generate your information to xml:");
+				saveDoctorToFile(d);
 			}
 			break;
 			
 		case 10: 
-			downloadXML();
+			List<String> files = getXMLFilenamesInFolder();
+			downloadXML(files);
+			System.out.println("Object Added");
 			break;
+			
 		case 0:
 			variableWhileDoctor=0;
 			conMan.close();			
@@ -398,30 +408,138 @@ public class MenuDoctor {
     	}
         
     }
-    
-
     private static void uploadPatientXML(Patient p) throws NumberFormatException, IOException {
     	System.out.println(p.toString());
     	xmlManag.patient2XML(p);
 }
-    private static void uploadDoctorXML(Doctor d) throws NumberFormatException, IOException {
-    	
-    	System.out.println(d.toString());
-    	xmlManag.doctor2XML(d);
+    
+    private static void uploadPatientHTML(Patient p) throws NumberFormatException, IOException {
+    	System.out.println(p.toString());
+    	xmlManag.patient2Html(p);
+   
 }
-    private static void downloadXML() throws NumberFormatException, IOException {
-    	System.out.println("Please, introduce the file root to select the XML FILE");
-    	String Fpath = r.readLine();
-    	File f= new File (Fpath);
-    	  if (f.exists()) {
-              System.out.println("The XML exists.");
-             Patient pXml= xmlManag.XML2patient(f);
-             patientManag.addPatient(pXml);
-             
-          } else {
-              System.out.println("The XML does not exist.");
-          } 	
+
+private static void savePatientToFile(Patient p ) {
+System.out.println(" What do you want to generate for a PATIENT:"
+		+ "\n   1. XML file"
+		+ "\n   2. HTML file");
+Integer option=0;
+try {
+	option = Integer.parseInt(r.readLine());
+	switch(option) {
+	case 1:
+		System.out.println("Save to XML file:");
+		uploadPatientXML(p);
+		break;
+	case 2:
+		System.out.println("Save to HTML file:");
+		uploadPatientHTML(p);
+		break;
+	default:
+		System.out.println(" ERROR: invalid option.");
 }
+	
+} catch (NumberFormatException e) {
+	e.printStackTrace();
+} catch (IOException e) {
+	e.printStackTrace();
+}
+}
+
+
+    
+    
+    
+private static void uploadDoctorXML(Doctor d) throws NumberFormatException, IOException {
+	System.out.println(d.toString());
+	xmlManag.doctor2XML(d);
+}
+    
+private static void uploadDoctorHTML(Doctor d) throws NumberFormatException, IOException {
+	System.out.println(d.toString());
+	xmlManag.doctor2Html(d);
+}
+     
+private static void saveDoctorToFile(Doctor d ) {
+System.out.println(" What do you want to generate for a DOCTOR:"
+		+ "\n   1. XML file"
+		+ "\n   2. HTML file");
+Integer option=0;
+try {
+	option = Integer.parseInt(r.readLine());
+	switch(option) {
+	case 1:
+		System.out.println("Save to XML file:");
+		uploadDoctorXML(d);
+		break;
+	case 2:
+		System.out.println("Save to HTML file:");
+		uploadDoctorHTML(d);
+		break;
+	default:
+		System.out.println(" ERROR: invalid option.");
+}
+	
+} catch (NumberFormatException e) {
+	e.printStackTrace();
+} catch (IOException e) {
+	e.printStackTrace();
+}
+}
+
+private static List<String> getXMLFilenamesInFolder() {
+	List<String> xmlFile = new ArrayList<>();
+	File folder = new File("./xmls");
+	if (folder.isDirectory()) {
+		File[] files = folder.listFiles();
+		if (files != null) {
+			for (File file : files) {
+				if (file.isFile() && file.getName().toLowerCase().endsWith(".xml")) {
+					xmlFile.add(file.getName());
+				}
+			}
+		}
+	}
+	return xmlFile;
+}
+
+    private static void downloadXML(List<String> xmlFile) throws NumberFormatException, IOException {
+    	int cont = 1;
+    	System.out.println(" -Which file do you want to load: ");
+    	Iterator<String> it = xmlFile.iterator();
+    	while(it.hasNext()) {
+    		System.out.println("   " + cont + ". " + it.next());
+    		cont++;
+    	}
+    	Integer option=0;
+    		try {
+    	 	do {
+    	 		System.out.println(" Choose a file given: ");
+        		option = Integer.parseInt(r.readLine())-1;
+        		if(option < 0) {
+        			System.out.println(" ERROR: Invalid option.");
+        		}
+        	} while(option < 0 );	
+    		File fileName = new File("./xmls/" + xmlFile.get(option));
+    		
+    	   	if(xmlFile.get(option).endsWith("-Patient.xml") ){
+        		Patient p = xmlManag.XML2patient(fileName);
+        		patientManag.addPatient(p);
+        		}
+        	if(xmlFile.get(option).endsWith("-Doctor.xml")) {
+        		Doctor d = xmlManag.XML2doctor(fileName);
+        		doctorManag.addDoctor(d);
+    		}    
+
+    }catch (NumberFormatException e) {
+    	e.printStackTrace();
+    } catch (IOException e) {
+    	e.printStackTrace();
+    }
+    }
+    
+
+    
 }
 
 

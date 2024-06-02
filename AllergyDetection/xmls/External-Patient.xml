@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Patient>
-    <name>Daniel</name>
-    <surname>Ruiz Conde</surname>
-    <dob>01-01-2020</dob>
+    <name>Pablo</name>
+    <surname>Hita</surname>
+    <dob>22-08-2000</dob>
     <gender>male</gender>
 </Patient>

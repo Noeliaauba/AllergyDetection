@@ -27,7 +27,6 @@ public class Doctor implements Serializable{
 	 private String surname;
 	 @XmlTransient
 	 private String username;
-	 
 	 @XmlTransient
 	 private List <Prescription> prescriptions ;
 	 
